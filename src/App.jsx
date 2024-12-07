@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import NavBar from "./components/NavBar.jsx";
+import Footer from "./components/Footer.jsx";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import HomePage from "./pages/HomePage";
+import AllBooksPage from "./pages/AllBooksPage";
+import BookDetailsPage from "./pages/BookDetailsPage";
+import UserBooksPage from "./pages/UserBooksPage";
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/all-books" element={<AllBooksPage />} />
+        <Route path="/book/:bookId" element={<BookDetailsPage />} />
+        <Route path="/my-books" element={<UserBooksPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
