@@ -1,0 +1,10 @@
+.error-page {
+    text-align: center;
+}
+
+.error-page-img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
