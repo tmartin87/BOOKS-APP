@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       <NavBar />
+      <main>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/all-books" element={<AllBooksPage />} />
@@ -19,6 +20,7 @@ function App() {
         <Route path="/my-books" element={<UserBooksPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      </main>
       <Footer />
     </>
   );
