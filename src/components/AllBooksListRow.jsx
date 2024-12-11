@@ -19,8 +19,6 @@ function AllBooksListRow({ book }) {
             return <li key={index}>{genre}</li>
           })}
         </ul>
-        <p className="AllBooksListRow-year">{book.year}</p>
-        <p className="AllBooksListRow-pages">{book.pages}</p>
       </li>
     </>
   );
