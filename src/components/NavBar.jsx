@@ -2,9 +2,11 @@ import "./NavBar.css"
 
 function NavBar () {
     
-    return(
-        <></>
-    )
+    return (
+      <>
+        <p>NavBar</p>
+      </>
+    );
 }
 
 export default NavBar;
