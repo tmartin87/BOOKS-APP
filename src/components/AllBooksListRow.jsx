@@ -1,6 +1,26 @@
 import "./AllBooksListRow.css";
+import check from "../assets/check.svg"
+import listWithCheck from "../assets/listWithCheck.svg"
+import { useState } from "react";
 
 function AllBooksListRow({ book }) {
+
+  const [readBooks, setReadBooks] = useState([]);
+  const [booksToRead, setBooksToRead] = useState([]);
+  
+  function markAsRead(bookId){
+    const newReadBooks = [...readBooks, bookId];
+    setReadBooks(newReadBooks);
+  }
+
+  function addToList(bookId){
+    console.log(bookId)
+    const newBooksToRead = [...booksToRead, bookId];
+    setBooksToRead(newBooksToRead);
+    console.log("new list", newBooksToRead)
+  }
+
+
   return (
     <>
       <li className="AllBooksListRow">
@@ -16,8 +36,10 @@ function AllBooksListRow({ book }) {
         <p className="AllBooksListRow-author">{book.author}</p>
         <ul className="AllBooksListRow-genre">
           {book.genres.map((genre, index) => {
-            return <li key={index}>{genre}</li>
+            return <li key={index}>{genre}</li>;
           })}
+          <img src={check} onClick={() => markAsRead(book.id)}/>
+          <img src={listWithCheck} onClick={() => addToList(book.id)} />
         </ul>
       </li>
     </>
