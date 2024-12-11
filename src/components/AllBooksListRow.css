@@ -1,6 +1,6 @@
 .AllBooksListRow {
     display: grid;
-    grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
+    grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr;
     column-gap: 0.7rem;
     align-items: center;
     margin-inline: 2rem;
@@ -32,7 +32,6 @@
 
 .AllBooksListRow-cover-container {
     overflow: hidden;
-
     img {
         width: 100%
     }

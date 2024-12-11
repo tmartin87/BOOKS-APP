@@ -16,11 +16,9 @@ function AllBooksListRow({ book }) {
         <p className="AllBooksListRow-author">{book.author}</p>
         <ul className="AllBooksListRow-genre">
           {book.genres.map((genre, index) => {
-            return <li key={index}>{genre}</li>;
+            return <li key={index}>{genre}</li>
           })}
         </ul>
-        <p className="AllBooksListRow-year">{book.year}</p>
-        <p className="AllBooksListRow-pages">{book.pages}</p>
       </li>
     </>
   );
