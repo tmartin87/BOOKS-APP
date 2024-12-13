@@ -23,7 +23,7 @@ function AllBooksList() {
     const apiResponseJson = await apiResponse.json();
     const coverURL = apiResponseJson.url;
     return coverURL;
-  } 
+  }
 
   //Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
   async function addImages(books) {
@@ -62,7 +62,18 @@ function AllBooksList() {
     <>
       <ul className="AllBooksList">
         {books.map((book, index) => {
-          return <AllBooksListRow book={book} key={index} readBooks={readBooks} setReadBooks={setReadBooks} booksToRead={booksToRead} setBooksToRead={setBooksToRead} />;
+          return (
+            <AllBooksListRow
+              key={index}
+              book={book}
+              books={books}
+              setBooks={setBooks}
+              readBooks={readBooks}
+              setReadBooks={setReadBooks}
+              booksToRead={booksToRead}
+              setBooksToRead={setBooksToRead}
+            />
+          );
         })}
       </ul>
     </>
