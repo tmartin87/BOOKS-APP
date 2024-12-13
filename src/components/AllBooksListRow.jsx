@@ -1,25 +1,27 @@
 import "./AllBooksListRow.css";
-import check from "../assets/check.svg"
-import listWithCheck from "../assets/listWithCheck.svg"
-import { useState } from "react";
+import check from "../assets/check.svg";
+import listWithCheck from "../assets/listWithCheck.svg";
 
-function AllBooksListRow({ book }) {
-
-  const [readBooks, setReadBooks] = useState([]);
-  const [booksToRead, setBooksToRead] = useState([]);
-  
-  function markAsRead(bookId){
+function AllBooksListRow({
+  book,
+  readBooks,
+  setReadBooks,
+  booksToRead,
+  setBooksToRead,
+}) {
+  function markAsRead(bookId) {
     const newReadBooks = [...readBooks, bookId];
     setReadBooks(newReadBooks);
   }
 
-  function addToList(bookId){
-    console.log(bookId)
+  function addToList(bookId) {
+    console.log("id", bookId);
+    console.log("BooksToRead ", booksToRead);
     const newBooksToRead = [...booksToRead, bookId];
     setBooksToRead(newBooksToRead);
-    console.log("new list", newBooksToRead)
+    console.log("newBooksToRead ", newBooksToRead);
+    console.log("booksToRead ", booksToRead);
   }
-
 
   return (
     <>
@@ -38,9 +40,17 @@ function AllBooksListRow({ book }) {
           {book.genres.map((genre, index) => {
             return <li key={index}>{genre}</li>;
           })}
-          <img src={check} onClick={() => markAsRead(book.id)}/>
-          <img src={listWithCheck} onClick={() => addToList(book.id)} />
         </ul>
+        <img
+          className="AllBooksListRow-options"
+          src={check}
+          onClick={() => markAsRead(book.id)}
+        />
+        <img
+          className="AllBooksListRow-options"
+          src={listWithCheck}
+          onClick={() => addToList(book.id)}
+        />
       </li>
     </>
   );

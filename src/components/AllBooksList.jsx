@@ -6,6 +6,8 @@ import AllBooksListRow from "./AllBooksListRow.jsx";
 
 function AllBooksList() {
   const [books, setBooks] = useState([]);
+  const [readBooks, setReadBooks] = useState([]);
+  const [booksToRead, setBooksToRead] = useState([]);
 
   function createApiURL(title, author) {
     const formattedTitle = title.split(" ").join("+");
@@ -60,7 +62,7 @@ function AllBooksList() {
     <>
       <ul className="AllBooksList">
         {books.map((book, index) => {
-          return <AllBooksListRow book={book} key={index} />;
+          return <AllBooksListRow book={book} key={index} readBooks={readBooks} setReadBooks={setReadBooks} booksToRead={booksToRead} setBooksToRead={setBooksToRead} />;
         })}
       </ul>
     </>
