@@ -62,7 +62,7 @@ function AllBooksList() {
     <>
       <ul className="AllBooksList">
         {books.map((book, index) => {
-          return <AllBooksListRow book={book} key={index} readBooks={readBooks} setReadBooks={setReadBooks} booksToRead={booksToRead} setBooksToRead={setBooksToRead} />;
+          return <AllBooksListRow  key={index} book={book} setBooks={setBooks} readBooks={readBooks} setReadBooks={setReadBooks} booksToRead={booksToRead} setBooksToRead={setBooksToRead}/>;
         })}
       </ul>
     </>
