@@ -3,9 +3,11 @@ import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.svg"
 import listWithCheck from "../assets/listWithCheck.svg";
 import listWithCross from "../assets/listWithCross.svg";
+import { Link } from "react-router-dom";
 
 function AllBooksListRow({
   book,
+  books,
   setBooks,
   readBooks,
   setReadBooks,
@@ -17,6 +19,9 @@ function AllBooksListRow({
     setReadBooks(newReadBooks);
     book.isRead = true;
     console.log(newReadBooks);
+    const newBooks = [...books]
+    setBooks(newBooks)
+    console.log(newBooks);
     
   }
   function markAsUnread(book) {
@@ -24,7 +29,8 @@ function AllBooksListRow({
     setReadBooks(newReadBooks);
     book.isRead = false;
     console.log(newReadBooks);
-    
+    const newBooks = [...books]
+    setBooks(newBooks)
   }
 
   function addToList(book) {
@@ -55,7 +61,7 @@ function AllBooksListRow({
           )}
         </div>
         <p className="AllBooksListRow-rating">{book.rating}</p>
-        <h2 className="AllBooksListRow-title">{book.title}</h2>
+        <Link to={`/book/${book.id}`}><h2 className="AllBooksListRow-title">{book.title}</h2></Link>
         <p className="AllBooksListRow-author">{book.author}</p>
         <ul className="AllBooksListRow-genre">
           {book.genres.map((genre, index) => {
