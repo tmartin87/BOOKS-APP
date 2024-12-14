@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import supabase from "../supabase/config.js";
-
 import "./AllBooksList.css";
 import AllBooksListRow from "./AllBooksListRow.jsx";
 
@@ -8,6 +7,7 @@ function AllBooksList() {
   const [books, setBooks] = useState([]);
   const [readBooks, setReadBooks] = useState([]);
   const [booksToRead, setBooksToRead] = useState([]);
+  
 
   function createApiURL(title, author) {
     const formattedTitle = title.split(" ").join("+");
@@ -55,28 +55,26 @@ function AllBooksList() {
   useEffect(() => {
     getBooks();
     //Comentado para no hacer demasiadas peticiones al API
-    /* addImages(books); */
+    addImages(books);
   }, []);
 
   return (
-    <>
-      <ul className="AllBooksList">
-        {books.map((book, index) => {
-          return (
-            <AllBooksListRow
-              key={index}
-              book={book}
-              books={books}
-              setBooks={setBooks}
-              readBooks={readBooks}
-              setReadBooks={setReadBooks}
-              booksToRead={booksToRead}
-              setBooksToRead={setBooksToRead}
-            />
-          );
-        })}
-      </ul>
-    </>
+    <ul className="AllBooksList">
+      {books.map((book) => (
+       
+          <AllBooksListRow
+          key={book.id}
+            book={book}
+            books={books}
+            setBooks={setBooks}
+            readBooks={readBooks}
+            setReadBooks={setReadBooks}
+            booksToRead={booksToRead}
+            setBooksToRead={setBooksToRead}
+          />
+      
+      ))}
+    </ul>
   );
 }
 
