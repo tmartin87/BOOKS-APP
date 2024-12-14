@@ -54,10 +54,23 @@ function AllBooksList() {
     try {
       const { data } = await supabase
         .from("users-info")
-        .select("booksToRead, booksRead")
+        .select("booksToRead")
         .eq("id", 1) //Usuario 1 es nuestro único usuario
         .single();
       setBooksToRead(data.booksToRead);
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+ 
+  async function getBooksRead() {
+    try {
+      const { data } = await supabase
+        .from("users-info")
+        .select("booksRead")
+        .eq("id", 1) //Usuario 1 es nuestro único usuario
+        .single();
       setBooksRead(data.booksRead);
       console.log(data);
     } catch (err) {
@@ -70,6 +83,7 @@ function AllBooksList() {
     //Comentado para no hacer demasiadas peticiones al API
     /* addImages(books); */
     getBooksToRead();
+    getBooksRead();
   }, []);
 
   return (
@@ -82,6 +96,7 @@ function AllBooksList() {
           setBooksRead={setBooksRead}
           booksToRead={booksToRead}
           setBooksToRead={setBooksToRead}
+          getBooksRead={getBooksRead}
         />
       ))}
     </ul>

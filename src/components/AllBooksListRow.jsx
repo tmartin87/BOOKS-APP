@@ -12,28 +12,36 @@ function AllBooksListRow({
   setBooksRead,
   booksToRead,
   setBooksToRead,
+  getBooksRead,
 }) {
   async function markAsRead(book) {
     const { data, error } = await supabase.rpc("append_book_books_read", {
       user_id: 1,
-      new_item: book.id,
+      new_item: Number(book.id),
     });
     //Usuario 1 es nuestro único usuario
     if (error) {
       console.log("Error: ", error);
     }
-    setBooksToRead(data.booksToRead);
-    setBooksRead(data.booksRead);
-    console.log(data);
+    getBooksRead();
+    console.log(booksRead);
   }
 
+  /* function testFunction() {
+    if (booksRead) {
+      console.log(booksRead.includes(book.id));
+      console.log(booksRead);
+    }
+  }
+  testFunction(); */
   function markAsUnread(book) {
-    const newReadBooks = [...readBooks].filter((id) => book.id !== id);
-    setReadBooks(newReadBooks);
+    /* const newReadBooks = [...readBooks].filter((id) => book.id !== id);
+    setBooksRead(newReadBooks);
     book.isRead = false;
     console.log(newReadBooks);
     const newBooks = [...books];
-    setBooks(newBooks);
+    setBooks(newBooks); */
+    console.log(book);
   }
 
   function addToList(book) {
@@ -71,7 +79,7 @@ function AllBooksListRow({
             return <li key={index}>{genre}</li>;
           })}
         </ul>
-        {book.isRead ? (
+        {booksRead && booksRead.includes(book.id) ? (
           <img
             className="AllBooksListRow-options"
             src={checkFull}
