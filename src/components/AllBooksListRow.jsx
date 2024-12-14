@@ -1,36 +1,39 @@
 import "./AllBooksListRow.css";
 import check from "../assets/check.svg";
-import checkFull from "../assets/checkFull.svg"
+import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
 import listWithCross from "../assets/listWithCross.svg";
 import { Link } from "react-router-dom";
+import supabase from "../supabase/config";
 
 function AllBooksListRow({
   book,
-  books,
-  setBooks,
-  readBooks,
-  setReadBooks,
+  booksRead,
+  setBooksRead,
   booksToRead,
   setBooksToRead,
 }) {
-  function markAsRead(book) {
-    const newReadBooks = [...readBooks, book.id];
-    setReadBooks(newReadBooks);
-    book.isRead = true;
-    console.log(newReadBooks);
-    const newBooks = [...books]
-    setBooks(newBooks)
-    console.log(newBooks);
-    
+  async function markAsRead(book) {
+    const { data, error } = await supabase.rpc("append_book_books_read", {
+      user_id: 1,
+      new_item: book.id,
+    });
+    //Usuario 1 es nuestro único usuario
+    if (error) {
+      console.log("Error: ", error);
+    }
+    setBooksToRead(data.booksToRead);
+    setBooksRead(data.booksRead);
+    console.log(data);
   }
+
   function markAsUnread(book) {
     const newReadBooks = [...readBooks].filter((id) => book.id !== id);
     setReadBooks(newReadBooks);
     book.isRead = false;
     console.log(newReadBooks);
-    const newBooks = [...books]
-    setBooks(newBooks)
+    const newBooks = [...books];
+    setBooks(newBooks);
   }
 
   function addToList(book) {
@@ -48,8 +51,6 @@ function AllBooksListRow({
     console.log("booksToRead ", booksToRead);
   }
 
-   
-
   return (
     <>
       <li className="AllBooksListRow">
@@ -61,33 +62,41 @@ function AllBooksListRow({
           )}
         </div>
         <p className="AllBooksListRow-rating">{book.rating}</p>
-        <Link to={`/book/${book.id}`}><h2 className="AllBooksListRow-title">{book.title}</h2></Link>
+        <Link to={`/book/${book.id}`}>
+          <h2 className="AllBooksListRow-title">{book.title}</h2>
+        </Link>
         <p className="AllBooksListRow-author">{book.author}</p>
         <ul className="AllBooksListRow-genre">
           {book.genres.map((genre, index) => {
             return <li key={index}>{genre}</li>;
           })}
         </ul>
-        {book.isRead ? <img
-          className="AllBooksListRow-options"
-          src={checkFull}
-          onClick={() => markAsUnread(book)}
-        />:
-        <img
-          className="AllBooksListRow-options"
-          src={check}
-          onClick={() => markAsRead(book)}
-        />}
-        {book.isInList ? <img
-          className="AllBooksListRow-options"
-          src={listWithCross}
-          onClick={() => removeFromList(book)}
-        />:
-        <img
-          className="AllBooksListRow-options"
-          src={listWithCheck}
-          onClick={() => addToList(book)}
-        />}
+        {book.isRead ? (
+          <img
+            className="AllBooksListRow-options"
+            src={checkFull}
+            onClick={() => markAsUnread(book)}
+          />
+        ) : (
+          <img
+            className="AllBooksListRow-options"
+            src={check}
+            onClick={() => markAsRead(book)}
+          />
+        )}
+        {book.isInList ? (
+          <img
+            className="AllBooksListRow-options"
+            src={listWithCross}
+            onClick={() => removeFromList(book)}
+          />
+        ) : (
+          <img
+            className="AllBooksListRow-options"
+            src={listWithCheck}
+            onClick={() => addToList(book)}
+          />
+        )}
       </li>
     </>
   );

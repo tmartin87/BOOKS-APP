@@ -5,9 +5,8 @@ import AllBooksListRow from "./AllBooksListRow.jsx";
 
 function AllBooksList() {
   const [books, setBooks] = useState([]);
-  const [readBooks, setReadBooks] = useState([]);
+  const [booksRead, setBooksRead] = useState([]);
   const [booksToRead, setBooksToRead] = useState([]);
-  
 
   function createApiURL(title, author) {
     const formattedTitle = title.split(" ").join("+");
@@ -44,8 +43,22 @@ function AllBooksList() {
     try {
       const { data } = await supabase
         .from("books")
-        .select("author, genres, id, pages, rating, title, year");
+        .select("author, genres, id, rating, title");
       setBooks(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function getBooksToRead() {
+    try {
+      const { data } = await supabase
+        .from("users-info")
+        .select("booksToRead, booksRead")
+        .eq("id", 1) //Usuario 1 es nuestro único usuario
+        .single();
+      setBooksToRead(data.booksToRead);
+      setBooksRead(data.booksRead);
       console.log(data);
     } catch (err) {
       console.error(err);
@@ -55,27 +68,29 @@ function AllBooksList() {
   useEffect(() => {
     getBooks();
     //Comentado para no hacer demasiadas peticiones al API
-    addImages(books);
+    /* addImages(books); */
+    getBooksToRead();
   }, []);
 
   return (
     <ul className="AllBooksList">
       {books.map((book) => (
-       
-          <AllBooksListRow
+        <AllBooksListRow
           key={book.id}
-            book={book}
-            books={books}
-            setBooks={setBooks}
-            readBooks={readBooks}
-            setReadBooks={setReadBooks}
-            booksToRead={booksToRead}
-            setBooksToRead={setBooksToRead}
-          />
-      
+          book={book}
+          booksRead={booksRead}
+          setBooksRead={setBooksRead}
+          booksToRead={booksToRead}
+          setBooksToRead={setBooksToRead}
+        />
       ))}
     </ul>
   );
 }
 
 export default AllBooksList;
+
+/*
+books={books}
+setBooks={setBooks}
+*/
