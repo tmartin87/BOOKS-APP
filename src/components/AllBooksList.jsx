@@ -3,7 +3,7 @@ import supabase from "../supabase/config.js";
 import "./AllBooksList.css";
 import AllBooksListRow from "./AllBooksListRow.jsx";
 
-function AllBooksList({setSelectedBook}) {
+function AllBooksList() {
   const [books, setBooks] = useState([]);
   const [readBooks, setReadBooks] = useState([]);
   const [booksToRead, setBooksToRead] = useState([]);
@@ -60,12 +60,10 @@ function AllBooksList({setSelectedBook}) {
 
   return (
     <ul className="AllBooksList">
-      {books.map((book, index) => (
-        <li
-          key={index}
-          onClick={() => setSelectedBook(book)} // Al hacer clic, selecciona el libro
-        >
+      {books.map((book) => (
+       
           <AllBooksListRow
+          key={book.id}
             book={book}
             books={books}
             setBooks={setBooks}
@@ -74,7 +72,7 @@ function AllBooksList({setSelectedBook}) {
             booksToRead={booksToRead}
             setBooksToRead={setBooksToRead}
           />
-        </li>
+      
       ))}
     </ul>
   );
