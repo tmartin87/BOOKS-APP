@@ -14,6 +14,7 @@ import {
   getBooksToRead,
   getBooksRead,
 } from "../helperFunctions/getDataFromDB.js";
+import { useState } from "react";
 
 function AllBooksListRow({
   book,
@@ -22,6 +23,8 @@ function AllBooksListRow({
   booksToRead,
   setBooksToRead,
 }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <>
       <li className="AllBooksListRow">
@@ -43,40 +46,60 @@ function AllBooksListRow({
           })}
         </ul>
         {booksRead && booksRead.includes(book.id) ? (
-          <img
-            className="AllBooksListRow-options"
-            src={checkFull}
-            onClick={() => {
-              markAsUnread(book, getBooksRead, setBooksRead);
-            }}
-          />
+          <div className="AllBooksListRow-options">
+            <div className="AllBooksListRow-icon-wrapper">
+              <img
+                className="AllBooksListRow-icon"
+                src={checkFull}
+                onClick={() => {
+                  markAsUnread(book, getBooksRead, setBooksRead);
+                }}
+              />
+            </div>
+            <p className="AllBooksListRow-label">Mark unread</p>
+          </div>
         ) : (
-          <img
-            className="AllBooksListRow-options"
-            src={check}
-            onClick={() => {
-              markAsRead(book, getBooksRead, setBooksRead);
-            }}
-          />
+          <div className="AllBooksListRow-options">
+            <div className="AllBooksListRow-icon-wrapper">
+              <img
+                className="AllBooksListRow-icon"
+                src={check}
+                onClick={() => {
+                  markAsRead(book, getBooksRead, setBooksRead);
+                }}
+              />
+            </div>
+            <p className="AllBooksListRow-label">Mark read</p>
+          </div>
         )}
         {book.isInList ? (
-          <img
-            className="AllBooksListRow-options"
-            src={listWithCross}
-            onClick={() => {
-              removeFromList(book);
-              getBooksToRead();
-            }}
-          />
+          <div className="AllBooksListRow-options">
+          <div className="AllBooksListRow-icon-wrapper">
+            <img
+              className="AllBooksListRow-options"
+              src={listWithCross}
+              onClick={() => {
+                removeFromList(book);
+                getBooksToRead();
+              }}
+            />
+          </div>
+            <p className="AllBooksListRow-label">Remove</p>
+          </div>
         ) : (
-          <img
-            className="AllBooksListRow-options"
-            src={listWithCheck}
-            onClick={() => {
-              addToList(book);
-              getBooksToRead();
-            }}
-          />
+          <div className="AllBooksListRow-options">
+          <div className="AllBooksListRow-icon-wrapper">
+            <img
+              className="AllBooksListRow-options"
+              src={listWithCheck}
+              onClick={() => {
+                addToList(book);
+                getBooksToRead();
+              }}
+            />
+          </div>
+            <p className="AllBooksListRow-label">Add to list</p>
+          </div>
         )}
       </li>
     </>

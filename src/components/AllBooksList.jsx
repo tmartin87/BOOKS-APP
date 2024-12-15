@@ -4,7 +4,10 @@ import {
   getBooksToRead,
   getBooksRead,
 } from "../helperFunctions/getDataFromDB.js";
-import { createApiURL, getCoverURL } from "../helperFunctions/getImagesFromAPI.js";
+import {
+  createApiURL,
+  getCoverURL,
+} from "../helperFunctions/getImagesFromAPI.js";
 import "./AllBooksList.css";
 import AllBooksListRow from "./AllBooksListRow.jsx";
 
@@ -12,8 +15,6 @@ function AllBooksList() {
   const [books, setBooks] = useState([]);
   const [booksToRead, setBooksToRead] = useState([]);
   const [booksRead, setBooksRead] = useState([]);
-
-  /* */
 
   //Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
   async function addImages(books) {
@@ -43,7 +44,15 @@ function AllBooksList() {
   }, []);
 
   return (
-    <ul className="AllBooksList">
+    <div className="AllBooksList-table">
+    <ul className="AllBooksList-header">
+      <li></li> {/*That's the cover column*/}
+      <li>Rating</li>
+      <li>Title</li>
+      <li>Author</li>
+      <li>Genre</li>
+    </ul>
+    <ul className="AllBooksList-rows">
       {books.map((book) => (
         <AllBooksListRow
           key={book.id}
@@ -55,12 +64,8 @@ function AllBooksList() {
         />
       ))}
     </ul>
+    </div>
   );
 }
 
 export default AllBooksList;
-
-/*
-books={books}
-setBooks={setBooks}
-*/

@@ -6,11 +6,14 @@
     margin-inline: 2rem;
     padding-block: 0.3rem;
     border-bottom: 1px solid grey;
+}
 
+.AllBooksListRow h2{
+    font-size: 1.3rem;
+}
 
-    &>* {
-        font-size: 1.2rem;
-    }
+.AllBooksListRow p {
+    font-size: 1.0rem;
 }
 
 .AllBooksListRow-no-cover,
@@ -18,23 +21,32 @@
     display: inline-flex;
     align-items: center;
     text-align: center;
-    height: 4.5rem;
-    width: 3rem;
+    height: 5rem;
+    width: 3.5rem;
 }
 
-
 .AllBooksListRow-no-cover {
-    background-color: slategray;
-    color: black;
-    font-size: 0.8rem;
+    background-color: var(--color-terciary);
+    color: var(--text-bright);
+    font-size: 0.7rem;
 }
 
 
 .AllBooksListRow-cover-container {
     overflow: hidden;
+
     img {
         width: 100%
     }
+}
+
+.AllBooksListRow a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.AllBooksListRow a:hover {
+    cursor: pointer;
 }
 
 .AllBooksListRow-genre li {
@@ -50,6 +62,34 @@
     margin-right: 0.3em;
 }
 
-.AllBooksRow-rating {
+.AllBooksListRow-cover-container,
+.AllBooksListRow-rating,
+.AllBooksListRow-icon-wrapper,
+.AllBooksListRow-icon,
+.AllBooksListRow-label {
     justify-self: center;
+    text-align: center;
+}
+
+.AllBooksListRow-options,
+.AllBooksListRow-icon-wrapper {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AllBooksListRow-options{
+    flex-direction: column;
+}
+
+
+p.AllBooksListRow-label {
+    font-size: 0.7rem;
+}
+
+.AllBooksListRow-icon-wrapper {
+    width: 44px;
+    height: 44px;
+
 }

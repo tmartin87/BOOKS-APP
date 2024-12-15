@@ -1,5 +1,25 @@
-.AllBooksList {
+.AllBooksList-table{
+    max-width: 75rem;
+}
+
+.AllBooksList-header {
+    display: grid;
+    grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
+    column-gap: 0.7rem;
+    align-items: center;
+    margin-inline: 2rem;
+    padding-block: 0.3rem;
+    border-bottom: 1px solid grey;
+    list-style: none;
+    font-weight: bold;
+    
+    &>* {
+        font-size: 1.2rem;
+    }
+}
+
+.AllBooksList-rows {
     display: flex;
-    max-width: 75rem; /* 1200px */
+    /* 1200px */
     flex-direction: column;
 }
