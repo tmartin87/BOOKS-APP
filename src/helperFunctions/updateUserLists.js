@@ -22,7 +22,15 @@ function markAsUnread(book, getBooksRead, setBooksRead) {
   console.log(book);
 }
 
-function addToList(book, getBooksToRead, setBooksToRead) {
+async function addToList(book, getBooksToRead, setBooksToRead) {
+  const {data, error} = await supabase.rpc("append_book_books_to_read", {
+    user_id: 1,
+    new_item: Number(book.id)
+  });
+  if (error) {
+    console.log("Error: ", error);
+  }
+  getBooksToRead(setBooksToRead);
   /* const newBooksToRead = [...booksToRead, book.id];
   setBooksToRead(newBooksToRead);
   console.log("newBooksToRead ", newBooksToRead);
