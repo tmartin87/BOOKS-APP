@@ -79,8 +79,7 @@ function AllBooksListRow({
               className="AllBooksListRow-options"
               src={listWithCross}
               onClick={() => {
-                removeFromList(book);
-                getBooksToRead();
+                removeFromList(book, getBooksToRead, setBooksToRead);
               }}
             />
           </div>
