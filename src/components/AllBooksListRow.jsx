@@ -72,7 +72,7 @@ function AllBooksListRow({
             <p className="AllBooksListRow-label">Mark read</p>
           </div>
         )}
-        {book.isInList ? (
+        {booksToRead && booksToRead.includes(book.id) ? (
           <div className="AllBooksListRow-options">
           <div className="AllBooksListRow-icon-wrapper">
             <img
@@ -93,8 +93,7 @@ function AllBooksListRow({
               className="AllBooksListRow-options"
               src={listWithCheck}
               onClick={() => {
-                addToList(book);
-                getBooksToRead();
+                addToList(book, getBooksToRead, setBooksToRead);
               }}
             />
           </div>
