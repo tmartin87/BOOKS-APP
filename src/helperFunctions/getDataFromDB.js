@@ -11,6 +11,27 @@ async function getAllBooks(setBooks) {
   }
 }
 
+async function getOneBook(bookId, setBook, setError) {
+  try {
+    const { data, error } = await supabase
+      .from("books")
+      .select("*")
+      .eq("id", bookId)
+      .single();
+    if (error) throw error;
+
+    if (!data) {
+      setError("Book not found.");
+    } else {
+      setBook(data);
+      return data;
+    }
+  } catch (err) {
+    setError("Failed to load book details.");
+    console.error(err);
+  }
+}
+
 async function getBooksToRead(setBooksToRead) {
   try {
     const { data } = await supabase
@@ -39,4 +60,4 @@ async function getBooksRead(setBooksRead) {
   }
 }
 
-export { getAllBooks, getBooksToRead, getBooksRead };
+export { getAllBooks, getOneBook, getBooksToRead, getBooksRead };
