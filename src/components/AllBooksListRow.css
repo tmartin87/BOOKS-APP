@@ -1,55 +1,94 @@
+.allbookslist {
+  margin-left: 52px;
+  width: 53em;
+  border-color: 1px;
+  background-color: var(--bg-primary);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 15rem;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+}
+
 .AllBooksListRow {
-    display: grid;
-    grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
-    column-gap: 0.7rem;
-    align-items: center;
-    margin-inline: 2rem;
-    padding-block: 0.3rem;
-    border-bottom: 1px solid grey;
+  width: 50rem;
+  display: grid;
+  grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
+  column-gap: 0.7rem;
+  align-items: center;
+  margin-inline: 2rem;
+  padding-block: 0.6rem;
+  background-color: var(--bg-primary);
+  
+}
 
 
-    &>* {
-        font-size: 1.2rem;
-    }
+.allbookslist-header {
+  margin-left: 0px;
+  width: 53rem;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 3fr 2fr 3fr 1fr 0fr;
+  column-gap: 0.7rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.header-item {
+  margin-left: 29px;
+  color: var(--text-semi-bright)
 }
 
 .AllBooksListRow-no-cover,
 .AllBooksListRow-cover-container {
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
-    height: 4.5rem;
-    width: 3rem;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  height: 4.5rem;
+  width: 3rem;
+  margin-right: 2.5rem;
 }
-
 
 .AllBooksListRow-no-cover {
-    background-color: slategray;
-    color: black;
-    font-size: 0.8rem;
+  background-color: slategray;
+  color: black;
+  font-size: 0.8rem;
 }
 
-
 .AllBooksListRow-cover-container {
-    overflow: hidden;
-    img {
-        width: 100%
-    }
+  overflow: hidden;
+}
+
+.AllBooksListRow-cover-container img {
+  
 }
 
 .AllBooksListRow-genre li {
-    font-size: 0.8rem;
-    padding: 0;
-    list-style: none;
-    display: inline-block;
-    background-color: antiquewhite;
-    border-radius: 2rem;
-    padding-block: 0.2em;
-    padding-inline: 1em;
-    margin-bottom: 0.3em;
-    margin-right: 0.3em;
+  font-size: 0.8rem;
+  padding: 0;
+  list-style: none;
+
+  border-radius: 2rem;
+  padding-block: 0.2em;
+  padding-inline: 1em;
+  margin-bottom: 0.3em;
+  margin-right: 0.4em;
 }
 
 .AllBooksRow-rating {
-    justify-self: center;
+ padding-left: 20px;
+ color: aquamarine;
+
+ 
+}
+
+.AllBooksListRow-title {
+  text-decoration: none;
+  color: inherit;
+  margin-left:1rem;
+  
+  
 }

@@ -17,3 +17,17 @@
   --text-bright: white;
   --text-semi-bright: #aeaeb6;
 }
+
+h2{
+  font-size: 15px
+}
+
+p{
+  font-size: 14px
+}
+a{
+  text-decoration: none;
+  color: black
+
+}
+

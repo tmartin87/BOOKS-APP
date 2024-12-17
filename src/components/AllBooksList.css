@@ -1,5 +1,5 @@
 .AllBooksList {
     display: flex;
-    max-width: 75rem; /* 1200px */
+    max-width: 71rem; /* 1200px */
     flex-direction: column;
 }
