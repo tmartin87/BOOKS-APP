@@ -4,7 +4,17 @@ import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
 import listWithCross from "../assets/listWithCross.svg";
 import { Link } from "react-router-dom";
-import supabase from "../supabase/config";
+import {
+  markAsRead,
+  markAsUnread,
+  addToList,
+  removeFromList,
+} from "../helperFunctions/updateUserLists.js";
+import {
+  getBooksToRead,
+  getBooksRead,
+} from "../helperFunctions/getDataFromDB.js";
+import { useState } from "react";
 
 function AllBooksListRow({
   book,
@@ -12,52 +22,8 @@ function AllBooksListRow({
   setBooksRead,
   booksToRead,
   setBooksToRead,
-  getBooksRead,
 }) {
-  async function markAsRead(book) {
-    const { data, error } = await supabase.rpc("append_book_books_read", {
-      user_id: 1,
-      new_item: Number(book.id),
-    });
-    //Usuario 1 es nuestro único usuario
-    if (error) {
-      console.log("Error: ", error);
-    }
-    getBooksRead();
-    console.log(booksRead);
-  }
-
-  /* function testFunction() {
-    if (booksRead) {
-      console.log(booksRead.includes(book.id));
-      console.log(booksRead);
-    }
-  }
-  testFunction(); */
-  function markAsUnread(book) {
-    /* const newReadBooks = [...readBooks].filter((id) => book.id !== id);
-    setBooksRead(newReadBooks);
-    book.isRead = false;
-    console.log(newReadBooks);
-    const newBooks = [...books];
-    setBooks(newBooks); */
-    console.log(book);
-  }
-
-  function addToList(book) {
-    const newBooksToRead = [...booksToRead, book.id];
-    setBooksToRead(newBooksToRead);
-    book.isInList = true;
-    console.log("newBooksToRead ", newBooksToRead);
-    console.log("booksToRead ", booksToRead);
-  }
-  function removeFromList(book) {
-    const newBooksToRead = [...booksToRead].filter((id) => book.id !== id);
-    setBooksToRead(newBooksToRead);
-    book.isInList = false;
-    console.log("newBooksToRead ", newBooksToRead);
-    console.log("booksToRead ", booksToRead);
-  }
+  const [hovered, setHovered] = useState(false);
 
   return (
     <>
@@ -80,30 +46,58 @@ function AllBooksListRow({
           })}
         </ul>
         {booksRead && booksRead.includes(book.id) ? (
-          <img
-            className="AllBooksListRow-options"
-            src={checkFull}
-            onClick={() => markAsUnread(book)}
-          />
+          <div className="AllBooksListRow-options">
+            <div className="AllBooksListRow-icon-wrapper">
+              <img
+                className="AllBooksListRow-icon"
+                src={checkFull}
+                onClick={() => {
+                  markAsUnread(book, getBooksRead, setBooksRead);
+                }}
+              />
+            </div>
+            <p className="AllBooksListRow-label">Mark unread</p>
+          </div>
         ) : (
-          <img
-            className="AllBooksListRow-options"
-            src={check}
-            onClick={() => markAsRead(book)}
-          />
+          <div className="AllBooksListRow-options">
+            <div className="AllBooksListRow-icon-wrapper">
+              <img
+                className="AllBooksListRow-icon"
+                src={check}
+                onClick={() => {
+                  markAsRead(book, getBooksRead, setBooksRead);
+                }}
+              />
+            </div>
+            <p className="AllBooksListRow-label">Mark read</p>
+          </div>
         )}
-        {book.isInList ? (
-          <img
-            className="AllBooksListRow-options"
-            src={listWithCross}
-            onClick={() => removeFromList(book)}
-          />
+        {booksToRead && booksToRead.includes(book.id) ? (
+          <div className="AllBooksListRow-options">
+          <div className="AllBooksListRow-icon-wrapper">
+            <img
+              className="AllBooksListRow-options"
+              src={listWithCross}
+              onClick={() => {
+                removeFromList(book, getBooksToRead, setBooksToRead);
+              }}
+            />
+          </div>
+            <p className="AllBooksListRow-label">Remove</p>
+          </div>
         ) : (
-          <img
-            className="AllBooksListRow-options"
-            src={listWithCheck}
-            onClick={() => addToList(book)}
-          />
+          <div className="AllBooksListRow-options">
+          <div className="AllBooksListRow-icon-wrapper">
+            <img
+              className="AllBooksListRow-options"
+              src={listWithCheck}
+              onClick={() => {
+                addToList(book, getBooksToRead, setBooksToRead);
+              }}
+            />
+          </div>
+            <p className="AllBooksListRow-label">Add to list</p>
+          </div>
         )}
       </li>
     </>

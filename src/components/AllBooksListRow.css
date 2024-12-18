@@ -23,6 +23,9 @@
   
 }
 
+.AllBooksListRow h2{
+    font-size: 1.3rem;
+}
 
 .allbookslist-header {
   margin-left: 0px;
@@ -64,6 +67,15 @@
 
 .AllBooksListRow-cover-container img {
   
+}
+
+.AllBooksListRow a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.AllBooksListRow a:hover {
+    cursor: pointer;
 }
 
 .AllBooksListRow-genre li {

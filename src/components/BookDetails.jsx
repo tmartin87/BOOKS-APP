@@ -1,6 +1,6 @@
 import "./BookDetails.css";
 
-function BookDetails({ book }) {
+function BookDetails({ book, bookCover }) {
   return (
     <div className="BookDetails-container">
       <h2>{book.title}</h2>
@@ -9,7 +9,7 @@ function BookDetails({ book }) {
       <p><strong>Year:</strong> {book.year}</p>
       <p><strong>Pages:</strong> {book.pages}</p>
       <p><strong>Rating:</strong> {book.rating}</p>
-      <img src={book.image || "default_cover.jpg"} alt={`${book.title} cover`} />
+      <img className="BookDetails-cover"src={bookCover || "default_cover.jpg"} alt={`${book.title} cover`} />
     </div>
   );
 }
