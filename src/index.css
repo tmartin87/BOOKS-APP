@@ -18,12 +18,16 @@
   --text-semi-bright: #aeaeb6;
 }
 
+h1{
+  
+}
+
 h2{
-  font-size: 15px
+  font-size: 16px
 }
 
 p{
-  font-size: 14px
+  font-size: 12px
 }
 a{
   text-decoration: none;

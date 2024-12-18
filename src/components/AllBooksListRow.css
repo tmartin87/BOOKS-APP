@@ -1,15 +1,3 @@
-.allbookslist {
-  margin-left: 52px;
-  width: 53em;
-  border-color: 1px;
-  background-color: var(--bg-primary);
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: 15rem;
-  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
-}
 
 .AllBooksListRow {
   width: 50rem;
@@ -20,29 +8,13 @@
   margin-inline: 2rem;
   padding-block: 0.6rem;
   background-color: var(--bg-primary);
-  
 }
 
-.AllBooksListRow h2{
-    font-size: 1.3rem;
-}
 
-.allbookslist-header {
-  margin-left: 0px;
-  width: 53rem;
-  font-weight: bold;
-  background-color: #f4f4f4;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 0.7fr 2fr 3fr 4fr 2fr 2fr 1fr;
-  column-gap: 0.7rem;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
 
 .header-item {
   margin-left: 29px;
-  color: var(--text-semi-bright)
+  color: var(--text-semi-bright);
 }
 
 .AllBooksListRow-no-cover,
@@ -66,16 +38,10 @@
 }
 
 .AllBooksListRow-cover-container img {
-  
-}
-
-.AllBooksListRow a {
-    color: var(--color-primary);
-    text-decoration: none;
 }
 
 .AllBooksListRow a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .AllBooksListRow-genre li {
@@ -91,16 +57,11 @@
 }
 
 .AllBooksRow-rating {
- padding-left: 20px;
- color: aquamarine;
-
- 
+  padding-left: 20px;
+  color: aquamarine;
 }
 
 .AllBooksListRow-title {
-  text-decoration: none;
-  color: inherit;
-  margin-left:1rem;
-  
-  
+ 
+  margin-left: 1rem;
 }
