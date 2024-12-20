@@ -1,38 +1,43 @@
-.allbookslist-container{
-
-  border: 1px solid red;
+.allbookslist-container {
   width: 1200px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin: 0 auto;
-    
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10px;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-  .allbookslist {
-    margin-left: 52px;
-    width: 53rem;
-    border-color: 1px;
-    background-color: var(--bg-primary);
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 15rem;
-    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-
-
+.allbookslist {
+  margin-left: 52px;
+  width: 53rem;
+  border-color: 1px;
+  background-color: var(--bg-primary);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+}
 
 .allbookslist-header {
-    margin-left: 0px;
-    width: 53rem;
-    font-weight: bold;
-    background-color: #f4f4f4;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 0.7fr 2fr 3fr 4fr 2fr 2fr 1fr;
-    column-gap: 0.7rem;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
+  margin-left: 0px;
+  width: 53rem;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 0.7fr 2fr 3fr 4fr 2fr 2fr 1fr;
+  column-gap: 0.7rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.header-item {
+  margin-left: 29px;
+  color: var(--text-semi-bright);
+}

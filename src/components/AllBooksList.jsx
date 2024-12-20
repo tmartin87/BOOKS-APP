@@ -48,6 +48,7 @@ function AllBooksList() {
     <div className="allbookslist-container">
       <h1>FIND YOUR NEXT BOOK</h1>
       <ul className="allbookslist">
+      
         <li className="allbookslist-header">
           <span className="header-item">Cover</span>
           <span className="header-item">Rating</span>
