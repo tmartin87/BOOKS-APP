@@ -1,25 +1,43 @@
-.AllBooksList-table{
-    max-width: 75rem;
+.allbookslist-container {
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10px;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-.AllBooksList-header {
-    display: grid;
-    grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
-    column-gap: 0.7rem;
-    align-items: center;
-    margin-inline: 2rem;
-    padding-block: 0.3rem;
-    border-bottom: 1px solid grey;
-    list-style: none;
-    font-weight: bold;
-    
-    &>* {
-        font-size: 1.2rem;
-    }
+.allbookslist {
+  
+  width: 53rem;
+  border-color: 1px;
+  background-color: var(--bg-primary);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
 }
 
-.AllBooksList-rows {
-    display: flex;
-    /* 1200px */
-    flex-direction: column;
+.allbookslist-header {
+  margin-left: 0px;
+  width: 53rem;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 0.4fr 1.1fr 1.3fr 0.9fr 0.8fr 1fr 1fr;
+  column-gap: 0.7rem;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.header-item {
+  margin-left: 29px;
+  color: var(--text-semi-bright);
 }

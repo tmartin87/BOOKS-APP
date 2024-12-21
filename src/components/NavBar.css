@@ -1,0 +1,43 @@
+/* NavBar.css */
+.navbar {
+    background-color: #ffffff; 
+    padding: 10px 20px;
+    
+    width: 1200px;
+   
+    justify-content: center;
+    margin: 0 auto;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+    
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var( --color-primary)
+  }
+  
+  .menu {
+    display: flex;
+    gap: 20px; 
+  }
+  
+  .menu .button, .menu .user {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .menu .button:hover, .menu .user:hover {
+    color:var( --color-primary)
+  }

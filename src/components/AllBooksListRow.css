@@ -1,95 +1,58 @@
 .AllBooksListRow {
-    display: grid;
-    grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
-    column-gap: 0.7rem;
-    align-items: center;
-    margin-inline: 2rem;
-    padding-block: 0.3rem;
-    border-bottom: 1px solid grey;
-}
-
-.AllBooksListRow h2{
-    font-size: 1.3rem;
-}
-
-.AllBooksListRow p {
-    font-size: 1.0rem;
+  width: 50rem;
+  display: grid;
+  grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
+  column-gap: 0.7rem;
+  align-items: center;
+  margin-inline: 2rem;
+  padding-block: 0.6rem;
+  background-color: var(--bg-primary);
 }
 
 .AllBooksListRow-no-cover,
 .AllBooksListRow-cover-container {
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
-    height: 5rem;
-    width: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  height: 4.5rem;
+  width: 3rem;
+  margin-right: 2.5rem;
 }
 
 .AllBooksListRow-no-cover {
-    background-color: var(--color-terciary);
-    color: var(--text-bright);
-    font-size: 0.7rem;
+  background-color: slategray;
+  color: black;
+  font-size: 0.8rem;
 }
-
 
 .AllBooksListRow-cover-container {
-    overflow: hidden;
-
-    img {
-        width: 100%
-    }
+  overflow: hidden;
 }
 
-.AllBooksListRow a {
-    color: var(--color-primary);
-    text-decoration: none;
+.AllBooksListRow-cover-container img {
 }
 
 .AllBooksListRow a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .AllBooksListRow-genre li {
-    font-size: 0.8rem;
-    padding: 0;
-    list-style: none;
-    display: inline-block;
-    background-color: antiquewhite;
-    border-radius: 2rem;
-    padding-block: 0.2em;
-    padding-inline: 1em;
-    margin-bottom: 0.3em;
-    margin-right: 0.3em;
+  font-size: 0.8rem;
+  padding: 0;
+  list-style: none;
+
+  border-radius: 2rem;
+  padding-block: 0.2em;
+  padding-inline: 1em;
+  margin-bottom: 0.3em;
+  margin-right: 0.4em;
 }
 
-.AllBooksListRow-cover-container,
-.AllBooksListRow-rating,
-.AllBooksListRow-icon-wrapper,
-.AllBooksListRow-icon,
-.AllBooksListRow-label {
-    justify-self: center;
-    text-align: center;
+.AllBooksRow-rating {
+  padding-left: 20px;
+  color: aquamarine;
 }
 
-.AllBooksListRow-options,
-.AllBooksListRow-icon-wrapper {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.AllBooksListRow-options{
-    flex-direction: column;
-}
-
-
-p.AllBooksListRow-label {
-    font-size: 0.7rem;
-}
-
-.AllBooksListRow-icon-wrapper {
-    width: 44px;
-    height: 44px;
-
+.AllBooksListRow-title {
+  margin-left: 1rem;
 }

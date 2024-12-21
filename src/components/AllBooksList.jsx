@@ -44,15 +44,20 @@ function AllBooksList() {
   }, []);
 
   return (
-    <div className="AllBooksList-table">
-      <ul className="AllBooksList-header">
-        <li></li> {/*That's the cover column*/}
-        <li>Rating</li>
-        <li>Title</li>
-        <li>Author</li>
-        <li>Genre</li>
-      </ul>
-      <ul className="AllBooksList-rows">
+   
+    <div className="allbookslist-container">
+      <h1>FIND YOUR NEXT BOOK</h1>
+      <ul className="allbookslist">
+      
+        <li className="allbookslist-header">
+          <span className="header-item">Cover</span>
+          <span className="header-item">Rating</span>
+          <span className="header-item">Title</span>
+          <span className="header-item">Author</span>
+          <span className="header-item">Genre</span>
+        </li>
+
+       
         {books.map((book) => (
           <AllBooksListRow
             key={book.id}
