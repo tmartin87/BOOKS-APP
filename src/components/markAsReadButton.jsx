@@ -1,5 +1,5 @@
 import check from "../assets/check.svg";
-import checkFull from "../assets/checkFull.svg";
+import checkFull from "../assets/checkFull.png";
 import { markAsRead, markAsUnread } from "../helperFunctions/updateUserLists.js";
 import { getBooksRead } from "../helperFunctions/getDataFromDB.js";
 
@@ -28,7 +28,7 @@ function MarkAsReadButton({ book, booksRead, setBooksRead }) {
           }}
         />
       </div>
-      <p className="AllBooksListRow-label">Mark read</p>
+      <p id="button-text" className="AllBooksListRow-label">Mark read</p>
     </div>
   );
 }

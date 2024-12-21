@@ -2,6 +2,7 @@ import listWithCheck from "../assets/listWithCheck.svg";
 import listWithCross from "../assets/listWithCross.svg";
 import { addToList, removeFromList } from "../helperFunctions/updateUserLists.js";
 import { getBooksToRead } from "../helperFunctions/getDataFromDB.js";
+import"./AddToListButton.css"
 
 function AddToListButton({ book, booksToRead, setBooksToRead }) {
   return booksToRead && booksToRead.includes(book.id) ? (
@@ -28,7 +29,7 @@ function AddToListButton({ book, booksToRead, setBooksToRead }) {
           }}
         />
       </div>
-      <p className="AllBooksListRow-label">Add to list</p>
+      <p id="button-text" >Add to list</p>
     </div>
   );
 }
