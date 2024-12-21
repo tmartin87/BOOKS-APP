@@ -56,3 +56,27 @@
 .AllBooksListRow-title {
   margin-left: 1rem;
 }
+
+
+.AllBooksListRow-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8px;
+}
+
+.AllBooksListRow-icon-wrapper {
+ 
+}
+
+.AllBooksListRow-label {
+  font-size: 8px; 
+  color: #555; 
+  opacity: 0;
+  transition: opacity 0.3s ease; 
+}
+
+.AllBooksListRow-options:hover .AllBooksListRow-label {
+  opacity: 1; 
+  font-size: 8px;
+}
