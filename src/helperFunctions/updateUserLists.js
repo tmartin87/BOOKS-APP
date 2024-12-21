@@ -1,6 +1,6 @@
 import supabase from "../supabase/config";
 
-async function markAsRead(book, getBooksRead, setBooksRead) {
+async function markAsRead(book, getUpdatedList, updateComponent) {
   const { data, error } = await supabase.rpc("append_book_books_read", {
     user_id: 1, //Usuario 1 es nuestro único usuario
     new_item: Number(book.id),
@@ -9,10 +9,10 @@ async function markAsRead(book, getBooksRead, setBooksRead) {
   if (error) {
     console.log("Error: ", error);
   }
-  getBooksRead(setBooksRead);
+  getUpdatedList(updateComponent);
 }
 
-async function markAsUnread(book, getBooksRead, setBooksRead) {
+async function markAsUnread(book, getUpdatedList, updateComponent) {
   const {data, error} = await supabase.rpc("remove_book_books_read", {
     user_id: 1,
     item_to_remove: Number(book.id)
@@ -20,7 +20,7 @@ async function markAsUnread(book, getBooksRead, setBooksRead) {
   if (error) {
     console.log("Error: ", error);
   } else {
-  getBooksRead(setBooksRead);
+  getUpdatedList(updateComponent);
   /* const newReadBooks = [...readBooks].filter((id) => book.id !== id);
     setBooksRead(newReadBooks);
     book.isRead = false;
