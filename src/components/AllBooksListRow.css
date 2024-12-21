@@ -1,4 +1,3 @@
-
 .AllBooksListRow {
   width: 50rem;
   display: grid;
@@ -9,10 +8,6 @@
   padding-block: 0.6rem;
   background-color: var(--bg-primary);
 }
-
-
-
-
 
 .AllBooksListRow-no-cover,
 .AllBooksListRow-cover-container {
@@ -59,6 +54,5 @@
 }
 
 .AllBooksListRow-title {
- 
   margin-left: 1rem;
 }

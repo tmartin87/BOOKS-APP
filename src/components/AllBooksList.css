@@ -12,7 +12,7 @@
 }
 
 .allbookslist {
-  margin-left: 52px;
+  
   width: 53rem;
   border-color: 1px;
   background-color: var(--bg-primary);
@@ -31,7 +31,7 @@
   background-color: #f4f4f4;
   padding: 10px;
   display: grid;
-  grid-template-columns: 0.7fr 2fr 3fr 4fr 2fr 2fr 1fr;
+  grid-template-columns: 0.4fr 1.1fr 1.3fr 0.9fr 0.8fr 1fr 1fr;
   column-gap: 0.7rem;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;

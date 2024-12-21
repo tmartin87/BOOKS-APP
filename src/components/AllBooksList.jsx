@@ -52,7 +52,7 @@ function AllBooksList() {
         <li className="allbookslist-header">
           <span className="header-item">Cover</span>
           <span className="header-item">Rating</span>
-          <span className="header-item">title</span>
+          <span className="header-item">Title</span>
           <span className="header-item">Author</span>
           <span className="header-item">Genre</span>
         </li>
