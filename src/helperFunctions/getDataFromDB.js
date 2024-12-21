@@ -32,32 +32,32 @@ async function getOneBook(bookId, setBook, setError) {
   }
 }
 
-async function getBooksToRead(setBooksToRead) {
+async function getBooksToReadList(setBooksToReadList) {
   try {
     const { data } = await supabase
       .from("users-info")
       .select("booksToRead")
       .eq("id", 1) //Usuario 1 es nuestro único usuario
       .single();
-    setBooksToRead(data.booksToRead);
+    setBooksToReadList(data.booksToRead);
     console.log(data.booksToRead);
   } catch (err) {
     console.error(err);
   }
 }
 
-async function getBooksRead(setBooksRead) {
+async function getBooksReadList(setBooksReadList) {
   try {
     const { data } = await supabase
       .from("users-info")
       .select("booksRead")
       .eq("id", 1) //Usuario 1 es nuestro único usuario
       .single();
-    setBooksRead(data.booksRead);
+    setBooksReadList(data.booksRead);
     console.log(data.booksRead);
   } catch (err) {
     console.error(err);
   }
 }
 
-export { getAllBooks, getOneBook, getBooksToRead, getBooksRead };
+export { getAllBooks, getOneBook, getBooksToReadList, getBooksReadList };
