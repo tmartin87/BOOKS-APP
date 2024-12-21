@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   getAllBooks,
-  getBooksToRead,
-  getBooksRead,
+  getBooksToReadList,
+  getBooksReadList,
 } from "../helperFunctions/getDataFromDB.js";
 import {
   createApiURL,
@@ -13,8 +13,8 @@ import AllBooksListRow from "./AllBooksListRow.jsx";
 
 function AllBooksList() {
   const [books, setBooks] = useState([]);
-  const [booksToRead, setBooksToRead] = useState([]);
-  const [booksRead, setBooksRead] = useState([]);
+  const [booksToReadList, setBooksToReadList] = useState([]);
+  const [booksReadList, setBooksReadList] = useState([]);
 
   //Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
   async function addImages(books) {
@@ -39,8 +39,8 @@ function AllBooksList() {
     //Comentado para no hacer demasiadas peticiones al API
     /* addImages(books); */
     console.log("Not fetching images...");
-    getBooksRead(setBooksRead);
-    getBooksToRead(setBooksToRead);
+    getBooksReadList(setBooksReadList);
+    getBooksToReadList(setBooksToReadList);
   }, []);
 
   return (
@@ -57,10 +57,10 @@ function AllBooksList() {
           <AllBooksListRow
             key={book.id}
             book={book}
-            booksRead={booksRead}
-            setBooksRead={setBooksRead}
-            booksToRead={booksToRead}
-            setBooksToRead={setBooksToRead}
+            booksRead={booksReadList}
+            setBooksRead={setBooksReadList}
+            booksToReadList={booksToReadList}
+            setBooksToReadList={setBooksToReadList}
           />
         ))}
       </ul>

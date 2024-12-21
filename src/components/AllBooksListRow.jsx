@@ -11,8 +11,8 @@ import {
   removeFromList,
 } from "../helperFunctions/updateUserLists.js";
 import {
-  getBooksToRead,
-  getBooksRead,
+  getBooksToReadList,
+  getBooksReadList,
 } from "../helperFunctions/getDataFromDB.js";
 import { useState } from "react";
 
@@ -52,7 +52,7 @@ function AllBooksListRow({
                 className="AllBooksListRow-icon"
                 src={checkFull}
                 onClick={() => {
-                  markAsUnread(book, getBooksRead, setBooksRead);
+                  markAsUnread(book, getBooksReadList, setBooksRead);
                 }}
               />
             </div>
@@ -65,7 +65,7 @@ function AllBooksListRow({
                 className="AllBooksListRow-icon"
                 src={check}
                 onClick={() => {
-                  markAsRead(book, getBooksRead, setBooksRead);
+                  markAsRead(book, getBooksReadList, setBooksRead);
                 }}
               />
             </div>
@@ -79,7 +79,7 @@ function AllBooksListRow({
               className="AllBooksListRow-options"
               src={listWithCross}
               onClick={() => {
-                removeFromList(book, getBooksToRead, setBooksToRead);
+                removeFromList(book, getBooksToReadList, setBooksToRead);
               }}
             />
           </div>
@@ -92,7 +92,7 @@ function AllBooksListRow({
               className="AllBooksListRow-options"
               src={listWithCheck}
               onClick={() => {
-                addToList(book, getBooksToRead, setBooksToRead);
+                addToList(book, getBooksToReadList, setBooksToRead);
               }}
             />
           </div>

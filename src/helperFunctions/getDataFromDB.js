@@ -32,7 +32,7 @@ async function getOneBook(bookId, setBook, setError) {
   }
 }
 
-async function getBooksToRead(setBooksToRead) {
+async function getBooksToReadList(setBooksToRead) {
   try {
     const { data } = await supabase
       .from("users-info")
@@ -46,7 +46,7 @@ async function getBooksToRead(setBooksToRead) {
   }
 }
 
-async function getBooksRead(setBooksRead) {
+async function getBooksReadList(setBooksRead) {
   try {
     const { data } = await supabase
       .from("users-info")
@@ -60,4 +60,4 @@ async function getBooksRead(setBooksRead) {
   }
 }
 
-export { getAllBooks, getOneBook, getBooksToRead, getBooksRead };
+export { getAllBooks, getOneBook, getBooksToReadList, getBooksReadList };
