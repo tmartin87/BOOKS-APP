@@ -2,7 +2,7 @@ import "./UserBooksPage.css";
 import { getBooksToRead, getBooksRead } from "../helperFunctions/getDataFromDB";
 import { useEffect, useState } from "react";
 import supabase from "../supabase/config";
-import InProgressList from "../components/InProgressList" 
+/* import InProgressList from "../components/InProgressList"  */
 
 function UserBooksPage() {
   const [BooksToRead, setBooksToRead] = useState([]);
@@ -26,7 +26,7 @@ function UserBooksPage() {
       <div className="books-to-read">Books to read
       <ul></ul></div>
       <div className="books-read">Books read</div>
-      <InProgressList />
+      {/* <InProgressList /> */}
     </div>
   );
 }

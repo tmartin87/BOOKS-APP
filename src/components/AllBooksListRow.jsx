@@ -16,6 +16,66 @@ import {
 } from "../helperFunctions/getDataFromDB.js";
 import { useState } from "react";
 
+function MarkAsReadButton({ book, booksRead, setBooksRead }) {
+  return booksRead && booksRead.includes(book.id) ? (
+    <div className="AllBooksListRow-options">
+      <div className="AllBooksListRow-icon-wrapper">
+        <img
+          className="AllBooksListRow-icon"
+          src={checkFull}
+          onClick={() => {
+            markAsUnread(book, getBooksRead, setBooksRead);
+          }}
+        />
+      </div>
+      <p className="AllBooksListRow-label">Mark unread</p>
+    </div>
+  ) : (
+    <div className="AllBooksListRow-options">
+      <div className="AllBooksListRow-icon-wrapper">
+        <img
+          className="AllBooksListRow-icon"
+          src={check}
+          onClick={() => {
+            markAsRead(book, getBooksRead, setBooksRead);
+          }}
+        />
+      </div>
+      <p className="AllBooksListRow-label">Mark read</p>
+    </div>
+  );
+}
+
+function AddToListButton({ book, booksToRead, setBooksToRead }) {
+  return booksToRead && booksToRead.includes(book.id) ? (
+    <div className="AllBooksListRow-options">
+      <div className="AllBooksListRow-icon-wrapper">
+        <img
+          className="AllBooksListRow-icon"
+          src={listWithCross}
+          onClick={() => {
+            removeFromList(book, getBooksToRead, setBooksToRead);
+          }}
+        />
+      </div>
+      <p className="AllBooksListRow-label">Remove</p>
+    </div>
+  ) : (
+    <div className="AllBooksListRow-options">
+      <div className="AllBooksListRow-icon-wrapper">
+        <img
+          className="AllBooksListRow-icon"
+          src={listWithCheck}
+          onClick={() => {
+            addToList(book, getBooksToRead, setBooksToRead);
+          }}
+        />
+      </div>
+      <p className="AllBooksListRow-label">Add to list</p>
+    </div>
+  );
+}
+
 function AllBooksListRow({
   book,
   booksRead,
@@ -45,60 +105,18 @@ function AllBooksListRow({
             return <li key={index}>{genre}</li>;
           })}
         </ul>
-        {booksRead && booksRead.includes(book.id) ? (
-          <div className="AllBooksListRow-options">
-            <div className="AllBooksListRow-icon-wrapper">
-              <img
-                className="AllBooksListRow-icon"
-                src={checkFull}
-                onClick={() => {
-                  markAsUnread(book, getBooksRead, setBooksRead);
-                }}
-              />
-            </div>
-            <p className="AllBooksListRow-label">Mark unread</p>
-          </div>
-        ) : (
-          <div className="AllBooksListRow-options">
-            <div className="AllBooksListRow-icon-wrapper">
-              <img
-                className="AllBooksListRow-icon"
-                src={check}
-                onClick={() => {
-                  markAsRead(book, getBooksRead, setBooksRead);
-                }}
-              />
-            </div>
-            <p className="AllBooksListRow-label">Mark read</p>
-          </div>
-        )}
-        {booksToRead && booksToRead.includes(book.id) ? (
-          <div className="AllBooksListRow-options">
-          <div className="AllBooksListRow-icon-wrapper">
-            <img
-              className="AllBooksListRow-options"
-              src={listWithCross}
-              onClick={() => {
-                removeFromList(book, getBooksToRead, setBooksToRead);
-              }}
-            />
-          </div>
-            <p className="AllBooksListRow-label">Remove</p>
-          </div>
-        ) : (
-          <div className="AllBooksListRow-options">
-          <div className="AllBooksListRow-icon-wrapper">
-            <img
-              className="AllBooksListRow-options"
-              src={listWithCheck}
-              onClick={() => {
-                addToList(book, getBooksToRead, setBooksToRead);
-              }}
-            />
-          </div>
-            <p className="AllBooksListRow-label">Add to list</p>
-          </div>
-        )}
+       
+        <MarkAsReadButton
+          book={book}
+          booksRead={booksRead}
+          setBooksRead={setBooksRead}
+        />
+        <AddToListButton
+          book={book}
+          booksToRead={booksToRead}
+          setBooksToRead={setBooksToRead}
+        />
+       
       </li>
     </>
   );
