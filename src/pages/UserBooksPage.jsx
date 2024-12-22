@@ -1,10 +1,13 @@
 import "./UserBooksPage.css";
 import { useEffect, useState } from "react";
-import {getBooksToReadDetails, getBooksReadDetails} from "../helperFunctions/getDataFromDB"
-import InProgressList from "../components/InProgressList";
+import {getBooksToReadDetails, getBooksReadDetails} from "../helperFunctions/getDataFromDB";
+import ToReadListRow from "../components/ToReadListRow";
+import ReadingListRow from "../components/ReadingListRow";
+import ReadListRow from "../components/ReadListRow";
 
 function UserBooksPage() {
   const [BooksToReadDetails, setBooksToReadDetails] = useState([]);
+  const [BooksReadingDetails, setBooksReadingDetails] = useState([])
   const [BooksReadDetails, setBooksReadDetails] = useState([]);
  
   useEffect(() => {
@@ -18,22 +21,18 @@ function UserBooksPage() {
           Books to read
           <ul>
             {BooksToReadDetails.map((bookToRead) => (
-              <li key={bookToRead.id}>
-                <strong>{bookToRead.title}</strong> - {bookToRead.author}
-              </li>
+              <ToReadListRow key={bookToRead.id} bookToRead={bookToRead}/>
             ))}
           </ul>
         </div>
       }
-      <InProgressList />
+      <ReadingListRow />
       {
         <div className="books-read">
           Books read
           <ul>
             {BooksReadDetails.map((bookRead) => (
-              <li key={bookRead.id}>
-                <strong>{bookRead.title}</strong> - {bookRead.author}
-              </li>
+              <ReadListRow key={bookRead.id} bookRead={bookRead} />
             ))}
           </ul>
         </div>
