@@ -1,37 +1,15 @@
 import "./UserBooksPage.css";
 import { useEffect, useState } from "react";
-import supabase from "../supabase/config";
+import {getBooksToReadDetails, getBooksReadDetails} from "../helperFunctions/getDataFromDB"
 import InProgressList from "../components/InProgressList";
 
 function UserBooksPage() {
   const [BooksToReadDetails, setBooksToReadDetails] = useState([]);
   const [BooksReadDetails, setBooksReadDetails] = useState([]);
  
-  async function getBooksToReadDetails(user_id) {
-    const { data, error } = await supabase.rpc("get_books_to_read", {
-      user_id: user_id,
-    });
-    if (error) {
-      console.log(error);
-    } else {
-      setBooksToReadDetails(data);
-    }
-  }
-
-  async function getBooksReadDetails(user_id) {
-    const { data, error } = await supabase.rpc("get_books_read", {
-      user_id: user_id,
-    });
-    if (error) {
-      console.log(error);
-    } else {
-      setBooksReadDetails(data);
-    }
-  }
-
   useEffect(() => {
-    getBooksToReadDetails(1);
-    getBooksReadDetails(1);
+    getBooksToReadDetails(1, setBooksToReadDetails);
+    getBooksReadDetails(1, setBooksReadDetails);
   }, []);
   return (
     <div className="UserBooksPage-container">

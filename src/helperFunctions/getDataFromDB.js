@@ -60,4 +60,33 @@ async function getBooksReadList(setBooksReadList) {
   }
 }
 
-export { getAllBooks, getOneBook, getBooksToReadList, getBooksReadList };
+ async function getBooksToReadDetails(user_id, updateComponent) {
+   const { data, error } = await supabase.rpc("get_books_to_read", {
+     user_id: user_id,
+   });
+   if (error) {
+     console.log(error);
+   } else {
+     updateComponent(data);
+   }
+ }
+
+ async function getBooksReadDetails(user_id, updateComponent) {
+   const { data, error } = await supabase.rpc("get_books_read", {
+     user_id: user_id,
+   });
+   if (error) {
+     console.log(error);
+   } else {
+     updateComponent(data);
+   }
+ }
+
+export {
+  getAllBooks,
+  getOneBook,
+  getBooksToReadList,
+  getBooksReadList,
+  getBooksToReadDetails,
+  getBooksReadDetails,
+};
