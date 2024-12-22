@@ -4,33 +4,34 @@ import supabase from "../supabase/config";
 import InProgressList from "../components/InProgressList";
 
 function UserBooksPage() {
-  const [BooksToRead, setBooksToRead] = useState([]);
-  const [BooksRead, setBooksRead] = useState([]);
-  async function getList(user_id) {
+  const [BooksToReadDetails, setBooksToReadDetails] = useState([]);
+  const [BooksReadDetails, setBooksReadDetails] = useState([]);
+ 
+  async function getBooksToReadDetails(user_id) {
     const { data, error } = await supabase.rpc("get_books_to_read", {
       user_id: user_id,
     });
     if (error) {
       console.log(error);
     } else {
-      setBooksToRead(data);
+      setBooksToReadDetails(data);
     }
   }
 
-  async function getListRead(user_id) {
+  async function getBooksReadDetails(user_id) {
     const { data, error } = await supabase.rpc("get_books_read", {
       user_id: user_id,
     });
     if (error) {
       console.log(error);
     } else {
-      setBooksRead(data);
+      setBooksReadDetails(data);
     }
   }
 
   useEffect(() => {
-    getList(1);
-    getListRead(1);
+    getBooksToReadDetails(1);
+    getBooksReadDetails(1);
   }, []);
   return (
     <div className="UserBooksPage-container">
@@ -38,7 +39,7 @@ function UserBooksPage() {
         <div className="books-to-read">
           Books to read
           <ul>
-            {BooksToRead.map((bookToRead) => (
+            {BooksToReadDetails.map((bookToRead) => (
               <li key={bookToRead.id}>
                 <strong>{bookToRead.title}</strong> - {bookToRead.author}
               </li>
@@ -51,7 +52,7 @@ function UserBooksPage() {
         <div className="books-read">
           Books read
           <ul>
-            {BooksRead.map((bookRead) => (
+            {BooksReadDetails.map((bookRead) => (
               <li key={bookRead.id}>
                 <strong>{bookRead.title}</strong> - {bookRead.author}
               </li>
