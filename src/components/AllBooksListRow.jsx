@@ -11,20 +11,19 @@ import {
   removeFromList,
 } from "../helperFunctions/updateUserLists.js";
 import {
-  getBooksToRead,
-  getBooksRead,
+  getBooksToReadList,
+  getBooksReadList,
 } from "../helperFunctions/getDataFromDB.js";
-import { useState } from "react";
 
-function MarkAsReadButton({ book, booksRead, setBooksRead }) {
-  return booksRead && booksRead.includes(book.id) ? (
+function MarkAsReadButton({ book, booksReadList, setBooksReadList }) {
+  return booksReadList && booksReadList.includes(book.id) ? (
     <div className="AllBooksListRow-options">
       <div className="AllBooksListRow-icon-wrapper">
         <img
           className="AllBooksListRow-icon"
           src={checkFull}
           onClick={() => {
-            markAsUnread(book, getBooksRead, setBooksRead);
+            markAsUnread(book, getBooksReadList, setBooksReadList);
           }}
         />
       </div>
@@ -37,7 +36,7 @@ function MarkAsReadButton({ book, booksRead, setBooksRead }) {
           className="AllBooksListRow-icon"
           src={check}
           onClick={() => {
-            markAsRead(book, getBooksRead, setBooksRead);
+            markAsRead(book, getBooksReadList, setBooksReadList);
           }}
         />
       </div>
@@ -46,15 +45,15 @@ function MarkAsReadButton({ book, booksRead, setBooksRead }) {
   );
 }
 
-function AddToListButton({ book, booksToRead, setBooksToRead }) {
-  return booksToRead && booksToRead.includes(book.id) ? (
+function AddToListButton({ book, booksToReadList, setBooksToReadList }) {
+  return booksToReadList && booksToReadList.includes(book.id) ? (
     <div className="AllBooksListRow-options">
       <div className="AllBooksListRow-icon-wrapper">
         <img
           className="AllBooksListRow-icon"
           src={listWithCross}
           onClick={() => {
-            removeFromList(book, getBooksToRead, setBooksToRead);
+            removeFromList(book, getBooksToReadList, setBooksToReadList);
           }}
         />
       </div>
@@ -67,7 +66,7 @@ function AddToListButton({ book, booksToRead, setBooksToRead }) {
           className="AllBooksListRow-icon"
           src={listWithCheck}
           onClick={() => {
-            addToList(book, getBooksToRead, setBooksToRead);
+            addToList(book, getBooksToReadList, setBooksToReadList);
           }}
         />
       </div>
@@ -78,12 +77,11 @@ function AddToListButton({ book, booksToRead, setBooksToRead }) {
 
 function AllBooksListRow({
   book,
-  booksRead,
-  setBooksRead,
-  booksToRead,
-  setBooksToRead,
+  booksReadList,
+  setBooksReadList,
+  booksToReadList,
+  setBooksToReadList,
 }) {
-  const [hovered, setHovered] = useState(false);
 
   return (
     <>
@@ -108,13 +106,13 @@ function AllBooksListRow({
        
         <MarkAsReadButton
           book={book}
-          booksRead={booksRead}
-          setBooksRead={setBooksRead}
+          booksReadList={booksReadList}
+          setBooksReadList={setBooksReadList}
         />
         <AddToListButton
           book={book}
-          booksToRead={booksToRead}
-          setBooksToRead={setBooksToRead}
+          booksToReadList={booksToReadList}
+          setBooksToReadList={setBooksToReadList}
         />
        
       </li>
