@@ -1,22 +1,22 @@
 import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.png";
-import { markAsRead, markAsUnread } from "../helperFunctions/updateUserLists.js";
+import {
+  markAsRead,
+  markAsUnread,
+} from "../helperFunctions/updateUserLists.js";
 import { getBooksRead } from "../helperFunctions/getDataFromDB.js";
+import OptionButton from "./OptionButton.jsx";
 
 function MarkAsReadButton({ book, booksRead, setBooksRead }) {
   return booksRead && booksRead.includes(book.id) ? (
-    <div className="AllBooksListRow-options">
-      <div className="AllBooksListRow-icon-wrapper">
-        <img
-          className="AllBooksListRow-icon"
-          src={checkFull}
-          onClick={() => {
-            markAsUnread(book, getBooksRead, setBooksRead);
-          }}
-        />
-      </div>
-      <p className="AllBooksListRow-label">Mark unread</p>
-    </div>
+    <OptionButton
+      imgSrc={checkFull}
+      imgOnclick={markAsUnread}
+      book={book}
+      getUpdatedList={getBooksRead}
+      updateComponent={setBooksRead}
+      label="Mark As Read"
+    />
   ) : (
     <div className="AllBooksListRow-options">
       <div className="AllBooksListRow-icon-wrapper">
@@ -28,7 +28,9 @@ function MarkAsReadButton({ book, booksRead, setBooksRead }) {
           }}
         />
       </div>
-      <p id="button-text" className="AllBooksListRow-label">Mark read</p>
+      <p id="button-text" className="AllBooksListRow-label">
+        Mark read
+      </p>
     </div>
   );
 }
