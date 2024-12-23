@@ -1,4 +1,4 @@
-function OptionButton({
+function IconButton({
   userId = 1,
   buttonImg,
   label,
@@ -18,8 +18,21 @@ function OptionButton({
             className="AllBooksListRow-icon"
             src={buttonImg}
             onClick={() => {
-              addToList(bookId, userId, getUpdatedNewList, updateNewListComponent);
-              removeFromList(bookId, userId, getUpdatedOldList, updateOldListComponent);
+              addToList(
+                bookId,
+                userId,
+                getUpdatedNewList,
+                updateNewListComponent
+              );
+
+              if (removeFromList) {
+                removeFromList(
+                  bookId,
+                  userId,
+                  getUpdatedOldList,
+                  updateOldListComponent
+                );
+              }
             }}
           />
         </div>
@@ -29,4 +42,4 @@ function OptionButton({
   );
 }
 
-export default OptionButton;
+export default IconButton;

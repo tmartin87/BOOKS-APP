@@ -14,7 +14,6 @@ function BookDetailsPage() {
   
 
   async function getBookCover(book) {
-    console.log("BOOK....", book);
     const apiURL = createApiURL(book.title, book.author);
     const bookCoverURL = await getCoverURL(apiURL); 
     setBookCover(bookCoverURL);

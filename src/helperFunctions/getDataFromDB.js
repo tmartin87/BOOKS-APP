@@ -37,10 +37,9 @@ async function getBooksToReadList(userId, setBooksToReadList) {
     const { data } = await supabase
       .from("users-info")
       .select("booksToRead")
-      .eq("id", userId) //Usuario 1 es nuestro único usuario
+      .eq("id", userId)
       .single();
     setBooksToReadList(data.booksToRead);
-    console.log(data.booksToRead);
   } catch (err) {
     console.error(err);
   }
@@ -51,10 +50,9 @@ async function getBooksReadList(userId, setBooksReadList) {
     const { data } = await supabase
       .from("users-info")
       .select("booksRead")
-      .eq("id", userId) //Usuario 1 es nuestro único usuario
+      .eq("id", userId)
       .single();
     setBooksReadList(data.booksRead);
-    console.log(data.booksRead);
   } catch (err) {
     console.error(err);
   }

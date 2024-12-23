@@ -16,4 +16,21 @@ async function getCoverURL(apiURL, start) {
   return coverURL;
 }
 
-export {createApiURL, getCoverURL}
+//Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
+  async function addImages(books, setBooks) {
+    const start = Date.now();
+    console.log(start);
+    const booksWithImages = await Promise.all(
+      books.map(async (book) => {
+        const apiURL = createApiURL(book.title, book.author);
+        const bookCoverURL = await getCoverURL(apiURL, start);
+        return {
+          ...book,
+          image: bookCoverURL,
+        };
+      })
+    );
+    setBooks(booksWithImages);
+  }
+
+export {createApiURL, getCoverURL, addImages}

@@ -14,7 +14,7 @@ async function markAsRead(bookId, userId, getBooksRead_, setBooksRead_) {
   }
 }
 
-async function unmarkAsRead(bookId, userId, getBooksRead_, setBooksRead_) {
+async function removeFromRead(bookId, userId, getBooksRead_, setBooksRead_) {
   const { data, error } = await supabase.rpc("remove_book_books_read", {
     user_id: userId, //Usuario 1 es nuestro único usuario
     item_to_remove: Number(bookId),
@@ -56,4 +56,4 @@ async function removeFromToRead(
   }
 }
 
-export { markAsRead, unmarkAsRead, MarkAsToRead, removeFromToRead };
+export { markAsRead, removeFromRead, MarkAsToRead, removeFromToRead };

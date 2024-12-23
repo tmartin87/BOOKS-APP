@@ -2,16 +2,16 @@ import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.png";
 import {
   markAsRead,
-  unmarkAsRead,
+  removeFromRead,
 } from "../helperFunctions/updateUserLists.js";
 import { getBooksRead } from "../helperFunctions/getDataFromDB.js";
-import OptionButton from "./OptionButton.jsx";
+import IconButton from "./IconButton.jsx";
 
 function MarkAsReadButton({ book, booksRead, setBooksRead }) {
   return booksRead && booksRead.includes(book.id) ? (
-    <OptionButton
+    <IconButton
       imgSrc={checkFull}
-      imgOnclick={unmarkAsRead}
+      imgOnclick={removeFromRead}
       book={book}
       getUpdatedList={getBooksRead}
       updateComponent={setBooksRead}

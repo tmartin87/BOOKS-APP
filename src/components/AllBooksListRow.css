@@ -1,7 +1,7 @@
 .AllBooksListRow {
   width: 50rem;
   display: grid;
-  grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.5fr 0.5fr;
+  grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.8fr 0.8fr;
   column-gap: 0.7rem;
   align-items: center;
   margin-inline: 2rem;
@@ -65,9 +65,18 @@
   font-size: 8px;
 }
 
-.AllBooksListRow-icon-wrapper {
- 
+.AllBooksListRow-options:hover {
+  cursor: pointer;
 }
+
+.AllBooksListRow-icon-wrapper {
+ display: flex;
+ justify-content: center;
+ width: 24px;
+ height: 24px;
+}
+
+
 
 .AllBooksListRow-label {
   font-size: 8px; 
