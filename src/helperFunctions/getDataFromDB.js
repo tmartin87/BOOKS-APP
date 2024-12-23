@@ -60,27 +60,29 @@ async function getBooksReadList(userId, setBooksReadList) {
   }
 }
 
- async function getBooksToReadDetails(userId, setBooksToReadDetails) {
-   const { data, error } = await supabase.rpc("get_books_to_read", {
-     user_id: userId,
-   });
-   if (error) {
-     console.log(error);
-   } else {
-     setBooksToReadDetails(data);
-   }
- }
+//WORKS
+async function getBooksToReadDetails(userId, setBooksToReadDetails) {
+  const { data, error } = await supabase.rpc("get_books_to_read", {
+    user_id: userId,
+  });
+  if (error) {
+    console.log(error);
+  } else {
+    setBooksToReadDetails(data);
+  }
+}
 
- async function getBooksReadDetails(userId, setBooksReadDetails) {
-   const { data, error } = await supabase.rpc("get_books_read", {
-     user_id: userId,
-   });
-   if (error) {
-     console.log(error);
-   } else {
-     setBooksReadDetails(data);
-   }
- }
+//WORKS
+async function getBooksReadDetails(userId, setBooksReadDetails) {
+  const { data, error } = await supabase.rpc("get_books_read", {
+    user_id: userId,
+  });
+  if (error) {
+    console.log(error);
+  } else {
+    setBooksReadDetails(data);
+  }
+}
 
 export {
   getAllBooks,

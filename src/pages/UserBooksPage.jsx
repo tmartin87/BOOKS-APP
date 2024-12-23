@@ -40,7 +40,12 @@ function UserBooksPage() {
           Books read
           <ul>
             {BooksReadDetails.map((book) => (
-              <ReadListRow key={book.id} bookRead={book} />
+              <ReadListRow
+                key={book.id}
+                book={book}
+                setBooksReadDetails={setBooksReadDetails}
+                setBooksToReadDetails={setBooksToReadDetails}
+              />
             ))}
           </ul>
         </div>
