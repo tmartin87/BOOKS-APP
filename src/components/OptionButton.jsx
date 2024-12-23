@@ -1,10 +1,14 @@
 function OptionButton({
-  imgSrc,
-  imgOnclick,
-  book,
-  getUpdatedList,
-  updateComponent,
+  userId = 1,
+  buttonImg,
   label,
+  bookId,
+  addToList,
+  getUpdatedNewList,
+  updateNewListComponent,
+  removeFromList,
+  getUpdatedOldList,
+  updateOldListComponent,
 }) {
   return (
     <>
@@ -12,9 +16,10 @@ function OptionButton({
         <div className="AllBooksListRow-icon-wrapper">
           <img
             className="AllBooksListRow-icon"
-            src={imgSrc}
+            src={buttonImg}
             onClick={() => {
-              imgOnclick(book, getUpdatedList, updateComponent);
+              addToList(bookId, userId, getUpdatedNewList, updateNewListComponent);
+              removeFromList(bookId, userId, getUpdatedOldList, updateOldListComponent);
             }}
           />
         </div>

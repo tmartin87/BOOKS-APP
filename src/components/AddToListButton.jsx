@@ -1,6 +1,9 @@
 import listWithCheck from "../assets/listWithCheck.svg";
 import listWithCross from "../assets/listWithCross.svg";
-import { addToList, removeFromList } from "../helperFunctions/updateUserLists.js";
+import {
+  MarkAsToRead,
+  removeFromList,
+} from "../helperFunctions/updateUserLists.js";
 import { getBooksToRead } from "../helperFunctions/getDataFromDB.js";
 import"./AddToListButton.css"
 
@@ -25,7 +28,7 @@ function AddToListButton({ book, booksToRead, setBooksToRead }) {
           className="AllBooksListRow-icon"
           src={listWithCheck}
           onClick={() => {
-            addToList(book, getBooksToRead, setBooksToRead);
+            MarkAsToRead(book, getBooksToRead, setBooksToRead);
           }}
         />
       </div>

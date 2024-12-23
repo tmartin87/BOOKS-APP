@@ -6,9 +6,9 @@ import listWithCross from "../assets/listWithCross.svg";
 import { Link } from "react-router-dom";
 import {
   markAsRead,
-  markAsUnread,
-  addToList,
-  removeFromList,
+  unmarkAsRead,
+  MarkAsToRead,
+  removeFromToRead,
 } from "../helperFunctions/updateUserLists.js";
 import {
   getBooksToReadList,
@@ -23,7 +23,7 @@ function MarkAsReadButton({ book, booksReadList, setBooksReadList }) {
           className="AllBooksListRow-icon"
           src={checkFull}
           onClick={() => {
-            markAsUnread(book, getBooksReadList, setBooksReadList);
+            unmarkAsRead(book, getBooksReadList, setBooksReadList);
           }}
         />
       </div>
@@ -53,7 +53,7 @@ function AddToListButton({ book, booksToReadList, setBooksToReadList }) {
           className="AllBooksListRow-icon"
           src={listWithCross}
           onClick={() => {
-            removeFromList(book, getBooksToReadList, setBooksToReadList);
+            removeFromToRead(book, getBooksToReadList, setBooksToReadList);
           }}
         />
       </div>
@@ -66,7 +66,7 @@ function AddToListButton({ book, booksToReadList, setBooksToReadList }) {
           className="AllBooksListRow-icon"
           src={listWithCheck}
           onClick={() => {
-            addToList(book, getBooksToReadList, setBooksToReadList);
+            MarkAsToRead(book, getBooksToReadList, setBooksToReadList);
           }}
         />
       </div>
@@ -82,6 +82,15 @@ function AllBooksListRow({
   booksToReadList,
   setBooksToReadList,
 }) {
+  /* const bookIsRead = booksReadList && booksReadList.includes(book.id);
+
+  const bookIsInList =
+    booksToReadList &&
+    booksToReadList.includes(book.id); 
+    //&& booksReadingList && booksReadingList.includes(book.id);
+
+  bookIsRead ? "checkFull" : !bookIsInList ? "check" : null;
+  !bookIsRead && !bookIsInList ? "addToListButton" : <a>Go to list</a>; */
 
   return (
     <>
@@ -103,8 +112,9 @@ function AllBooksListRow({
             return <li key={index}>{genre}</li>;
           })}
         </ul>
-       
-        <MarkAsReadButton
+        {book.isRead ? "checkFull" : !book.isInList ? "check" : null}
+
+        {/* <MarkAsReadButton
           book={book}
           booksReadList={booksReadList}
           setBooksReadList={setBooksReadList}
@@ -113,8 +123,7 @@ function AllBooksListRow({
           book={book}
           booksToReadList={booksToReadList}
           setBooksToReadList={setBooksToReadList}
-        />
-       
+        /> */}
       </li>
     </>
   );

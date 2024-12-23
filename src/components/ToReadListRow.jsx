@@ -1,24 +1,32 @@
 import "./ToReadListRow.css";
 import OptionButton from "./OptionButton";
 import check from "../assets/check.svg"
-import { markAsRead } from "../helperFunctions/updateUserLists";
+import {
+  markAsRead,
+  removeFromToRead,
+} from "../helperFunctions/updateUserLists";
 import {getBooksReadDetails, getBooksToReadDetails} from "../helperFunctions/getDataFromDB"
 
-function ToReadListRow({ bookToRead, setBooksToReadDetails, setBooksReadDetails }) {
+function ToReadListRow({ book, setBooksToReadDetails, setBooksReadDetails }) {
   return (
-    <li key={bookToRead.id}>
-      <strong>{bookToRead.title}</strong> - {bookToRead.author}
+    <li key={book.id}>
+      <strong>{book.title}</strong> - {book.author}
       <OptionButton
-      imgSrc={check}
-      imgOnclick={markAsRead}
-      bookToRead={bookToRead}
-      getUpdatedList={getBooksRead}
-      updateComponent={setBooksRead}
-      label="Mark As Read"
-    />
+        buttonImg={check}
+        label="Mark as read"
+        bookId={book.id}
+        addToList={markAsRead}
+        getUpdatedNewList={getBooksReadDetails}
+        updateNewListComponent={setBooksReadDetails}
+        removeFromList={removeFromToRead}
+        getUpdatedOldList={getBooksToReadDetails}
+        updateOldListComponent={setBooksToReadDetails}
+      />
     </li>
-    
   );
 }
 
 export default ToReadListRow;
+
+//removeFromList={}
+//

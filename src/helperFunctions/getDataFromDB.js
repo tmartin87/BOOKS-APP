@@ -32,12 +32,12 @@ async function getOneBook(bookId, setBook, setError) {
   }
 }
 
-async function getBooksToReadList(setBooksToReadList) {
+async function getBooksToReadList(userId, setBooksToReadList) {
   try {
     const { data } = await supabase
       .from("users-info")
       .select("booksToRead")
-      .eq("id", 1) //Usuario 1 es nuestro único usuario
+      .eq("id", userId) //Usuario 1 es nuestro único usuario
       .single();
     setBooksToReadList(data.booksToRead);
     console.log(data.booksToRead);
@@ -46,12 +46,12 @@ async function getBooksToReadList(setBooksToReadList) {
   }
 }
 
-async function getBooksReadList(setBooksReadList) {
+async function getBooksReadList(userId, setBooksReadList) {
   try {
     const { data } = await supabase
       .from("users-info")
       .select("booksRead")
-      .eq("id", 1) //Usuario 1 es nuestro único usuario
+      .eq("id", userId) //Usuario 1 es nuestro único usuario
       .single();
     setBooksReadList(data.booksRead);
     console.log(data.booksRead);
@@ -60,25 +60,25 @@ async function getBooksReadList(setBooksReadList) {
   }
 }
 
- async function getBooksToReadDetails(user_id, updateComponent) {
+ async function getBooksToReadDetails(userId, setBooksToReadDetails) {
    const { data, error } = await supabase.rpc("get_books_to_read", {
-     user_id: user_id,
+     user_id: userId,
    });
    if (error) {
      console.log(error);
    } else {
-     updateComponent(data);
+     setBooksToReadDetails(data);
    }
  }
 
- async function getBooksReadDetails(user_id, updateComponent) {
+ async function getBooksReadDetails(userId, setBooksReadDetails) {
    const { data, error } = await supabase.rpc("get_books_read", {
-     user_id: user_id,
+     user_id: userId,
    });
    if (error) {
      console.log(error);
    } else {
-     updateComponent(data);
+     setBooksReadDetails(data);
    }
  }
 

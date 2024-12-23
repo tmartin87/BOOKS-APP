@@ -40,7 +40,7 @@ function AllBooksList() {
     /* addImages(books); */
     console.log("Not fetching images...");
     getBooksReadList(setBooksReadList);
-    getBooksToReadList(setBooksToReadList);
+    getBooksToReadList(1, setBooksToReadList); //TODO
   }, []);
 
   return (

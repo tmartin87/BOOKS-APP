@@ -1,44 +1,58 @@
 import supabase from "../supabase/config";
 
-async function markAsRead(book, getUpdatedList, updateComponent) {
+async function markAsRead(bookId, userId, getBooksRead_, setBooksRead_) {
   const { data, error } = await supabase.rpc("append_book_books_read", {
     user_id: 1, //Usuario 1 es nuestro único usuario
-    new_item: Number(book.id),
+    new_item: Number(bookId),
   });
 
   if (error) {
     console.log("Error: ", error);
-  } else { getUpdatedList(updateComponent); }
+  } else {
+    getBooksRead_(userId, setBooksRead_);
+  }
 }
 
-async function markAsUnread(book, getUpdatedList, updateComponent) {
+async function unmarkAsRead(book, userId, getBooksRead_, setBooksRead_) {
   const { data, error } = await supabase.rpc("remove_book_books_read", {
-    user_id: 1, //Usuario 1 es nuestro único usuario
+    user_id: userId, //Usuario 1 es nuestro único usuario
     item_to_remove: Number(book.id),
   });
   if (error) {
     console.log("Error: ", error);
-  } else { getUpdatedList(updateComponent); }
+  } else {
+    getBooksRead_(userId, setBooksRead_);
+  }
 }
 
-async function addToList(book, getUpdatedList, updateComponent) {
-  const {data, error} = await supabase.rpc("append_book_books_to_read", {
-    user_id: 1,
-    new_item: Number(book.id)
+async function MarkAsToRead(book, userId, getBooksToRead_, setBooksToRead_) {
+  const { data, error } = await supabase.rpc("append_book_books_to_read", {
+    user_id: userId,
+    new_item: Number(book.id),
   });
   if (error) {
     console.log("Error: ", error);
-  } else{ getUpdatedList(updateComponent); }
-
+  } else {
+    getBooksToRead_(userId, setBooksToRead_);
+  }
 }
-async function removeFromList(book, getUpdatedList, updateComponent) {
-  const {data, error} = await supabase.rpc("remove_book_books_to_read", {
-    user_id: 1,
-    item_to_remove: Number(book.id)
+
+async function removeFromToRead(
+  book,
+  userId,
+  getBooksToRead_,
+  setBooksToRead_
+) {
+  console.log("removeFromToRead!!");
+  const { data, error } = await supabase.rpc("remove_book_books_to_read", {
+    user_id: userId,
+    item_to_remove: Number(book),
   });
   if (error) {
     console.log("Error: ", error);
-  } else { getUpdatedList(updateComponent); }
+  } else {
+    getBooksToRead_(userId, setBooksToRead_);
+  }
 }
 
-export { markAsRead, markAsUnread, addToList, removeFromList };
+export { markAsRead, unmarkAsRead, MarkAsToRead, removeFromToRead };
