@@ -1,5 +1,6 @@
 import supabase from "../supabase/config.js";
 
+//Any books
 async function getAllBooks(setBooks) {
   try {
     const { data } = await supabase
@@ -32,13 +33,14 @@ async function getOneBook(bookId, setBook, setError) {
   }
 }
 
+//User's books just IDs
+
 async function getBooksToReadList(userId, setBooksToReadList) {
   const { data, error } = await supabase
-    .from("users-info")
-    .select("booksToRead")
-    .eq("id", userId)
-    .single();
-    console.log("DATA...");
+  .from("users-info")
+  .select("booksToRead")
+  .eq("id", userId)
+  .single();
     if (error) {
       console.log(error);
     } else {
@@ -46,11 +48,24 @@ async function getBooksToReadList(userId, setBooksToReadList) {
   }
 }
 
+async function getBooksReadingList(userId, setBooksReadingList) {
+  const { data, error } = await supabase
+    .from("booksReading")
+    .select("book_id")
+    .eq("user_id", userId);
+  const booksReadingArray = data.map((item) => item.book_id);
+  if (error) {
+    console.log(error);
+  } else {
+    setBooksReadingList(booksReadingArray);
+  }
+}
+
 async function getBooksReadList(userId, setBooksReadList) {
   const { data, error } = await supabase
-    .from("users-info")
-    .select("booksRead")
-    .eq("id", userId)
+  .from("users-info")
+  .select("booksRead")
+  .eq("id", userId)
     .single();
   if (error) {
     console.log(error);
@@ -59,7 +74,8 @@ async function getBooksReadList(userId, setBooksReadList) {
   }
 }
 
-//WORKS
+//User's books with details
+
 async function getBooksToReadDetails(userId, setBooksToReadDetails) {
   const { data, error } = await supabase.rpc("get_books_to_read", {
     user_id: userId,
@@ -71,7 +87,19 @@ async function getBooksToReadDetails(userId, setBooksToReadDetails) {
   }
 }
 
-//WORKS
+async function getBooksReadingDetails(userId, setBooksReadingDetails) {
+  const { data, error } = await supabase.rpc("get_books_reading", {
+    user__id: userId,
+  });
+  
+  if (error) {
+    console.log(error);
+
+  } else {
+    setBooksReadingDetails(data);
+  }
+}
+
 async function getBooksReadDetails(userId, setBooksReadDetails) {
   const { data, error } = await supabase.rpc("get_books_read", {
     user_id: userId,
@@ -87,7 +115,9 @@ export {
   getAllBooks,
   getOneBook,
   getBooksToReadList,
+  getBooksReadingList,
   getBooksReadList,
   getBooksToReadDetails,
+  getBooksReadingDetails,
   getBooksReadDetails,
 };

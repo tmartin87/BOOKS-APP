@@ -1,16 +1,32 @@
+//Styles and components
 import "./ToReadListRow.css";
 import IconButton from "./IconButton";
+
+//Icons
+import arrowRight from "../assets/arrowRight.svg";
 import check from "../assets/check.svg";
+import listWithCross from "../assets/listWithCross.svg"
+
+//Import functions for IconButtons
 import {
+  markAsReading,
   markAsRead,
   removeFromToRead,
 } from "../helperFunctions/updateUserLists";
+
+//Import functions for initial render
 import {
   getBooksReadDetails,
+  getBooksReadingDetails,
   getBooksToReadDetails,
 } from "../helperFunctions/getDataFromDB";
 
-function ToReadListRow({ book, setBooksReadDetails, setBooksToReadDetails }) {
+function ToReadListRow({
+  book,
+  setBooksToReadDetails,
+  setBooksReadingDetails,
+  setBooksReadDetails,
+}) {
   return (
     <li className="ToReadListRow" key={book.id}>
       <div className="ToReadListRow-book-info">
@@ -22,6 +38,17 @@ function ToReadListRow({ book, setBooksReadDetails, setBooksToReadDetails }) {
       <div className="ToReadListRow-icon-buttons">
         {/*TODO Add IconButton to move to Reading*/}
         <IconButton
+          buttonImg={arrowRight}
+          label="Start reading"
+          bookId={book.id}
+          addToList={markAsReading}
+          getUpdatedNewList={getBooksReadingDetails}
+          updateNewListComponent={setBooksReadingDetails}
+          removeFromList={removeFromToRead}
+          getUpdatedOldList={getBooksToReadDetails}
+          updateOldListComponent={setBooksToReadDetails}
+        />
+        <IconButton
           buttonImg={check}
           label="Mark as read"
           bookId={book.id}
@@ -32,7 +59,17 @@ function ToReadListRow({ book, setBooksReadDetails, setBooksToReadDetails }) {
           getUpdatedOldList={getBooksToReadDetails}
           updateOldListComponent={setBooksToReadDetails}
         />
-        {/* TODO Add option button to remove from ToRead - which doesn't add to another list*/}
+        <IconButton
+          buttonImg={listWithCross}
+          label="Remove"
+          bookId={book.id}
+          addToList={null}
+          getUpdatedNewList={null}
+          updateNewListComponent={null}
+          removeFromList={removeFromToRead}
+          getUpdatedOldList={getBooksToReadDetails}
+          updateOldListComponent={setBooksToReadDetails}
+        />
       </div>
     </li>
   );

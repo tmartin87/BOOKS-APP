@@ -2,6 +2,7 @@ import "./UserBooksPage.css";
 import { useEffect, useState } from "react";
 import {
   getBooksToReadDetails,
+  getBooksReadingDetails,
   getBooksReadDetails,
 } from "../helperFunctions/getDataFromDB";
 import ToReadListRow from "../components/ToReadListRow";
@@ -15,6 +16,7 @@ function UserBooksPage() {
 
   useEffect(() => {
     getBooksToReadDetails(1, setBooksToReadDetails);
+    getBooksReadingDetails(1, setBooksReadingDetails);
     getBooksReadDetails(1, setBooksReadDetails);
   }, []);
   return (
@@ -28,13 +30,28 @@ function UserBooksPage() {
                 key={book.id}
                 book={book}
                 setBooksToReadDetails={setBooksToReadDetails}
+                setBooksReadingDetails={setBooksReadingDetails}
                 setBooksReadDetails={setBooksReadDetails}
               />
             ))}
           </ul>
         </div>
       }
-      <ReadingListRow />
+      {
+        <div className="books-reading">
+          <h2>📖 Reading</h2>
+          <ul>
+            {BooksReadingDetails.map((book) => (
+              <ReadingListRow
+                key={book.id}
+                book={book}
+                setBooksReadingDetails={setBooksReadingDetails}
+                setBooksReadDetails={setBooksReadDetails}
+              />
+            ))}
+          </ul>
+        </div>
+      }
       {
         <div className="books-read">
           <h2>✅ Read</h2>
@@ -44,7 +61,6 @@ function UserBooksPage() {
                 key={book.id}
                 book={book}
                 setBooksReadDetails={setBooksReadDetails}
-                setBooksToReadDetails={setBooksToReadDetails}
               />
             ))}
           </ul>

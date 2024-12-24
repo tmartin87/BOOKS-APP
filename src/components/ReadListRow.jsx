@@ -1,23 +1,23 @@
 import "./ReadListRow.css";
 import IconButton from "./IconButton";
-import checkFull from "../assets/checkFull.svg";
+import x from "../assets/x.svg"
 import {
-  MarkAsToRead,
   removeFromRead,
 } from "../helperFunctions/updateUserLists";
 import {
   getBooksReadDetails,
-  getBooksToReadDetails,
 } from "../helperFunctions/getDataFromDB";
 
-function ReadListRow({ book, setBooksToReadDetails, setBooksReadDetails }) {
+function ReadListRow({ book, setBooksReadDetails }) {
   return (
     <li key={book.id}>
-      <strong>{book.title}</strong> - {book.author}
-      {/*Marking as unread adds the book back to ToRead and the user can remove it from there*/}
+      <p>
+        <strong>{book.title}</strong>
+      </p>
+      <p>{book.author}</p>
       <IconButton
-        buttonImg={checkFull}
-        label="Remove from read"
+        buttonImg={x}
+        label="Remove"
         bookId={book.id}
         addToList={null}
         getUpdatedNewList={null}

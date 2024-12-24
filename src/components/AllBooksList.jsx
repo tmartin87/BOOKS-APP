@@ -15,8 +15,8 @@ import listWithCheck from "../assets/listWithCheck.svg";
 import {
   getAllBooks,
   getBooksToReadList,
-  //getBooksReadingList, //Define function
-  getBooksReadList,
+  getBooksReadingList,
+  getBooksReadList
 } from "../helperFunctions/getDataFromDB.js";
 
 import { addImages } from "../helperFunctions/getImagesFromAPI.js";
@@ -38,12 +38,12 @@ function AllBooksList() {
   useEffect(() => {
     getAllBooks(setBooks);
     //Comentado para no hacer demasiadas peticiones al API
-    /* addImages(books); */
+    /* addImages(books, setBooks); */
     console.log("Not fetching images...");
-    getBooksToReadList(1, setBooksToReadList);
+    getBooksToReadList(1, setBooksToReadList); //TODO useContext for userId?
     //TODO
-    /* getBooksReadingList(1, setBooksReadingList); */
-    getBooksReadList(1, setBooksReadList);
+    getBooksReadingList(1, setBooksReadingList);
+    getBooksReadList(1, setBooksReadList); //TODO useContext for userId?
   }, []);
 
   return (

@@ -1,5 +1,6 @@
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
+//TODO que en NavBar se marque la página actual
 
 function NavBar() {
   return (
