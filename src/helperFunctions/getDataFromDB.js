@@ -33,28 +33,29 @@ async function getOneBook(bookId, setBook, setError) {
 }
 
 async function getBooksToReadList(userId, setBooksToReadList) {
-  try {
-    const { data } = await supabase
-      .from("users-info")
-      .select("booksToRead")
-      .eq("id", userId)
-      .single();
+  const { data, error } = await supabase
+    .from("users-info")
+    .select("booksToRead")
+    .eq("id", userId)
+    .single();
+    console.log("DATA...");
+    if (error) {
+      console.log(error);
+    } else {
     setBooksToReadList(data.booksToRead);
-  } catch (err) {
-    console.error(err);
   }
 }
 
 async function getBooksReadList(userId, setBooksReadList) {
-  try {
-    const { data } = await supabase
-      .from("users-info")
-      .select("booksRead")
-      .eq("id", userId)
-      .single();
+  const { data, error } = await supabase
+    .from("users-info")
+    .select("booksRead")
+    .eq("id", userId)
+    .single();
+  if (error) {
+    console.log(error);
+  } else {
     setBooksReadList(data.booksRead);
-  } catch (err) {
-    console.error(err);
   }
 }
 

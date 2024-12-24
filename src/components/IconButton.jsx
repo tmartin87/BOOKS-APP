@@ -1,5 +1,5 @@
 function IconButton({
-  userId = 1,
+  userId = 1, //TODO - Remplazar con useContext?
   buttonImg,
   label,
   bookId,
@@ -18,13 +18,14 @@ function IconButton({
             className="AllBooksListRow-icon"
             src={buttonImg}
             onClick={() => {
-              addToList(
-                bookId,
-                userId,
-                getUpdatedNewList,
-                updateNewListComponent
-              );
-
+              if (addToList) {
+                addToList(
+                  bookId,
+                  userId,
+                  getUpdatedNewList,
+                  updateNewListComponent
+                );
+              }
               if (removeFromList) {
                 removeFromList(
                   bookId,

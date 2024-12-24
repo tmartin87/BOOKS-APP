@@ -21,7 +21,7 @@ function UserBooksPage() {
     <div className="UserBooksPage-container">
       {
         <div className="books-to-read">
-          Books to read
+          <h2>📚 To read</h2>
           <ul>
             {BooksToReadDetails.map((book) => (
               <ToReadListRow
@@ -37,7 +37,7 @@ function UserBooksPage() {
       <ReadingListRow />
       {
         <div className="books-read">
-          Books read
+          <h2>✅ Read</h2>
           <ul>
             {BooksReadDetails.map((book) => (
               <ReadListRow

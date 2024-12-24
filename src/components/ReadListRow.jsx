@@ -17,11 +17,11 @@ function ReadListRow({ book, setBooksToReadDetails, setBooksReadDetails }) {
       {/*Marking as unread adds the book back to ToRead and the user can remove it from there*/}
       <IconButton
         buttonImg={checkFull}
-        label="Mark as unread"
+        label="Remove from read"
         bookId={book.id}
-        addToList={MarkAsToRead}
-        getUpdatedNewList={getBooksToReadDetails}
-        updateNewListComponent={setBooksToReadDetails}
+        addToList={null}
+        getUpdatedNewList={null}
+        updateNewListComponent={null}
         removeFromList={removeFromRead}
         getUpdatedOldList={getBooksReadDetails}
         updateOldListComponent={setBooksReadDetails}

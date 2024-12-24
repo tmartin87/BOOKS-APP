@@ -12,22 +12,28 @@ import {
 
 function ToReadListRow({ book, setBooksReadDetails, setBooksToReadDetails }) {
   return (
-    <li key={book.id}>
-      <strong>{book.title}</strong> - {book.author}
-      {/*Add IconButton to move to Reading*/}
-      {/*Marking as unread adds the book back to ToRead and the user can remove it from there*/}
-      <IconButton
-        buttonImg={check}
-        label="Mark as read"
-        bookId={book.id}
-        addToList={markAsRead}
-        getUpdatedNewList={getBooksReadDetails}
-        updateNewListComponent={setBooksReadDetails}
-        removeFromList={removeFromToRead}
-        getUpdatedOldList={getBooksToReadDetails}
-        updateOldListComponent={setBooksToReadDetails}
-      />
-      {/*Add option button to remove from ToRead - which doesn't add to another list*/}
+    <li className="ToReadListRow" key={book.id}>
+      <div className="ToReadListRow-book-info">
+        <p>
+          <strong>{book.title}</strong>
+        </p>
+        <p>{book.author}</p>
+      </div>
+      <div className="ToReadListRow-icon-buttons">
+        {/*TODO Add IconButton to move to Reading*/}
+        <IconButton
+          buttonImg={check}
+          label="Mark as read"
+          bookId={book.id}
+          addToList={markAsRead}
+          getUpdatedNewList={getBooksReadDetails}
+          updateNewListComponent={setBooksReadDetails}
+          removeFromList={removeFromToRead}
+          getUpdatedOldList={getBooksToReadDetails}
+          updateOldListComponent={setBooksToReadDetails}
+        />
+        {/* TODO Add option button to remove from ToRead - which doesn't add to another list*/}
+      </div>
     </li>
   );
 }

@@ -10,7 +10,6 @@ import IconButton from "./IconButton.jsx";
 import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
-import listWithCross from "../assets/listWithCross.svg";
 
 //Import functions for initial render
 import {
@@ -30,7 +29,6 @@ import {
   removeFromToRead,
 } from "../helperFunctions/updateUserLists.js";
 
-
 function AllBooksList() {
   const [books, setBooks] = useState([]);
   const [booksToReadList, setBooksToReadList] = useState([]);
@@ -42,9 +40,9 @@ function AllBooksList() {
     //Comentado para no hacer demasiadas peticiones al API
     /* addImages(books); */
     console.log("Not fetching images...");
-    getBooksToReadList(1, setBooksToReadList); //TODO
+    getBooksToReadList(1, setBooksToReadList);
+    //TODO
     /* getBooksReadingList(1, setBooksReadingList); */
-    //Define function
     getBooksReadList(1, setBooksReadList);
   }, []);
 
@@ -63,8 +61,8 @@ function AllBooksList() {
         {books.map((book) => {
           const bookIsRead = booksReadList && booksReadList.includes(book.id);
           const bookIsInList =
-            booksToReadList && booksToReadList.includes(book.id) && 
-            booksReadingList && booksReadingList.includes(book.id);
+            (booksToReadList && booksToReadList.includes(book.id)) ||
+            (booksReadingList && booksReadingList.includes(book.id));
 
           return (
             <AllBooksListRow key={book.id} book={book}>
@@ -74,8 +72,9 @@ function AllBooksList() {
                   buttonImg={checkFull}
                   label="Mark unread"
                   bookId={book.id}
-                  addToList={MarkAsToRead}
-                  getUpdatedNewList={getBooksToReadList}
+                  addToList={null}
+                  getUpdatedNewList={null}
+                  updateNewListComponent={null}
                   removeFromList={removeFromRead}
                   getUpdatedOldList={getBooksReadList}
                   updateOldListComponent={setBooksReadList}
@@ -107,9 +106,9 @@ function AllBooksList() {
                   getUpdatedOldList={null}
                   updateOldListComponent={null}
                 />
-              ) : (
-                <Link to="/my-books">See list</Link>
-              )}
+              ) : !bookIsRead ? (
+                <Link className="AllBooksList-see-list" to="/my-books">On your list</Link>
+              ) : null}
             </AllBooksListRow>
           );
         })}
@@ -119,23 +118,3 @@ function AllBooksList() {
 }
 
 export default AllBooksList;
-
-/*
-
-
-  bookIsRead ? "checkFull" : !bookIsInList ? "check" : null;
-  !bookIsRead && !bookIsInList ? "addToListButton" : <a>Go to list</a>;
-
-  {
-    book.isRead ? "checkFull" : !book.isInList ? "check" : null;
-  }
-*/
-
-/*
- booksToReadList={booksToReadList}
- setBooksToReadList={setBooksToReadList}
- booksReadingList={booksReadingList}
- setBooksReadingList={setBooksReadingList}
- booksReadList={booksReadList}
- setBooksReadList={setBooksReadList}
- */

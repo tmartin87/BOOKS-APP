@@ -1,15 +1,15 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: roboto;
 }
 
-:root{
-  
+:root {
+
   --color-primary: #8216a0;
   --color-secondary: #23065e;
-  --color-terciary: #3c3c46;
+  --color-tertiary: #3c3c46;
   --color-extra: #4bc5cc;
   --bg-primary: #ffffff;
   --bg-secondary: #dddde3;
@@ -18,22 +18,21 @@
   --text-semi-bright: #aeaeb6;
 }
 
-h1{
+h1 {
   color: var(--color-secondary);
-  
+
 }
 
-h2{
+h2 {
   font-size: 16px;
   color: var(--color-secondary);
 }
 
-p{
+p {
   font-size: 12px
 }
-a{
+
+a {
   text-decoration: none;
   color: black
-
 }
-
