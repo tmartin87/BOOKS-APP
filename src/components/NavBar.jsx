@@ -1,14 +1,24 @@
 import "./NavBar.css";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
     <nav className="navbar">
       <ul className="navbar-container">
-        <li className="logo">LOGO</li>
+        <li className="logo">
+          <NavLink to="/">Logo</NavLink>
+        </li>
         <div className="menu">
-          <li className="button">MY BOOKS</li>
-          <li className="button">FIND A BOOK</li>
-          <li className="user">USER</li>
+          <li className="button">
+            <NavLink to="/my-books">My books</NavLink>
+          </li>
+          <li className="button">
+            <NavLink to="/all-books">Find books</NavLink>
+          </li>
+          <li className="user">
+            <NavLink to="/">👤</NavLink>
+            {/* TODO Crear una página de perfil de usuario y su ruta?? */}
+          </li>
         </div>
       </ul>
     </nav>
