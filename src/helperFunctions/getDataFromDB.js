@@ -12,6 +12,20 @@ async function getAllBooks(setBooks) {
   }
 }
 
+async function getSomeBooks(setBooks, currPage) {
+  try {
+    const { data } = await supabase
+      .from("books")
+      .select("author, genres, id, rating, title")
+      .range(currPage * 20, (currPage * 20)+19);
+    setBooks(data);
+    console.log("hi");
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 async function getOneBook(bookId, setBook, setError) {
   try {
     const { data, error } = await supabase
@@ -113,6 +127,7 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
 
 export {
   getAllBooks,
+  getSomeBooks,
   getOneBook,
   getBooksToReadList,
   getBooksReadingList,
