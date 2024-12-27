@@ -47,3 +47,15 @@
   color: var(--color-secondary);
   text-decoration: underline;
 }
+
+.pagination{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 900px;
+
+  p{
+    font-size: 16px;
+    color: var(--color-primary);
+  }
+}

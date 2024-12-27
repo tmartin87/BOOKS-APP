@@ -1,7 +1,7 @@
 import supabase from "../supabase/config";
 
 //##
-//Remove from one of 3 lists
+//Add to one of 3 lists
 //##
 
 async function MarkAsToRead(bookId, userId, getBooksToRead_, setBooksToRead_) {
@@ -51,7 +51,7 @@ async function markAsRead(bookId, userId, getBooksRead_, setBooksRead_) {
 }
 
 //##
-//Add to one of 3 lists
+//Remove from to one of 3 lists
 //##
 
 async function removeFromToRead(
@@ -91,7 +91,7 @@ async function removeFromReading(
 
 async function removeFromRead(bookId, userId, getBooksRead_, setBooksRead_) {
   const { data, error } = await supabase.rpc("remove_book_books_read", {
-    user_id: userId, //Usuario 1 es nuestro único usuario
+    user_id: userId,
     item_to_remove: Number(bookId),
   });
   if (error) {

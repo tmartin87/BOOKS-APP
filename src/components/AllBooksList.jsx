@@ -16,7 +16,8 @@ import {
   getAllBooks,
   getBooksToReadList,
   getBooksReadingList,
-  getBooksReadList
+  getBooksReadList,
+  getSomeBooks,
 } from "../helperFunctions/getDataFromDB.js";
 
 import { addImages } from "../helperFunctions/getImagesFromAPI.js";
@@ -30,15 +31,18 @@ import {
 } from "../helperFunctions/updateUserLists.js";
 
 function AllBooksList() {
+  const [currPage, setCurrPage] = useState(0);
   const [books, setBooks] = useState([]);
   const [booksToReadList, setBooksToReadList] = useState([]);
   const [booksReadingList, setBooksReadingList] = useState([]);
   const [booksReadList, setBooksReadList] = useState([]);
 
   useEffect(() => {
-    getAllBooks(setBooks);
+    //getAllBooks(setBooks);
+    console.log(currPage);
+    getSomeBooks(setBooks, currPage);
     //Comentado para no hacer demasiadas peticiones al API
-    /* addImages(books, setBooks); */
+    //addImages(books, setBooks);
     console.log("Not fetching images...");
     getBooksToReadList(1, setBooksToReadList); //TODO useContext for userId?
     //TODO
@@ -49,6 +53,30 @@ function AllBooksList() {
   return (
     <div className="allbookslist-container">
       <h1>FIND YOUR NEXT BOOK</h1>
+      <div className="pagination">
+        <p
+          onClick={() => {
+            if(currPage>0){
+              console.log("DOWN1", currPage);
+              setCurrPage((curr)=>curr-1);
+              getSomeBooks(setBooks, currPage-1);
+            }else{console.log(currPage)}
+          }}
+        >--Previous page</p>
+        <p>Page {currPage+1}</p>
+        <p
+          onClick={() => {
+            if (currPage < 4) {
+              // TODO calcular cuantas páginas en total
+              console.log("UP1", currPage);
+              setCurrPage((curr) => curr + 1);
+              getSomeBooks(setBooks, currPage+1);
+            } else {console.log(currPage);}
+          }}
+        >
+          Next page--
+        </p>
+      </div>
       <ul className="allbookslist">
         <li className="allbookslist-header">
           <span className="header-item">Cover</span>
@@ -57,7 +85,6 @@ function AllBooksList() {
           <span className="header-item">Author</span>
           <span className="header-item">Genre</span>
         </li>
-
         {books.map((book) => {
           const bookIsRead = booksReadList && booksReadList.includes(book.id);
           const bookIsInList =
@@ -107,7 +134,9 @@ function AllBooksList() {
                   updateOldListComponent={null}
                 />
               ) : !bookIsRead ? (
-                <Link className="AllBooksList-see-list" to="/my-books">On your list</Link>
+                <Link className="AllBooksList-see-list" to="/my-books">
+                  On your list
+                </Link>
               ) : null}
             </AllBooksListRow>
           );
