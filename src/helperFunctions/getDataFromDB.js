@@ -1,5 +1,7 @@
 import supabase from "../supabase/config.js";
 
+const booksPerPage = 10;
+
 //Any books
 async function getAllBooks(setBooks) {
   try {
@@ -12,14 +14,25 @@ async function getAllBooks(setBooks) {
   }
 }
 
+async function getAllBooksCount(setNumberOfPages) {
+  try {
+    const { data } = await supabase
+      .from("books")
+      .select("id", { count: "exact" });
+    const numberOfPages = Math.ceil(data.length / booksPerPage);
+    setNumberOfPages(numberOfPages)
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 async function getSomeBooks(setBooks, currPage) {
   try {
     const { data } = await supabase
       .from("books")
       .select("author, genres, id, rating, title")
-      .range(currPage * 20, (currPage * 20)+19);
+      .range(currPage * booksPerPage, currPage * booksPerPage + booksPerPage-1);
     setBooks(data);
-
   } catch (err) {
     console.error(err);
   }
@@ -126,6 +139,7 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
 
 export {
   getAllBooks,
+  getAllBooksCount,
   getSomeBooks,
   getOneBook,
   getBooksToReadList,

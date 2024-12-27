@@ -1,0 +1,17 @@
+.AllBooksListHeader {
+    margin-left: 0px;
+    width: 53rem;
+    font-weight: bold;
+    background-color: #f4f4f4;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 0.4fr 1.1fr 1.3fr 0.9fr 0.8fr 1fr 1fr;
+    column-gap: 0.7rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.AllBooksListHeader-item {
+    margin-left: 29px;
+    color: var(--text-semi-bright);
+}
