@@ -1,44 +1,71 @@
 import "./UserBooksPage.css";
 import { useEffect, useState } from "react";
-import {getBooksToReadDetails, getBooksReadDetails} from "../helperFunctions/getDataFromDB"
-import InProgressList from "../components/InProgressList";
+import {
+  getBooksToReadDetails,
+  getBooksReadingDetails,
+  getBooksReadDetails,
+} from "../helperFunctions/getDataFromDB";
+import ToReadListRow from "../components/ToReadListRow";
+import ReadingListRow from "../components/ReadingListRow";
+import ReadListRow from "../components/ReadListRow";
 
 function UserBooksPage() {
   const [BooksToReadDetails, setBooksToReadDetails] = useState([]);
+  const [BooksReadingDetails, setBooksReadingDetails] = useState([]);
   const [BooksReadDetails, setBooksReadDetails] = useState([]);
- 
+
   useEffect(() => {
     getBooksToReadDetails(1, setBooksToReadDetails);
+    getBooksReadingDetails(1, setBooksReadingDetails);
     getBooksReadDetails(1, setBooksReadDetails);
   }, []);
   return (
     <div className="UserBooksPage-container">
       {
         <div className="books-to-read">
-          Books to read
+          <h2>📚 To read</h2>
           <ul>
-            {BooksToReadDetails.map((bookToRead) => (
-              <li key={bookToRead.id}>
-                <strong>{bookToRead.title}</strong> - {bookToRead.author}
-              </li>
+            {BooksToReadDetails.map((book) => (
+              <ToReadListRow
+                key={book.id}
+                book={book}
+                setBooksToReadDetails={setBooksToReadDetails}
+                setBooksReadingDetails={setBooksReadingDetails}
+                setBooksReadDetails={setBooksReadDetails}
+              />
             ))}
           </ul>
         </div>
       }
-      <InProgressList />
+      {
+        <div className="books-reading">
+          <h2>📖 Reading</h2>
+          <ul>
+            {BooksReadingDetails.map((book) => (
+              <ReadingListRow
+                key={book.id}
+                book={book}
+                setBooksReadingDetails={setBooksReadingDetails}
+                setBooksReadDetails={setBooksReadDetails}
+              />
+            ))}
+          </ul>
+        </div>
+      }
       {
         <div className="books-read">
-          Books read
+          <h2>✅ Read</h2>
           <ul>
-            {BooksReadDetails.map((bookRead) => (
-              <li key={bookRead.id}>
-                <strong>{bookRead.title}</strong> - {bookRead.author}
-              </li>
+            {BooksReadDetails.map((book) => (
+              <ReadListRow
+                key={book.id}
+                book={book}
+                setBooksReadDetails={setBooksReadDetails}
+              />
             ))}
           </ul>
         </div>
       }
-      
     </div>
   );
 }

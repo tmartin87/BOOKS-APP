@@ -1,5 +1,6 @@
 import supabase from "../supabase/config.js";
 
+//Any books
 async function getAllBooks(setBooks) {
   try {
     const { data } = await supabase
@@ -32,61 +33,91 @@ async function getOneBook(bookId, setBook, setError) {
   }
 }
 
-async function getBooksToReadList(setBooksToReadList) {
-  try {
-    const { data } = await supabase
-      .from("users-info")
-      .select("booksToRead")
-      .eq("id", 1) //Usuario 1 es nuestro único usuario
-      .single();
+//User's books just IDs
+
+async function getBooksToReadList(userId, setBooksToReadList) {
+  const { data, error } = await supabase
+  .from("users-info")
+  .select("booksToRead")
+  .eq("id", userId)
+  .single();
+    if (error) {
+      console.log(error);
+    } else {
     setBooksToReadList(data.booksToRead);
-    console.log(data.booksToRead);
-  } catch (err) {
-    console.error(err);
   }
 }
 
-async function getBooksReadList(setBooksReadList) {
-  try {
-    const { data } = await supabase
-      .from("users-info")
-      .select("booksRead")
-      .eq("id", 1) //Usuario 1 es nuestro único usuario
-      .single();
+async function getBooksReadingList(userId, setBooksReadingList) {
+  const { data, error } = await supabase
+    .from("booksReading")
+    .select("book_id")
+    .eq("user_id", userId);
+  const booksReadingArray = data.map((item) => item.book_id);
+  if (error) {
+    console.log(error);
+  } else {
+    setBooksReadingList(booksReadingArray);
+  }
+}
+
+async function getBooksReadList(userId, setBooksReadList) {
+  const { data, error } = await supabase
+  .from("users-info")
+  .select("booksRead")
+  .eq("id", userId)
+    .single();
+  if (error) {
+    console.log(error);
+  } else {
     setBooksReadList(data.booksRead);
-    console.log(data.booksRead);
-  } catch (err) {
-    console.error(err);
   }
 }
 
- async function getBooksToReadDetails(user_id, updateComponent) {
-   const { data, error } = await supabase.rpc("get_books_to_read", {
-     user_id: user_id,
-   });
-   if (error) {
-     console.log(error);
-   } else {
-     updateComponent(data);
-   }
- }
+//User's books with details
 
- async function getBooksReadDetails(user_id, updateComponent) {
-   const { data, error } = await supabase.rpc("get_books_read", {
-     user_id: user_id,
-   });
-   if (error) {
-     console.log(error);
-   } else {
-     updateComponent(data);
-   }
- }
+async function getBooksToReadDetails(userId, setBooksToReadDetails) {
+  const { data, error } = await supabase.rpc("get_books_to_read", {
+    user_id: userId,
+  });
+  if (error) {
+    console.log(error);
+  } else {
+    setBooksToReadDetails(data);
+  }
+}
+
+async function getBooksReadingDetails(userId, setBooksReadingDetails) {
+  const { data, error } = await supabase.rpc("get_books_reading", {
+    user__id: userId,
+  });
+  
+  if (error) {
+    console.log(error);
+
+  } else {
+    setBooksReadingDetails(data);
+  }
+}
+
+async function getBooksReadDetails(userId, setBooksReadDetails) {
+  const { data, error } = await supabase.rpc("get_books_read", {
+    user_id: userId,
+  });
+  if (error) {
+    console.log(error);
+  } else {
+    setBooksReadDetails(data);
+  }
+}
 
 export {
   getAllBooks,
   getOneBook,
   getBooksToReadList,
+  getBooksReadingList,
   getBooksReadList,
   getBooksToReadDetails,
+  getBooksReadingDetails,
   getBooksReadDetails,
 };
