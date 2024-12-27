@@ -19,7 +19,6 @@ async function getSomeBooks(setBooks, currPage) {
       .select("author, genres, id, rating, title")
       .range(currPage * 20, (currPage * 20)+19);
     setBooks(data);
-    console.log("hi");
 
   } catch (err) {
     console.error(err);

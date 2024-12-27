@@ -42,7 +42,7 @@ function AllBooksList() {
     console.log(currPage);
     getSomeBooks(setBooks, currPage);
     //Comentado para no hacer demasiadas peticiones al API
-    /* addImages(books, setBooks); */
+    //addImages(books, setBooks);
     console.log("Not fetching images...");
     getBooksToReadList(1, setBooksToReadList); //TODO useContext for userId?
     //TODO
