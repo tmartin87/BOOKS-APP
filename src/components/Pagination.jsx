@@ -108,13 +108,6 @@ function Pagination({ currPage, setCurrPage, setBooks }) {
             Next page 👉{" "}
           </button>
         )}
-      <button
-        className="Pagination-top"
-        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-      >
-        {" "}
-        <img src={top} />
-      </button>
       </div>
     </>
   );

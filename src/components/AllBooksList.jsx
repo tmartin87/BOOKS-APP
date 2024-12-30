@@ -12,6 +12,7 @@ import Pagination from "./Pagination.jsx";
 import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
+import top from "../assets/top.svg"
 
 //Import functions for initial render
 import {
@@ -116,6 +117,15 @@ function AllBooksList() {
             </AllBooksListRow>
           );
         })}
+        <button
+          className="top-button"
+          onClick={() =>
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+          }
+        >
+          {" "}
+          <img className="top-icon" src={top} />
+        </button>
       </ul>
       {
         <Pagination

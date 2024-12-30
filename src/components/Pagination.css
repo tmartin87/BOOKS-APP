@@ -6,52 +6,38 @@
     width: 800px;
 
     p {
-        font-size: 16px;
+        font-size: 14px;
         color: var(--color-primary);
     }
 }
 
 .Pagination-forward-back, 
-.Pagination-page,
 .Pagination-top { 
     all: unset;
     text-align: center;
     line-height: 1.1;
 }
 
-.Pagination-forward-back, 
-.Pagination-page{ 
+.Pagination-forward-back{ 
     padding: 0.5em 0.75em;
     border: 1px solid var(--color-tertiary);
     border-radius: 8px;
-}
-
-.Pagination-forward-back {
     min-width: 10ch;
 }
 
 .Pagination-forward-back:hover,
-.Pagination-page:hover 
 .Pagination-top:hover{
-    cursor: pointer;
+    cursor: pointer;    
+}
+
+.Pagination-forward-back:hover{
     background-color: var(--color-secondary);
     color: white;
     
-}
-
-.Pagination .active-page {
-    background-color: var(--color-primary);
-    color: white;
-    border: 1px solid var(--color-primary);
 }
 
 .Pagination-forward-back:disabled {
     background-color: lightgray;
     color: grey;
     border: none;
-}
-
-.Pagination-top{
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
 }
