@@ -43,22 +43,22 @@ function AllBooksList() {
   useEffect(() => {
     //getAllBooks(setBooks);
     getSomeBooks(setBooks, currPage);
-    
+
     console.log("Not fetching images...");
     //addImages(books, setBooks);
     //Comentado para no hacer demasiadas peticiones al API
 
     //TODO useContext for userId to replace "1" below?
-    getBooksToReadList(1, setBooksToReadList); 
+    getBooksToReadList(1, setBooksToReadList);
     getBooksReadingList(1, setBooksReadingList);
     getBooksReadList(1, setBooksReadList);
   }, []);
 
   return (
-    <div className="allbookslist-container">
+    <div className="AllBooksList-container">
       <h1>FIND YOUR NEXT BOOK</h1>
-      <ul className="allbookslist">
-      <AllBooksListHeader />
+      <ul className="AllBooksList">
+        <AllBooksListHeader />
         {books.map((book) => {
           const bookIsRead = booksReadList && booksReadList.includes(book.id);
           const bookIsInList =
@@ -67,6 +67,7 @@ function AllBooksList() {
 
           return (
             <AllBooksListRow key={book.id} book={book}>
+              {/*Icons as children*/}
               {/*First icon*/}
               {bookIsRead ? (
                 <IconButton
@@ -116,7 +117,13 @@ function AllBooksList() {
           );
         })}
       </ul>
-      {<Pagination currPage={currPage} setCurrPage={setCurrPage} setBooks = {setBooks} />}
+      {
+        <Pagination
+          currPage={currPage}
+          setCurrPage={setCurrPage}
+          setBooks={setBooks}
+        />
+      }
     </div>
   );
 }

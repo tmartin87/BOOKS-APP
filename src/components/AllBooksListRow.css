@@ -30,6 +30,7 @@
 }
 
 .AllBooksListRow-cover-container img {
+  width: 100%; /*Check*/
 }
 
 .AllBooksListRow a:hover {

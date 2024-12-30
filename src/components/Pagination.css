@@ -1,8 +1,9 @@
 .Pagination {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: 1rem;
-    width: 900px;
+    width: 800px;
 
     p {
         font-size: 16px;
@@ -10,6 +11,42 @@
     }
 }
 
-.Pagination-button{
+.Pagination-forward-back, 
+.Pagination-page,
+.Pagination-top { 
+    all: unset;
+    padding: 0.5em 0.75em;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.Pagination-forward-back, 
+.Pagination-page{ 
+    border: 1px solid var(--color-tertiary);
+    border-radius: 8px;
+}
+
+.Pagination-forward-back {
+    min-width: 10ch;
+}
+
+.Pagination-forward-back:hover,
+.Pagination-page:hover 
+.Pagination-top:hover{
+    cursor: pointer;
+    background-color: var(--color-secondary);
+    color: white;
     
+}
+
+.Pagination .active-page {
+    background-color: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-primary);
+}
+
+.Pagination-forward-back:disabled {
+    background-color: lightgray;
+    color: grey;
+    border: none;
 }

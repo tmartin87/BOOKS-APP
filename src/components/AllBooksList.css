@@ -1,4 +1,4 @@
-.allbookslist-container {
+.AllBooksList-container {
   width: 1200px;
   display: flex;
   justify-content: center;
@@ -11,8 +11,7 @@
   padding-bottom: 3rem;
 }
 
-.allbookslist {
-  
+.AllBooksList {
   width: 53rem;
   border-color: 1px;
   background-color: var(--bg-primary);
