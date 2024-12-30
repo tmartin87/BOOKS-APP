@@ -1,13 +1,14 @@
 import "./Pagination.css";
-import top from "../assets/top.svg"
+import top from "../assets/top.svg";
 import { getSomeBooks } from "../helperFunctions/getDataFromDB";
 import { getAllBooksCount } from "../helperFunctions/getDataFromDB";
 import { useEffect, useState } from "react";
+import PaginationButton from "./PaginationButton";
 
 function Pagination({ currPage, setCurrPage, setBooks }) {
   const [numberOfPages, setNumberOfPages] = useState();
   const firstPage = currPage <= 0;
-  const lastPage = currPage >= numberOfPages-1;
+  const lastPage = currPage >= numberOfPages - 1;
 
   function isActivePage(page) {
     return `Pagination-page ${currPage === page ? "active" : "inactive"}-page`;
@@ -55,44 +56,47 @@ function Pagination({ currPage, setCurrPage, setBooks }) {
           </button>
         )}
         {numberOfPages > 0 && (
-          <button className={isActivePage(0)} onClick={() => changePage(0)}>
-            1
-          </button>
+          <PaginationButton
+            page={0}
+            isActivePage={isActivePage}
+            changePage={changePage}
+          />
         )}
         {numberOfPages > 1 && (
-          <button className={isActivePage(1)} onClick={() => changePage(1)}>
-            2
-          </button>
+          <PaginationButton
+            page={1}
+            isActivePage={isActivePage}
+            changePage={changePage}
+          />
         )}
         {numberOfPages > 2 && (
-          <button className={isActivePage(2)} onClick={() => changePage(2)}>
-            3
-          </button>
+          <PaginationButton
+            page={2}
+            isActivePage={isActivePage}
+            changePage={changePage}
+          />
         )}
         {numberOfPages > 6 && <p>...</p>}
         {numberOfPages > 4 && (
-          <button
-            className={isActivePage(numberOfPages - 3)}
-            onClick={() => changePage(numberOfPages - 3)}
-          >
-            {numberOfPages - 2}
-          </button>
+          <PaginationButton
+            page={numberOfPages - 3}
+            isActivePage={isActivePage}
+            changePage={changePage}
+          />
         )}
         {numberOfPages > 2 && (
-          <button
-            className={isActivePage(numberOfPages - 2)}
-            onClick={() => changePage(numberOfPages - 2)}
-          >
-            {numberOfPages - 1}
-          </button>
+          <PaginationButton
+            page={numberOfPages - 2}
+            isActivePage={isActivePage}
+            changePage={changePage}
+          />
         )}
         {numberOfPages > 3 && (
-          <button
-            className={isActivePage(numberOfPages - 1)}
-            onClick={() => changePage(numberOfPages - 1)}
-          >
-            {numberOfPages}
-          </button>
+          <PaginationButton
+            page={numberOfPages - 1}
+            isActivePage={isActivePage}
+            changePage={changePage}
+          />
         )}
         {numberOfPages > 0 && (
           <button
@@ -100,10 +104,17 @@ function Pagination({ currPage, setCurrPage, setBooks }) {
             onClick={incrementPage}
             disabled={lastPage}
           >
-            Next page 👉
+            {" "}
+            Next page 👉{" "}
           </button>
         )}
-        <button className = "Pagination-top" onClick={()=>window.scrollTo({top: 0, left:0, behavior: 'smooth'})}><img src={top}/></button>
+      <button
+        className="Pagination-top"
+        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+      >
+        {" "}
+        <img src={top} />
+      </button>
       </div>
     </>
   );
