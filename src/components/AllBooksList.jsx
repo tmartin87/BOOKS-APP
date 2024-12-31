@@ -16,14 +16,13 @@ import top from "../assets/top.svg"
 
 //Import functions for initial render
 import {
-  //getAllBooks,
   getBooksToReadList,
   getBooksReadingList,
   getBooksReadList,
   getSomeBooks,
 } from "../helperFunctions/getDataFromDB.js";
 
-import { addImages } from "../helperFunctions/getImagesFromAPI.js";
+//import { addImages } from "../helperFunctions/getImagesFromAPI.js";
 
 //Import functions for IconButtons
 import {
@@ -39,21 +38,26 @@ function AllBooksList() {
   const [booksToReadList, setBooksToReadList] = useState([]);
   const [booksReadingList, setBooksReadingList] = useState([]);
   const [booksReadList, setBooksReadList] = useState([]);
-  const allBooksCount = 0;
-
+  
   useEffect(() => {
-    //getAllBooks(setBooks);
-    getSomeBooks(setBooks, currPage);
-
-    console.log("Not fetching images...");
-    //addImages(books, setBooks);
-    //Comentado para no hacer demasiadas peticiones al API
-
+    console.log("lists useEffect");
     //TODO useContext for userId to replace "1" below?
     getBooksToReadList(1, setBooksToReadList);
     getBooksReadingList(1, setBooksReadingList);
     getBooksReadList(1, setBooksReadList);
   }, []);
+
+  useEffect(() => {
+    console.log("books useEffect")
+    getSomeBooks(setBooks, currPage);
+  }, [currPage]);
+
+  /* useEffect(() => {
+    console.log("images useEffect");
+    //Comentado para no hacer demasiadas peticiones al API
+    //addImages(books, setBooks);
+    console.log("Not fetching images...");
+  }, [currPage]); */
 
   return (
     <div className="AllBooksList-container">
@@ -131,7 +135,6 @@ function AllBooksList() {
         <Pagination
           currPage={currPage}
           setCurrPage={setCurrPage}
-          setBooks={setBooks}
         />
       }
     </div>

@@ -7,30 +7,29 @@ function createApiURL(title, author) {
   return apiURL;
 }
 
-async function getCoverURL(apiURL, start) {
+async function getCoverURL(apiURL) {
   const apiResponse = await fetch(apiURL);
   const apiResponseJson = await apiResponse.json();
   const coverURL = apiResponseJson.url;
   console.log(coverURL);
-  console.log(`Time elapsed: ${Date.now() - start} ms`);
   return coverURL;
 }
 
 //Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
-  async function addImages(books, setBooks) {
-    const start = Date.now();
-    console.log(start);
+  async function addImages(books/* , setBooks */) {
+    console.log("About to make API calls");
     const booksWithImages = await Promise.all(
       books.map(async (book) => {
         const apiURL = createApiURL(book.title, book.author);
-        const bookCoverURL = await getCoverURL(apiURL, start);
+        const bookCoverURL = await getCoverURL(apiURL);
         return {
           ...book,
           image: bookCoverURL,
         };
       })
     );
-    setBooks(booksWithImages);
+    /* setBooks(booksWithImages); */
+    return(booksWithImages);
   }
 
 export {createApiURL, getCoverURL, addImages}

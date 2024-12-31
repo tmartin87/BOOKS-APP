@@ -5,6 +5,7 @@ function AllBooksListRow({
   book,
   children,
 }) {
+  console.log("AllBooksListRow");
   return (
     <li className="AllBooksListRow">
       <div className="AllBooksListRow-cover-container">

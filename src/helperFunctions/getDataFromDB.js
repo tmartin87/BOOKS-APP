@@ -1,4 +1,5 @@
 import supabase from "../supabase/config.js";
+import {addImages} from './getImagesFromAPI.js'
 
 const booksPerPage = 10;
 
@@ -32,6 +33,8 @@ async function getSomeBooks(setBooks, currPage) {
       .from("books")
       .select("author, genres, id, rating, title")
       .range(currPage * booksPerPage, currPage * booksPerPage + booksPerPage-1);
+    //const booksWithImages = await addImages(data);
+    //setBooks(booksWithImages);
     setBooks(data);
   } catch (err) {
     console.error(err);

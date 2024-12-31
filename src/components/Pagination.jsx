@@ -1,11 +1,9 @@
-import "./Pagination.css";
-import top from "../assets/top.svg";
-import { getSomeBooks } from "../helperFunctions/getDataFromDB";
-import { getAllBooksCount } from "../helperFunctions/getDataFromDB";
 import { useEffect, useState } from "react";
+import "./Pagination.css";
 import PaginationButton from "./PaginationButton";
+import { getAllBooksCount } from "../helperFunctions/getDataFromDB";
 
-function Pagination({ currPage, setCurrPage, setBooks }) {
+function Pagination({ currPage, setCurrPage}) {
   const [numberOfPages, setNumberOfPages] = useState();
   const firstPage = currPage <= 0;
   const lastPage = currPage >= numberOfPages - 1;
@@ -17,7 +15,6 @@ function Pagination({ currPage, setCurrPage, setBooks }) {
   function changePage(newPage) {
     if (currPage !== newPage) {
       setCurrPage(newPage);
-      getSomeBooks(setBooks, newPage);
     }
   }
 
@@ -25,7 +22,6 @@ function Pagination({ currPage, setCurrPage, setBooks }) {
     if (currPage > 0) {
       console.log("DOWN1", currPage);
       setCurrPage((curr) => curr - 1);
-      getSomeBooks(setBooks, currPage - 1);
     }
   }
 
@@ -33,15 +29,14 @@ function Pagination({ currPage, setCurrPage, setBooks }) {
     if (currPage < numberOfPages - 1) {
       console.log("UP1", currPage);
       setCurrPage((curr) => curr + 1);
-      getSomeBooks(setBooks, currPage + 1);
     }
   }
 
   useEffect(() => {
     getAllBooksCount(setNumberOfPages);
+    console.log("Book count useEffect");
   }, []);
 
-  console.log("numberOfPages ", numberOfPages);
 
   return (
     <>
