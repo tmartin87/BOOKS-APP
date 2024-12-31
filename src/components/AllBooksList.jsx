@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 //Styles and components
@@ -7,14 +7,15 @@ import AllBooksListHeader from "./AllBooksListHeader.jsx";
 import AllBooksListRow from "./AllBooksListRow.jsx";
 import IconButton from "./IconButton.jsx";
 import Pagination from "./Pagination.jsx";
+import BackToTop from "./BackToTop.jsx";
+import ErrorMessage from "./ErrorMessage.jsx";
 
-//Import icons
+//Icons
 import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
-import top from "../assets/top.svg"
 
-//Import functions for initial render
+//Functions to fetch book data
 import {
   getBooksToReadList,
   getBooksReadingList,
@@ -22,9 +23,7 @@ import {
   getSomeBooks,
 } from "../helperFunctions/getDataFromDB.js";
 
-//import { addImages } from "../helperFunctions/getImagesFromAPI.js";
-
-//Import functions for IconButtons
+//Functions for IconButtons to edit user lists
 import {
   markAsRead,
   removeFromRead,
@@ -38,9 +37,15 @@ function AllBooksList() {
   const [booksToReadList, setBooksToReadList] = useState([]);
   const [booksReadingList, setBooksReadingList] = useState([]);
   const [booksReadList, setBooksReadList] = useState([]);
-  
+  const [error, setError] = useState(null);
+
+  //Array para guardar los abort controllers para cancelar las fetch requests al API
+  const abortControllerArray = useRef([]);
+  //Util en caso de que el usuario cambie de página antes de se hayan completado esos fetch
+  //Cada uno se crea dentro de un fetch request en getCoverURL
+  //Los llamamos en loop dentro del return de useEffect al cambiar de página
+
   useEffect(() => {
-    console.log("lists useEffect");
     //TODO useContext for userId to replace "1" below?
     getBooksToReadList(1, setBooksToReadList);
     getBooksReadingList(1, setBooksReadingList);
@@ -48,19 +53,22 @@ function AllBooksList() {
   }, []);
 
   useEffect(() => {
-    console.log("books useEffect")
-    getSomeBooks(setBooks, currPage);
-  }, [currPage]);
+    getSomeBooks(setBooks, setError, currPage, abortControllerArray);
 
-  /* useEffect(() => {
-    console.log("images useEffect");
-    //Comentado para no hacer demasiadas peticiones al API
-    //addImages(books, setBooks);
-    console.log("Not fetching images...");
-  }, [currPage]); */
+    return () => {
+      abortControllerArray.current.forEach((abortController) => {
+        abortController.abort();
+      });
+      //Con todas las peticiones canceladas dejamos el array vacio
+      abortControllerArray.current = [];
+    };
+  }, [currPage]);
 
   return (
     <div className="AllBooksList-container">
+      {error && <ErrorMessage error={error} />}
+      {!error &&
+      <>
       <h1>FIND YOUR NEXT BOOK</h1>
       <ul className="AllBooksList">
         <AllBooksListHeader />
@@ -121,22 +129,10 @@ function AllBooksList() {
             </AllBooksListRow>
           );
         })}
-        <button
-          className="top-button"
-          onClick={() =>
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
-          }
-        >
-          {" "}
-          <img className="top-icon" src={top} />
-        </button>
+        <BackToTop />
       </ul>
-      {
-        <Pagination
-          currPage={currPage}
-          setCurrPage={setCurrPage}
-        />
-      }
+      {<Pagination currPage={currPage} setCurrPage={setCurrPage} />}
+      </>}
     </div>
   );
 }

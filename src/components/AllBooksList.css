@@ -28,16 +28,3 @@
   color: var(--color-secondary);
   text-decoration: underline;
 }
-
-.top-button {
-  all: unset;
-  background-color: var(--color-tertiary);
-  padding-top: 0.25rem;
-  text-align: center;
-  border-radius: 0 0 15px 15px;
-  max-height: 1.25rem;
-}
-
-.top-icon{
-  height: 1rem;
-}

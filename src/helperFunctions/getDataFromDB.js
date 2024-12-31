@@ -27,16 +27,20 @@ async function getAllBooksCount(setNumberOfPages) {
   }
 }
 
-async function getSomeBooks(setBooks, currPage) {
+async function getSomeBooks(setBooks, setError, currPage, abortControllerArray) {
   try {
     const { data } = await supabase
       .from("books")
       .select("author, genres, id, rating, title")
-      .range(currPage * booksPerPage, currPage * booksPerPage + booksPerPage-1);
-    //const booksWithImages = await addImages(data);
-    //setBooks(booksWithImages);
-    setBooks(data);
+      .range(
+        currPage * booksPerPage,
+        currPage * booksPerPage + booksPerPage - 1
+      );
+    const booksWithImages = await addImages(data, abortControllerArray);
+    setBooks(booksWithImages);
+    /* setBooks(data); */
   } catch (err) {
+    setError("Something went wrong with recovering the list of books. Try refreshing the page.");
     console.error(err);
   }
 }
