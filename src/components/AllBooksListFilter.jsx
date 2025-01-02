@@ -1,31 +1,33 @@
-import "./AllBooksListFilter.css"
+import "./AllBooksListFilter.css";
 
-function AllBooksListFilter({genres, selectedGenre, setSelectedGenre}){
-    return (
-      <div className="AllBooksListFilter">
-        <label htmlFor="genres">Choose a genre:</label>
-        <select name="genres" id="genres">
+function AllBooksListFilter({
+  genres,
+  selectedGenre,
+  setSelectedGenre,
+  setCurrPage,
+}) {
+  return (
+    <div className="AllBooksListFilter">
+      <label htmlFor="selectedGenre">Choose a genre:</label>
 
-          <option
-            value={selectedGenre}
-            onChange={(e) => setSelectedGenre(e.target.value)}
-          >
-            All
+      <select
+        id="selectedGenre"
+        value={selectedGenre}
+        onChange={(e) => {
+          setSelectedGenre(e.target.value);
+          setCurrPage(0);
+        }}
+      >
+        <option value="all">All</option>
+
+        {genres.map((genre, index) => (
+          <option key={index} value={genre}>
+            {genre}
           </option>
-
-          {genres.map((genre, index) => (
-            <option
-              key={index}
-              value={selectedGenre}
-              onChange={(e) => setSelectedGenre(e.target.value)}
-            >
-              {genre}
-            </option>
-          ))}
-
-        </select>
-      </div>
-    );
+        ))}
+      </select>
+    </div>
+  );
 }
 
 export default AllBooksListFilter;

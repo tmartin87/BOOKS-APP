@@ -24,7 +24,9 @@ import {
   getBooksReadList,
   getSomeBooks,
   getAllGenres,
+  getAllBooksCount
 } from "../helperFunctions/getDataFromDB.js";
+
 
 //Functions for IconButtons to edit user lists
 import {
@@ -60,7 +62,8 @@ function AllBooksList() {
   }, []);
 
   useEffect(() => {
-    getSomeBooks(setBooks, setError, currPage, abortControllerArray);
+    getSomeBooks(setBooks, setError, currPage, abortControllerArray, selectedGenre);
+    
 
     return () => {
       abortControllerArray.current.forEach((abortController) => {
@@ -69,7 +72,7 @@ function AllBooksList() {
       //Con todas las peticiones canceladas dejamos el array vacio
       abortControllerArray.current = [];
     };
-  }, [currPage]);
+  }, [currPage, selectedGenre]);
 
   return (
     <div className="AllBooksList-container">
@@ -81,6 +84,7 @@ function AllBooksList() {
             genres={genres}
             selectedGenre={selectedGenre}
             setSelectedGenre={setSelectedGenre}
+            setCurrPage={setCurrPage}
           />
           <ul className="AllBooksList">
             <AllBooksListHeader />

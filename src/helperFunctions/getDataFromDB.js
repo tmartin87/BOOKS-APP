@@ -1,5 +1,5 @@
 import supabase from "../supabase/config.js";
-import {addImages} from './getImagesFromAPI.js'
+import { addImages } from "./getImagesFromAPI.js";
 
 const booksPerPage = 10;
 
@@ -21,26 +21,46 @@ async function getAllBooksCount(setNumberOfPages) {
       .from("books")
       .select("id", { count: "exact" });
     const numberOfPages = Math.ceil(data.length / booksPerPage);
-    setNumberOfPages(numberOfPages)
+    setNumberOfPages(numberOfPages);
   } catch (err) {
     console.error(err);
   }
 }
 
-async function getSomeBooks(setBooks, setError, currPage, abortControllerArray) {
+async function getSomeBooks(
+  setBooks,
+  setError,
+  currPage,
+  abortControllerArray,
+  selectedGenre
+) {
   try {
-    const { data } = await supabase
+    const query = supabase
       .from("books")
       .select("author, genres, id, rating, title")
       .range(
         currPage * booksPerPage,
         currPage * booksPerPage + booksPerPage - 1
       );
-    const booksWithImages = await addImages(data, abortControllerArray);
-    setBooks(booksWithImages);
-    /* setBooks(data); */
+
+    console.log(query);
+
+    if (selectedGenre !== "all") {
+      query.overlaps("genres", [selectedGenre]);
+      console.log(query);
+    }
+
+    const { data, error } = await query;
+    if (error) {
+      console.log(error);
+    } else {
+      const booksWithImages = await addImages(data, abortControllerArray);
+      setBooks(booksWithImages);
+    }
   } catch (err) {
-    setError("Something went wrong with recovering the list of books. Try refreshing the page.");
+    setError(
+      "Something went wrong with recovering the list of books. Try refreshing the page."
+    );
     console.error(err);
   }
 }
@@ -70,13 +90,13 @@ async function getOneBook(bookId, setBook, setError) {
 
 async function getBooksToReadList(userId, setBooksToReadList) {
   const { data, error } = await supabase
-  .from("users-info")
-  .select("booksToRead")
-  .eq("id", userId)
-  .single();
-    if (error) {
-      console.log(error);
-    } else {
+    .from("users-info")
+    .select("booksToRead")
+    .eq("id", userId)
+    .single();
+  if (error) {
+    console.log(error);
+  } else {
     setBooksToReadList(data.booksToRead);
   }
 }
@@ -96,9 +116,9 @@ async function getBooksReadingList(userId, setBooksReadingList) {
 
 async function getBooksReadList(userId, setBooksReadList) {
   const { data, error } = await supabase
-  .from("users-info")
-  .select("booksRead")
-  .eq("id", userId)
+    .from("users-info")
+    .select("booksRead")
+    .eq("id", userId)
     .single();
   if (error) {
     console.log(error);
@@ -124,10 +144,9 @@ async function getBooksReadingDetails(userId, setBooksReadingDetails) {
   const { data, error } = await supabase.rpc("get_books_reading", {
     user__id: userId,
   });
-  
+
   if (error) {
     console.log(error);
-
   } else {
     setBooksReadingDetails(data);
   }
