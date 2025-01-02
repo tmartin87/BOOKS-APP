@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 function ErrorMessage({error}){
     const initialReloadCount = window.localStorage.getItem('reloadCount');
     let reloadCount = useRef(initialReloadCount);
-    console.log(reloadCount.current);
     
     useEffect(()=>{
         window.localStorage.setItem('reloadCount', reloadCount.current)

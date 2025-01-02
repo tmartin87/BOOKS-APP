@@ -20,21 +20,18 @@ function Pagination({ currPage, setCurrPage}) {
 
   function decrementPage() {
     if (currPage > 0) {
-      console.log("DOWN1", currPage);
       setCurrPage((curr) => curr - 1);
     }
   }
 
   function incrementPage() {
     if (currPage < numberOfPages - 1) {
-      console.log("UP1", currPage);
       setCurrPage((curr) => curr + 1);
     }
   }
 
   useEffect(() => {
     getAllBooksCount(setNumberOfPages);
-    console.log("Book count useEffect");
   }, []);
 
 

@@ -34,7 +34,6 @@ async function getCoverURL(apiURL, abortControllerArray) {
 
 //Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
   async function addImages(books, abortControllerArray) {
-    console.log("About to make API calls");
     const booksWithImages = await Promise.all(
       books.map(async (book) => {
         const apiURL = createApiURL(book.title, book.author);
