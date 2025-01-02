@@ -15,7 +15,6 @@ import ErrorMessage from "./ErrorMessage.jsx";
 import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
-import sort from "../assets/sort.svg";
 
 //Functions to fetch book data
 import {
@@ -24,9 +23,9 @@ import {
   getBooksReadList,
   getSomeBooks,
   getAllGenres,
-  getAllBooksCount
+  getNumberOfPages,
+  /* getAllBooksCount */
 } from "../helperFunctions/getDataFromDB.js";
-
 
 //Functions for IconButtons to edit user lists
 import {
@@ -37,7 +36,9 @@ import {
 } from "../helperFunctions/updateUserLists.js";
 
 function AllBooksList() {
+  const booksPerPage = 10; //also defined in getDataFrom DB
   const [currPage, setCurrPage] = useState(0);
+  const [numberOfPages, setNumberOfPages] = useState();
   const [books, setBooks] = useState([]);
   const [booksToReadList, setBooksToReadList] = useState([]);
   const [booksReadingList, setBooksReadingList] = useState([]);
@@ -62,8 +63,15 @@ function AllBooksList() {
   }, []);
 
   useEffect(() => {
-    getSomeBooks(setBooks, setError, currPage, abortControllerArray, selectedGenre);
-    
+    getSomeBooks(
+      currPage,
+      selectedGenre,
+      setBooks,
+      setError,
+      abortControllerArray,
+    );
+
+    getNumberOfPages(setNumberOfPages, selectedGenre);
 
     return () => {
       abortControllerArray.current.forEach((abortController) => {
@@ -148,7 +156,7 @@ function AllBooksList() {
             })}
             <BackToTop />
           </ul>
-          {<Pagination currPage={currPage} setCurrPage={setCurrPage} />}
+          {<Pagination currPage={currPage} setCurrPage={setCurrPage} numberOfPages={numberOfPages} />}
         </>
       )}
     </div>

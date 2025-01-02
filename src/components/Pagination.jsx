@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
 import "./Pagination.css";
 import PaginationButton from "./PaginationButton";
-import { getAllBooksCount } from "../helperFunctions/getDataFromDB";
 
-function Pagination({ currPage, setCurrPage}) {
-  const [numberOfPages, setNumberOfPages] = useState();
+function Pagination({ currPage, setCurrPage, numberOfPages}) {
   const firstPage = currPage <= 0;
   const lastPage = currPage >= numberOfPages - 1;
 
@@ -29,11 +26,6 @@ function Pagination({ currPage, setCurrPage}) {
       setCurrPage((curr) => curr + 1);
     }
   }
-
-  useEffect(() => {
-    getAllBooksCount(setNumberOfPages);
-  }, []);
-
 
   return (
     <>

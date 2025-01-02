@@ -1,10 +1,8 @@
 import supabase from "../supabase/config.js";
 import { addImages } from "./getImagesFromAPI.js";
 
-const booksPerPage = 10;
-
 //Any books
-async function getAllBooks(setBooks) {
+/* async function getAllBooks(setBooks) {
   try {
     const { data } = await supabase
       .from("books")
@@ -13,43 +11,38 @@ async function getAllBooks(setBooks) {
   } catch (err) {
     console.error(err);
   }
-}
+} */
 
-async function getAllBooksCount(setNumberOfPages) {
-  try {
-    const { data } = await supabase
-      .from("books")
-      .select("id", { count: "exact" });
-    const numberOfPages = Math.ceil(data.length / booksPerPage);
-    setNumberOfPages(numberOfPages);
-  } catch (err) {
-    console.error(err);
+const booksPerPage = 10; //also defined in AllBooksList
+
+function prepareSomeBooksQuery(currPage, selectedGenre) {
+  const startBook = currPage * booksPerPage;
+  const endBook = currPage * booksPerPage + booksPerPage - 1;
+  const query = supabase
+    .from("books")
+    .select("author, genres, id, rating, title")
+    .range(startBook, endBook);
+
+  console.log(query);
+
+  if (selectedGenre !== "all") {
+    query.overlaps("genres", [selectedGenre]);
   }
+  console.log(query);
+
+  return query;
 }
 
 async function getSomeBooks(
+  currPage,
+  selectedGenre,
   setBooks,
   setError,
-  currPage,
   abortControllerArray,
-  selectedGenre
 ) {
+
+  const query = prepareSomeBooksQuery(currPage, selectedGenre);
   try {
-    const query = supabase
-      .from("books")
-      .select("author, genres, id, rating, title")
-      .range(
-        currPage * booksPerPage,
-        currPage * booksPerPage + booksPerPage - 1
-      );
-
-    console.log(query);
-
-    if (selectedGenre !== "all") {
-      query.overlaps("genres", [selectedGenre]);
-      console.log(query);
-    }
-
     const { data, error } = await query;
     if (error) {
       console.log(error);
@@ -61,6 +54,27 @@ async function getSomeBooks(
     setError(
       "Something went wrong with recovering the list of books. Try refreshing the page."
     );
+    console.error(err);
+  }
+}
+
+async function getNumberOfPages(setNumberOfPages, selectedGenre) {
+  try {
+    const query = supabase.from("books").select("id", { count: "exact" });
+
+    if (selectedGenre !== "all") {
+      query.overlaps("genres", [selectedGenre]);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.log(error);
+    } else {
+      const numberOfPages = Math.ceil(data.length / booksPerPage);
+      setNumberOfPages(numberOfPages);
+    }
+  } catch (err) {
     console.error(err);
   }
 }
@@ -181,8 +195,8 @@ async function getAllGenres(setGenres) {
 }
 
 export {
-  getAllBooks,
-  getAllBooksCount,
+  /* getAllBooks, */
+  getNumberOfPages,
   getSomeBooks,
   getOneBook,
   getBooksToReadList,
