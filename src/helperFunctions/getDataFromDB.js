@@ -1,4 +1,7 @@
 import supabase from "../supabase/config.js";
+import {addImages} from './getImagesFromAPI.js'
+
+const booksPerPage = 10;
 
 //Any books
 async function getAllBooks(setBooks) {
@@ -12,15 +15,32 @@ async function getAllBooks(setBooks) {
   }
 }
 
-async function getSomeBooks(setBooks, currPage) {
+async function getAllBooksCount(setNumberOfPages) {
+  try {
+    const { data } = await supabase
+      .from("books")
+      .select("id", { count: "exact" });
+    const numberOfPages = Math.ceil(data.length / booksPerPage);
+    setNumberOfPages(numberOfPages)
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function getSomeBooks(setBooks, setError, currPage, abortControllerArray) {
   try {
     const { data } = await supabase
       .from("books")
       .select("author, genres, id, rating, title")
-      .range(currPage * 20, (currPage * 20)+19);
-    setBooks(data);
-
+      .range(
+        currPage * booksPerPage,
+        currPage * booksPerPage + booksPerPage - 1
+      );
+    const booksWithImages = await addImages(data, abortControllerArray);
+    setBooks(booksWithImages);
+    /* setBooks(data); */
   } catch (err) {
+    setError("Something went wrong with recovering the list of books. Try refreshing the page.");
     console.error(err);
   }
 }
@@ -126,6 +146,7 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
 
 export {
   getAllBooks,
+  getAllBooksCount,
   getSomeBooks,
   getOneBook,
   getBooksToReadList,

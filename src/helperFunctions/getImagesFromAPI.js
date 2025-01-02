@@ -7,30 +7,44 @@ function createApiURL(title, author) {
   return apiURL;
 }
 
-async function getCoverURL(apiURL, start) {
-  const apiResponse = await fetch(apiURL);
-  const apiResponseJson = await apiResponse.json();
-  const coverURL = apiResponseJson.url;
-  console.log(coverURL);
-  console.log(`Time elapsed: ${Date.now() - start} ms`);
-  return coverURL;
+async function getCoverURL(apiURL, abortControllerArray) {
+  const newController = new AbortController();
+  abortControllerArray.current.push(newController);
+  //Guardamos dos los abortControllers para luego poder iterar sobre ellos y abortarlos uno a uno
+  console.log("Otro controller pal saco")
+
+  try{
+    const newSignal = newController.signal;
+    const apiResponse = await fetch(apiURL, {signal: newSignal});
+    //Al dar signal al fetch estamos linkeando un abortController con cada fetch 
+    // Así luego podemos parar este fetch
+    const apiResponseJson = await apiResponse.json();
+    const coverURL = apiResponseJson.url;
+    console.log(coverURL);
+    return coverURL;
+  }catch(err){
+    if (err.name === 'AbortError'){
+      //Abortar da error el cual gestionamos de manera diferente al no ser un error de verdad
+      console.log("Aborted")
+    }else{
+      console.log(err);
+    }
+  }
 }
 
 //Función para añadir las URLs de imagen del API que se llama una vez con useEffect al cargarse el componente
-  async function addImages(books, setBooks) {
-    const start = Date.now();
-    console.log(start);
+  async function addImages(books, abortControllerArray) {
     const booksWithImages = await Promise.all(
       books.map(async (book) => {
         const apiURL = createApiURL(book.title, book.author);
-        const bookCoverURL = await getCoverURL(apiURL, start);
+        const bookCoverURL = await getCoverURL(apiURL, abortControllerArray);
         return {
           ...book,
           image: bookCoverURL,
         };
       })
     );
-    setBooks(booksWithImages);
+    return(booksWithImages);
   }
 
 export {createApiURL, getCoverURL, addImages}

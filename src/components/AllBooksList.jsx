@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 //Styles and components
 import "./AllBooksList.css";
+import AllBooksListHeader from "./AllBooksListHeader.jsx";
 import AllBooksListRow from "./AllBooksListRow.jsx";
 import IconButton from "./IconButton.jsx";
+import Pagination from "./Pagination.jsx";
+import BackToTop from "./BackToTop.jsx";
+import ErrorMessage from "./ErrorMessage.jsx";
 
-//Import icons
+//Icons
 import check from "../assets/check.svg";
 import checkFull from "../assets/checkFull.svg";
 import listWithCheck from "../assets/listWithCheck.svg";
 
-//Import functions for initial render
+//Functions to fetch book data
 import {
-  getAllBooks,
   getBooksToReadList,
   getBooksReadingList,
   getBooksReadList,
   getSomeBooks,
 } from "../helperFunctions/getDataFromDB.js";
 
-import { addImages } from "../helperFunctions/getImagesFromAPI.js";
-
-//Import functions for IconButtons
+//Functions for IconButtons to edit user lists
 import {
   markAsRead,
   removeFromRead,
@@ -36,55 +37,41 @@ function AllBooksList() {
   const [booksToReadList, setBooksToReadList] = useState([]);
   const [booksReadingList, setBooksReadingList] = useState([]);
   const [booksReadList, setBooksReadList] = useState([]);
+  const [error, setError] = useState(null);
+
+  //Array para guardar los abort controllers para cancelar las fetch requests al API
+  const abortControllerArray = useRef([]);
+  //Util en caso de que el usuario cambie de página antes de se hayan completado esos fetch
+  //Cada uno se crea dentro de un fetch request en getCoverURL
+  //Los llamamos en loop dentro del return de useEffect al cambiar de página
 
   useEffect(() => {
-    //getAllBooks(setBooks);
-    console.log(currPage);
-    getSomeBooks(setBooks, currPage);
-    //Comentado para no hacer demasiadas peticiones al API
-    //addImages(books, setBooks);
-    console.log("Not fetching images...");
-    getBooksToReadList(1, setBooksToReadList); //TODO useContext for userId?
-    //TODO
+    //TODO useContext for userId to replace "1" below?
+    getBooksToReadList(1, setBooksToReadList);
     getBooksReadingList(1, setBooksReadingList);
-    getBooksReadList(1, setBooksReadList); //TODO useContext for userId?
+    getBooksReadList(1, setBooksReadList);
   }, []);
 
+  useEffect(() => {
+    getSomeBooks(setBooks, setError, currPage, abortControllerArray);
+
+    return () => {
+      abortControllerArray.current.forEach((abortController) => {
+        abortController.abort();
+      });
+      //Con todas las peticiones canceladas dejamos el array vacio
+      abortControllerArray.current = [];
+    };
+  }, [currPage]);
+
   return (
-    <div className="allbookslist-container">
+    <div className="AllBooksList-container">
+      {error && <ErrorMessage error={error} />}
+      {!error &&
+      <>
       <h1>FIND YOUR NEXT BOOK</h1>
-      <div className="pagination">
-        <p
-          onClick={() => {
-            if(currPage>0){
-              console.log("DOWN1", currPage);
-              setCurrPage((curr)=>curr-1);
-              getSomeBooks(setBooks, currPage-1);
-            }else{console.log(currPage)}
-          }}
-        >--Previous page</p>
-        <p>Page {currPage+1}</p>
-        <p
-          onClick={() => {
-            if (currPage < 4) {
-              // TODO calcular cuantas páginas en total
-              console.log("UP1", currPage);
-              setCurrPage((curr) => curr + 1);
-              getSomeBooks(setBooks, currPage+1);
-            } else {console.log(currPage);}
-          }}
-        >
-          Next page--
-        </p>
-      </div>
-      <ul className="allbookslist">
-        <li className="allbookslist-header">
-          <span className="header-item">Cover</span>
-          <span className="header-item">Rating</span>
-          <span className="header-item">Title</span>
-          <span className="header-item">Author</span>
-          <span className="header-item">Genre</span>
-        </li>
+      <ul className="AllBooksList">
+        <AllBooksListHeader />
         {books.map((book) => {
           const bookIsRead = booksReadList && booksReadList.includes(book.id);
           const bookIsInList =
@@ -93,6 +80,7 @@ function AllBooksList() {
 
           return (
             <AllBooksListRow key={book.id} book={book}>
+              {/*Icons as children*/}
               {/*First icon*/}
               {bookIsRead ? (
                 <IconButton
@@ -141,7 +129,10 @@ function AllBooksList() {
             </AllBooksListRow>
           );
         })}
+        <BackToTop />
       </ul>
+      {<Pagination currPage={currPage} setCurrPage={setCurrPage} />}
+      </>}
     </div>
   );
 }

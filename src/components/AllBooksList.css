@@ -1,4 +1,4 @@
-.allbookslist-container {
+.AllBooksList-container {
   width: 1200px;
   display: flex;
   justify-content: center;
@@ -11,8 +11,7 @@
   padding-bottom: 3rem;
 }
 
-.allbookslist {
-  
+.AllBooksList {
   width: 53rem;
   border-color: 1px;
   background-color: var(--bg-primary);
@@ -24,38 +23,8 @@
   margin-top: 2rem;
 }
 
-.allbookslist-header {
-  margin-left: 0px;
-  width: 53rem;
-  font-weight: bold;
-  background-color: #f4f4f4;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 0.4fr 1.1fr 1.3fr 0.9fr 0.8fr 1fr 1fr;
-  column-gap: 0.7rem;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-.header-item {
-  margin-left: 29px;
-  color: var(--text-semi-bright);
-}
-
 .AllBooksList-see-list{
   grid-column: 6 / span 2;
   color: var(--color-secondary);
   text-decoration: underline;
-}
-
-.pagination{
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  width: 900px;
-
-  p{
-    font-size: 16px;
-    color: var(--color-primary);
-  }
 }
