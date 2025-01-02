@@ -13,22 +13,25 @@
   }
 }
 
-.AllBooksListRow-cover{
+.AllBooksListRow-cover,
+.AllBooksListRow-no-cover{
   height: 4.5rem;
-  width: 3.0rem;
+  width: 3.2rem;
 }
 
-.AllBooksListRow-no-cover,
-.AllBooksListRow-cover-container {
+.AllBooksListRow-cover:hover,
+.AllBooksListRow-no-cover:hover{
+  transform: scale(3);
+  transition-delay: 1s;
+
+  
+}
+
+.AllBooksListRow-no-cover{
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  height: 4.5rem;
-  width: 3rem;
-  margin-right: 2.5rem;
-}
-
-.AllBooksListRow-no-cover {
   background-color: slategray;
   color: black;
   font-size: 0.8rem;
@@ -36,10 +39,6 @@
 
 .AllBooksListRow-cover-container {
   overflow: hidden;
-}
-
-.AllBooksListRow-cover-container img {
-  width: 100%; /*Check*/
 }
 
 .AllBooksListRow a:hover {
@@ -57,6 +56,7 @@
 }
 
 .AllBooksListRow-cover,
+.AllBooksListRow-no-cover,
 .AllBooksListRow-rating {
   justify-self: center;
 }
@@ -79,8 +79,6 @@
  width: 24px;
  height: 24px;
 }
-
-
 
 .AllBooksListRow-label {
   font-size: 8px; 

@@ -7,7 +7,6 @@ function AllBooksListRow({
 }) {
   return (
     <li className="AllBooksListRow">
-      {/* <div className="AllBooksListRow-cover-container"> */}
       {book.image ? (
         <img
           className="AllBooksListRow-cover"
@@ -17,7 +16,6 @@ function AllBooksListRow({
       ) : (
         <div className="AllBooksListRow-no-cover">Cover not available</div>
       )}
-      {/*</div>*/}
       <p className="AllBooksListRow-rating">{book.rating}</p>
       <Link to={`/book/${book.id}`}>
         <h2 className="AllBooksListRow-title">{book.title}</h2>
