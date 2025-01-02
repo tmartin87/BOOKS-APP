@@ -1,8 +1,14 @@
-
 #root{
   min-height: 100vh;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.main-container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-grow: 1;
 }
 
