@@ -28,6 +28,12 @@ h2 {
   color: var(--color-secondary);
 }
 
+
+h3{
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
 p {
   font-size: 12px
 }
