@@ -144,6 +144,23 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
   }
 }
 
+async function getAllGenres(setGenres) {
+  try {
+    const { data, error } = await supabase.from("books").select("genres");
+
+    if (error) {
+      console.log("Error fetching genres: ", error);
+    } else {
+      const genresWithDuplicates = data.flatMap((item) => item.genres);
+      const uniqueGenresSet = new Set(genresWithDuplicates);
+      const uniqueGenresArray = Array.from(uniqueGenresSet);
+      setGenres(uniqueGenresArray);
+    }
+  } catch (err) {
+    console.log("Unexpected error: ", err);
+  }
+}
+
 export {
   getAllBooks,
   getAllBooksCount,
@@ -155,4 +172,5 @@ export {
   getBooksToReadDetails,
   getBooksReadingDetails,
   getBooksReadDetails,
+  getAllGenres,
 };

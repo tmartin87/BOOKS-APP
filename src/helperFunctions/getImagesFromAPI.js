@@ -11,7 +11,6 @@ async function getCoverURL(apiURL, abortControllerArray) {
   const newController = new AbortController();
   abortControllerArray.current.push(newController);
   //Guardamos dos los abortControllers para luego poder iterar sobre ellos y abortarlos uno a uno
-  console.log("Otro controller pal saco")
 
   try{
     const newSignal = newController.signal;
