@@ -1,3 +1,24 @@
-.BookDetails-cover{
-    width: 30%;
+.BookDetails-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.BookDetails-subcontainer {
+    padding: 1rem;
+  width: 50rem;
+  border-color: 1px;
+  background-color: var(--bg-primary);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+
+  flex-direction: row;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+}
+
+.BookDetails-cover {
+  width: 30%;
 }
