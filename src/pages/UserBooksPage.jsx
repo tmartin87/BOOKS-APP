@@ -24,7 +24,7 @@ function UserBooksPage() {
       {
         <div className="books-to-read">
           <h2>📚 To read</h2>
-          <ul>
+          <ul className="books-to-read-details">
             {BooksToReadDetails.map((book) => (
               <ToReadListRow
                 key={book.id}
@@ -40,7 +40,7 @@ function UserBooksPage() {
       {
         <div className="books-reading">
           <h2>📖 Reading</h2>
-          <ul>
+          <ul className="books-reading-details">
             {BooksReadingDetails.map((book) => (
               <ReadingListRow
                 key={book.id}
@@ -55,7 +55,7 @@ function UserBooksPage() {
       {
         <div className="books-read">
           <h2>✅ Read</h2>
-          <ul>
+          <ul className="books-read-details">
             {BooksReadDetails.map((book) => (
               <ReadListRow
                 key={book.id}

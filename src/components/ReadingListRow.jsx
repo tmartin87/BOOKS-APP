@@ -21,6 +21,7 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
       </p>
       <p>{book.author}</p>
       <p>{book.current_page}/{book.pages}pages</p>
+      <div className="UserBooks-icon-buttons">
       <IconButton
         buttonImg={check}
         label="Mark as read"
@@ -32,15 +33,15 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
         getUpdatedOldList={getBooksReadingDetails}
         updateOldListComponent={setBooksReadingDetails}
       />
-      <div className="AllBooksListRow-options">
+      <div className="IconButton">
         <div className="AllBooksListRow-icon-wrapper">
           <Link to={`/book/${book.id}`}>
             <img src={pencil} />
           </Link>
         </div>
-        <div>
+        
           <p className="AllBooksListRow-label">Update page</p>
-        </div>
+        
       </div>
       <IconButton
         buttonImg={listWithCross}
@@ -53,6 +54,7 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
         getUpdatedOldList={getBooksReadingDetails}
         updateOldListComponent={setBooksReadingDetails}
       />
+      </div>
     </li>
   );
 }

@@ -1,3 +1,5 @@
+import "./IconButton.css"
+
 function IconButton({
   userId = 1, //TODO - Remplazar con useContext?
   buttonImg,
@@ -12,8 +14,8 @@ function IconButton({
 }) {
   return (
     <>
-      <div className="AllBooksListRow-options">
-        <div className="AllBooksListRow-icon-wrapper">
+      <div className="IconButton">
+        <button className="AllBooksListRow-icon-wrapper">
           <img
             className="AllBooksListRow-icon"
             src={buttonImg}
@@ -36,7 +38,7 @@ function IconButton({
               }
             }}
           />
-        </div>
+        </button>
         <p className="AllBooksListRow-label">{label}</p>
       </div>
     </>

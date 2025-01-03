@@ -35,7 +35,7 @@ function ToReadListRow({
         </p>
         <p>{book.author}</p>
       </div>
-      <div className="ToReadListRow-icon-buttons">
+      <div className="UserBooks-icon-buttons">
         {/*TODO Add IconButton to move to Reading*/}
         <IconButton
           buttonImg={arrowRight}
