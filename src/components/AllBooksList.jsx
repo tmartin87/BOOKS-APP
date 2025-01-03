@@ -73,6 +73,7 @@ function AllBooksList() {
 
     getNumberOfPages(setNumberOfPages, selectedGenre);
 
+    //El código del return se llama cuando cambiamos de página
     return () => {
       abortControllerArray.current.forEach((abortController) => {
         abortController.abort();

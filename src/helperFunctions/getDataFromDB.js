@@ -1,7 +1,7 @@
 import supabase from "../supabase/config.js";
-import { addImages } from "./getImagesFromAPI.js";
+import { getBookCovers } from "./getImagesFromAPI.js";
+const booksPerPage = 10; //also defined in AllBooksList
 
-//Any books
 /* async function getAllBooks(setBooks) {
   try {
     const { data } = await supabase
@@ -13,19 +13,25 @@ import { addImages } from "./getImagesFromAPI.js";
   }
 } */
 
-const booksPerPage = 10; //also defined in AllBooksList
-
+//Only called in getSomeBooks
 function prepareSomeBooksQuery(currPage, selectedGenre) {
   const startBook = currPage * booksPerPage;
   const endBook = currPage * booksPerPage + booksPerPage - 1;
   const query = supabase
     .from("books")
     .select("author, genres, id, rating, title")
+    .order("rating", {
+      ascending: false,
+    })
+    .order("title", {
+      ascending: true,
+    })
     .range(startBook, endBook);
 
   console.log(query);
 
   if (selectedGenre !== "all") {
+    console.log("filtering...");
     query.overlaps("genres", [selectedGenre]);
   }
   console.log(query);
@@ -38,16 +44,16 @@ async function getSomeBooks(
   selectedGenre,
   setBooks,
   setError,
-  abortControllerArray,
+  abortControllerArray
 ) {
-
   const query = prepareSomeBooksQuery(currPage, selectedGenre);
+  
   try {
     const { data, error } = await query;
     if (error) {
       console.log(error);
     } else {
-      const booksWithImages = await addImages(data, abortControllerArray);
+      const booksWithImages = await getBookCovers(data, abortControllerArray);
       setBooks(booksWithImages);
     }
   } catch (err) {
@@ -76,6 +82,23 @@ async function getNumberOfPages(setNumberOfPages, selectedGenre) {
     }
   } catch (err) {
     console.error(err);
+  }
+}
+
+async function getAllGenres(setGenres) {
+  try {
+    const { data, error } = await supabase.from("books").select("genres");
+
+    if (error) {
+      console.log("Error fetching genres: ", error);
+    } else {
+      const genresWithDuplicates = data.flatMap((item) => item.genres);
+      const uniqueGenresSet = new Set(genresWithDuplicates);
+      const uniqueGenresArray = Array.from(uniqueGenresSet);
+      setGenres(uniqueGenresArray);
+    }
+  } catch (err) {
+    console.log("Unexpected error: ", err);
   }
 }
 
@@ -174,23 +197,6 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
     console.log(error);
   } else {
     setBooksReadDetails(data);
-  }
-}
-
-async function getAllGenres(setGenres) {
-  try {
-    const { data, error } = await supabase.from("books").select("genres");
-
-    if (error) {
-      console.log("Error fetching genres: ", error);
-    } else {
-      const genresWithDuplicates = data.flatMap((item) => item.genres);
-      const uniqueGenresSet = new Set(genresWithDuplicates);
-      const uniqueGenresArray = Array.from(uniqueGenresSet);
-      setGenres(uniqueGenresArray);
-    }
-  } catch (err) {
-    console.log("Unexpected error: ", err);
   }
 }
 
