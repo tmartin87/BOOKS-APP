@@ -28,13 +28,9 @@ function prepareSomeBooksQuery(currPage, selectedGenre) {
     })
     .range(startBook, endBook);
 
-  console.log(query);
-
   if (selectedGenre !== "all") {
-    console.log("filtering...");
     query.overlaps("genres", [selectedGenre]);
   }
-  console.log(query);
 
   return query;
 }

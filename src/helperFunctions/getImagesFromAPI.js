@@ -25,11 +25,11 @@ async function getCoverURL(apiURL, abortControllerArray) {
     // Así luego podemos parar este fetch
     const apiResponseJson = await apiResponse.json();
     const coverURL = apiResponseJson.url;
-    console.log(coverURL);
+    //console.log(coverURL);
     return coverURL;
   } catch (err) {
     if (err.name === "AbortError") {
-      //Abortar da error el cual gestionamos de manera diferente al no ser un error de verdad
+      //Abortar da error, pero en este caso está provocado por nosotros así que todo bien
       console.log("Aborted");
     } else {
       console.log(err);
