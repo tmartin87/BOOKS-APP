@@ -1,25 +1,37 @@
 .AllBooksListRow {
   width: 50rem;
   display: grid;
-  grid-template-columns: 0.7fr 0.5fr 3fr 2fr 3fr 0.8fr 0.8fr;
+  grid-template-columns: 1fr 1fr 3fr 2fr 3fr 0.8fr 0.8fr;
   column-gap: 0.7rem;
   align-items: center;
-  margin-inline: 2rem;
+  margin-inline: 1.5rem;
   padding-block: 0.6rem;
   background-color: var(--bg-primary);
+
+  h2{
+    margin-left: 0;
+  }
 }
 
-.AllBooksListRow-no-cover,
-.AllBooksListRow-cover-container {
+.AllBooksListRow-cover,
+.AllBooksListRow-no-cover{
+  height: 4.5rem;
+  width: 3.2rem;
+}
+
+.AllBooksListRow-cover:hover,
+.AllBooksListRow-no-cover:hover{
+  transform: scale(3);
+  transition-delay: 1s;
+
+  
+}
+
+.AllBooksListRow-no-cover{
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  height: 4.5rem;
-  width: 3rem;
-  margin-right: 2.5rem;
-}
-
-.AllBooksListRow-no-cover {
   background-color: slategray;
   color: black;
   font-size: 0.8rem;
@@ -27,9 +39,6 @@
 
 .AllBooksListRow-cover-container {
   overflow: hidden;
-}
-
-.AllBooksListRow-cover-container img {
 }
 
 .AllBooksListRow a:hover {
@@ -41,20 +50,47 @@
   padding: 0;
   list-style: none;
 
-  border-radius: 2rem;
   padding-block: 0.2em;
-  padding-inline: 1em;
   margin-bottom: 0.3em;
   margin-right: 0.4em;
 }
 
-.AllBooksRow-rating {
-  padding-left: 20px;
-  color: aquamarine;
-}
-
-.AllBooksListRow-title {
-  margin-left: 1rem;
+.AllBooksListRow-cover,
+.AllBooksListRow-no-cover,
+.AllBooksListRow-rating {
+  justify-self: center;
 }
 
 
+<<<<<<< HEAD
+=======
+.AllBooksListRow-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 8px;
+}
+
+.AllBooksListRow-options:hover {
+  cursor: pointer;
+}
+
+.AllBooksListRow-icon-wrapper {
+ display: flex;
+ justify-content: center;
+ width: 24px;
+ height: 24px;
+}
+
+.AllBooksListRow-label {
+  font-size: 8px; 
+  color: #555; 
+  opacity: 0;
+  transition: opacity 0.3s ease; 
+}
+
+.AllBooksListRow-options:hover .AllBooksListRow-label {
+  opacity: 1; 
+  font-size: 8px;
+}
+>>>>>>> 420ce5eccee4c194be97e48c43596dd348abad51
