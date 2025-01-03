@@ -43,7 +43,7 @@ async function getSomeBooks(
   abortControllerArray
 ) {
   const query = prepareSomeBooksQuery(currPage, selectedGenre);
-  
+
   try {
     const { data, error } = await query;
     if (error) {
@@ -180,8 +180,10 @@ async function getBooksReadingDetails(userId, setBooksReadingDetails) {
 
   if (error) {
     console.log(error);
-  } else {
+  } else if (setBooksReadingDetails) {
     setBooksReadingDetails(data);
+  } else {
+    return data;
   }
 }
 
