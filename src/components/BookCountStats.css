@@ -1,0 +1,63 @@
+.BookCountStats>h2{
+    margin-top: 2rem;
+}
+
+.DonutChart{
+    margin-block: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    column-gap: 2rem;
+
+}
+
+.DonutChart-container {
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.DonutChart-slice{
+    position: absolute;
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.DonutChart-slice::before {
+    content: "";
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background: var(--bg-primary);
+}
+
+.DonutChart-legend{
+    margin-top: 1rem;
+}
+
+.DonutChart-legend-item{
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+
+    &.toRead{
+        background-color: grey;
+    }
+    &.reading{
+        background-color: var(--color-primary);
+    }
+    &.read{
+        background-color: green;
+    }
+}
+

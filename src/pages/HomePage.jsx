@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { getBooksReadingDetails, getBooksToReadDetails, getBooksReadDetails } from "../helperFunctions/getDataFromDB";
 import "./HomePage.css";
-/* import supabase from "../supabase/config"; */
+import BookCountStats from "../components/BookCountStats";
 
 function HomePage() {
-  /* const [booksReadingDetails, setBooksReadingDetails] = useState(); */
   const [pagesToRead, setPagesToRead] = useState();
   const [pagesRead, setPagesRead] = useState();
   const [booksToReadCount, setbooksToReadCount] = useState();
   const [booksReadingCount, setbooksReadingCount] = useState();
   const [booksReadCount, setbooksReadCount] = useState();
+  const [loading, setLoading] = useState(true);
 
   function sumPages(sum, books, attribute){
     books.forEach((book) => {
       sum += book[attribute];
-      console.log(sum);
     });
     return sum;
   }
@@ -46,6 +45,7 @@ function HomePage() {
     setbooksToReadCount(toReadData.length);
     setbooksReadingCount(readingData.length);
     setbooksReadCount(readData.length);
+    setLoading(false);
   }
 
   function calculateTime(pagesPerDay, pagesToRead){
@@ -58,28 +58,30 @@ function HomePage() {
 
   return (
     <>
-      <p>Pages to read: {pagesToRead}</p>
-      <p>Pages read: {pagesRead}</p>
-      <p>
-        There {booksToReadCount === 1 ? "is" : "are"}{" "}
-        {booksToReadCount === 1 ? "book" : "books"} {booksToReadCount} on your
-        to-read list.
-      </p>
-      <p>
-        You have {booksReadingCount}{" "}
-        {booksReadingCount === 1 ? "book" : "books"} in progress
-      </p>
-      <p>
-        You've read {booksReadCount} {booksReadCount === 1 ? "book" : "books"}!
-      </p>
-      <p>
-        If you read 5 pages per day, you'll be done in{" "}
-        {calculateTime(5, pagesToRead)} days{" "}
-      </p>
-      <p>
-        If you read 15 pages per day, you'll be done in{" "}
-        {calculateTime(15, pagesToRead)} days{" "}
-      </p>
+      {!loading && (
+        <>
+          <h1 className="HomePage">Here's how you're doing</h1>
+          <BookCountStats
+            booksToReadCount={booksToReadCount}
+            booksReadingCount={booksReadingCount}
+            booksReadCount={booksReadCount}
+          />
+          <h2>Your progress in terms of pages</h2>
+          <p>Pages to read: {pagesToRead}</p>
+          <p>Pages read: {pagesRead}</p>
+
+
+          <h2>Pace calculator</h2>
+          <p>
+            If you read 5 pages per day, you'll be done in{" "}
+            {calculateTime(5, pagesToRead)} days{" "}
+          </p>
+          <p>
+            If you read 15 pages per day, you'll be done in{" "}
+            {calculateTime(15, pagesToRead)} days{" "}
+          </p>
+        </>
+      )}
     </>
   );
 }
