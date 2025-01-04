@@ -1,0 +1,25 @@
+.ProgressBar-container {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .ProgressBar-slider {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .ProgressBar {
+    position: relative;
+    width: 100%;
+    height: 12px;
+    background-color: #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .ProgressBar-filled {
+    height: 100%;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease-in-out;
+  }

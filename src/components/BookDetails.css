@@ -3,11 +3,12 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-top: 48px;
 }
 
 .BookDetails-subcontainer {
-    padding: 1rem;
-  width: 50rem;
+  padding: 1rem;
+  max-width: 50rem;
   border-color: 1px;
   background-color: var(--bg-primary);
   border-radius: 15px;
@@ -23,3 +24,4 @@
   width: 30%;
   margin-right: 18px;
 }
+
