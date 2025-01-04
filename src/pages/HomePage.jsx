@@ -1,60 +1,51 @@
 import { useEffect, useState } from "react";
-import { getBooksReadingDetails } from "../helperFunctions/getDataFromDB";
+import { getBooksReadingDetails, getBooksToReadDetails, getBooksReadDetails } from "../helperFunctions/getDataFromDB";
 import "./HomePage.css";
-import supabase from "../supabase/config";
+/* import supabase from "../supabase/config"; */
 
 function HomePage() {
   /* const [booksReadingDetails, setBooksReadingDetails] = useState(); */
   const [pagesToRead, setPagesToRead] = useState();
-  const [pagesReading, setPagesReading] = useState();
+  const [pagesRead, setPagesRead] = useState();
   const [booksToReadCount, setbooksToReadCount] = useState();
   const [booksReadingCount, setbooksReadingCount] = useState();
   const [booksReadCount, setbooksReadCount] = useState();
 
-  function calculatePagesToRead(data) {
-    let toReadPageSum = 0;
-    data.forEach((book) => {
-      toReadPageSum += book.pages;
-      setPagesToRead(toReadPageSum);
+  function sumPages(sum, books, attribute){
+    books.forEach((book) => {
+      sum += book[attribute];
+      console.log(sum);
     });
+    return sum;
   }
 
-  function calculatePagesReading(data) {
-    let readingPageSum = 0;
-    data.forEach((book) => {
-      readingPageSum += book.current_page;
-      setPagesReading(readingPageSum);
-    });
+  function calculatePagesToRead(toReadData, readingData) {
+    //sumar páginas por leer en to read
+    let pagesToReadSum = sumPages(0, toReadData, "pages");
+    //sumar además páginas por leer en reading
+    pagesToReadSum = sumPages(pagesToReadSum, readingData, "pages");
+    setPagesToRead(pagesToReadSum);
   }
 
-  async function countBooksToRead(userId) {
-    const { data, error } = await supabase
-      .from("users-info")
-      .select("booksToRead")
-      .eq("id", userId);
-    setbooksToReadCount(data[0].booksToRead.length);
-  }
-
-  async function countBooksReading(userId) {
-    const { data, error } = await supabase
-      .from("booksReading")
-      .select("id", { count: "exact" })
-      .eq("user_id", userId);
-    setbooksReadingCount(data.length);
-  }
-
-  async function countBooksRead(userId) {
-    const { data, error } = await supabase
-      .from("users-info")
-      .select("booksRead")
-      .eq("id", userId);
-    setbooksReadCount(data[0].booksRead.length);
+  function calculatePagesRead(readingData, readData) {
+    let pagesReadSum = sumPages(0, readingData, "current_page");
+    //TODO editar función get_books_read(user_id bigint) en supabase para que devuelva páginas también
+    //pagesReadSum = sumPages(pagesReadSum, readData, "pages");
+    setPagesRead(pagesReadSum);
   }
 
   async function calculateProgress() {
-    const data = await getBooksReadingDetails(1); //TODO replace with useContext?
-    calculatePagesToRead(data);
-    calculatePagesReading(data);
+    const toReadData = await getBooksToReadDetails(1); //TODO replace with useContext?
+    const readingData = await getBooksReadingDetails(1); //TODO replace with useContext?
+    const readData = await getBooksReadDetails(1); //TODO replace with useContext?
+    console.log("toReadData ", toReadData);
+    console.log("readingData ", readingData);
+    console.log("readData ", readData);
+    calculatePagesToRead(toReadData, readingData);
+    calculatePagesRead(readingData, readData);
+    setbooksToReadCount(toReadData.length);
+    setbooksReadingCount(readingData.length);
+    setbooksReadCount(readData.length);
   }
 
   function calculateTime(pagesPerDay, pagesToRead){
@@ -63,19 +54,16 @@ function HomePage() {
 
   useEffect(() => {
     calculateProgress();
-    countBooksToRead(1); //TODO replace with useContext?
-    countBooksReading(1); //TODO replace with useContext?
-    countBooksRead(1); //TODO replace with useContext?
   }, []);
 
   return (
     <>
       <p>Pages to read: {pagesToRead}</p>
-      <p>Pages read: {pagesReading}</p>
+      <p>Pages read: {pagesRead}</p>
       <p>
         There {booksToReadCount === 1 ? "is" : "are"}{" "}
         {booksToReadCount === 1 ? "book" : "books"} {booksToReadCount} on your
-        to-read list{" "}
+        to-read list.
       </p>
       <p>
         You have {booksReadingCount}{" "}

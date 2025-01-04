@@ -13,7 +13,7 @@ const booksPerPage = 10; //also defined in AllBooksList
   }
 } */
 
-//Only called in getSomeBooks
+//Solo se llama en getSomeBooks
 function prepareSomeBooksQuery(currPage, selectedGenre) {
   const startBook = currPage * booksPerPage;
   const endBook = currPage * booksPerPage + booksPerPage - 1;
@@ -28,6 +28,7 @@ function prepareSomeBooksQuery(currPage, selectedGenre) {
     })
     .range(startBook, endBook);
 
+  //Así se aplica el filtro por genero en los resultados
   if (selectedGenre !== "all") {
     query.overlaps("genres", [selectedGenre]);
   }
@@ -60,6 +61,7 @@ async function getSomeBooks(
   }
 }
 
+//Se refiere a páginas de la paginación, no páginas de libros
 async function getNumberOfPages(setNumberOfPages, selectedGenre) {
   try {
     const query = supabase.from("books").select("id", { count: "exact" });
@@ -81,6 +83,7 @@ async function getNumberOfPages(setNumberOfPages, selectedGenre) {
   }
 }
 
+//Conseguir lista de generos para el fitro
 async function getAllGenres(setGenres) {
   try {
     const { data, error } = await supabase.from("books").select("genres");
@@ -168,8 +171,10 @@ async function getBooksToReadDetails(userId, setBooksToReadDetails) {
   });
   if (error) {
     console.log(error);
-  } else {
+  } else if (setBooksToReadDetails){
     setBooksToReadDetails(data);
+  } else {
+    return data;
   }
 }
 
@@ -193,8 +198,10 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
   });
   if (error) {
     console.log(error);
-  } else {
+  } else if (setBooksReadDetails){
     setBooksReadDetails(data);
+  } else {
+    return data;
   }
 }
 
