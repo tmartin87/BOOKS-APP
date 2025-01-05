@@ -26,3 +26,14 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.PaceCalculator-control-minus{
+    margin-left: 0.5rem;
+}
+
+.PaceCalculator-control-plus{
+    margin-right: 0.5rem;
+}
+
+.PaceCalculator-warning{
+    color: red;
+}

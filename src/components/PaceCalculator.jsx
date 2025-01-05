@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./PaceCalculator.css";
 import plus from "../assets/plus.svg";
 import minus from "../assets/minus.svg";
 
 function PaceCalculator({ pagesToRead }) {
-  const [pagesPerDay, setPagesPerDay] = useState(5);
+  const [pagesPerDay, setPagesPerDay] = useState(Number(window.localStorage.getItem("pagesPerDay")) || 5);
   const [warning, setWarning] = useState();
   const sillyMessageBelowZero = `You can't read less than 0 pages per day 😬`;
   const sillyMessageAbovePagesToRead = `A+ for attitude, but you al your unread books sum just ${pagesToRead} pages! 🧐`;
+
 
   function checkRange(futureNumber) {
     if (futureNumber < 0) {
@@ -44,6 +45,10 @@ function PaceCalculator({ pagesToRead }) {
     return Number(time.toFixed(2));
   }
 
+  useEffect(()=>{
+    window.localStorage.setItem('pagesPerDay', pagesPerDay)
+  },[pagesPerDay])
+
   return (
     <section className="PaceCalculator">
       <h2>Pace calculator</h2>
@@ -51,7 +56,7 @@ function PaceCalculator({ pagesToRead }) {
         If you read{" "}
         <img
           src={minus}
-          className="PaceCalculator-control"
+          className="PaceCalculator-control-minus"
           onClick={decreasePagesPerDay}
         />
         <input
@@ -63,9 +68,11 @@ function PaceCalculator({ pagesToRead }) {
         ></input>{" "}
         <img
           src={plus}
-          className="PaceCalculator-control"
+          className="PaceCalculator-control-plus"
           onClick={increasePagesPerDay}
-        />{" "}pages per day, you'll be done in <strong>{calculateTime(pagesPerDay, pagesToRead)} days</strong>.
+        />{" "}
+        pages per day, you will be done in{" "}
+        <strong>{calculateTime(pagesPerDay, pagesToRead)}days</strong>.
       </p>
       {warning && <p className="PaceCalculator-warning">{warning}</p>}
     </section>

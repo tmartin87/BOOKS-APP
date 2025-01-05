@@ -32,7 +32,7 @@ function DonutChart({ booksToReadCount, booksReadingCount, booksReadCount }) {
       <figure className="DonutChart">
         <div className="DonutChart-container">
           <div
-            className="DonutChart-emptySlice"       ></div>
+            className="DonutChart-emptySlice"></div>
           <div
             className="DonutChart-slice"
             style={{
