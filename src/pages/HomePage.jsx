@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getBooksReadingDetails, getBooksToReadDetails, getBooksReadDetails } from "../helperFunctions/getDataFromDB";
 import "./HomePage.css";
 import BookCountStats from "../components/BookCountStats";
+import PaceCalculator from "../components/PaceCalculator";
 
 function HomePage() {
   const [pagesToRead, setPagesToRead] = useState();
@@ -48,10 +49,6 @@ function HomePage() {
     setLoading(false);
   }
 
-  function calculateTime(pagesPerDay, pagesToRead){
-    return Math.ceil(pagesToRead/pagesPerDay);
-  }
-
   useEffect(() => {
     calculateProgress();
   }, []);
@@ -60,26 +57,19 @@ function HomePage() {
     <>
       {!loading && (
         <>
-          <h1 className="HomePage">Here's how you're doing</h1>
+          <h1 className="HomePage">Welcome back!</h1>
           <BookCountStats
             booksToReadCount={booksToReadCount}
             booksReadingCount={booksReadingCount}
             booksReadCount={booksReadCount}
           />
+          <br></br>
+          <br></br>
           <h2>Your progress in terms of pages</h2>
           <p>Pages to read: {pagesToRead}</p>
           <p>Pages read: {pagesRead}</p>
 
-
-          <h2>Pace calculator</h2>
-          <p>
-            If you read 5 pages per day, you'll be done in{" "}
-            {calculateTime(5, pagesToRead)} days{" "}
-          </p>
-          <p>
-            If you read 15 pages per day, you'll be done in{" "}
-            {calculateTime(15, pagesToRead)} days{" "}
-          </p>
+          <PaceCalculator pagesToRead={pagesToRead} />
         </>
       )}
     </>

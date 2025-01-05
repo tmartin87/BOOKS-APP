@@ -32,6 +32,8 @@ function DonutChart({ booksToReadCount, booksReadingCount, booksReadCount }) {
       <figure className="DonutChart">
         <div className="DonutChart-container">
           <div
+            className="DonutChart-emptySlice"       ></div>
+          <div
             className="DonutChart-slice"
             style={{
               background: donutColors,
@@ -52,7 +54,7 @@ function DonutChart({ booksToReadCount, booksReadingCount, booksReadCount }) {
           <p>
             <span className="DonutChart-legend-item read"></span>
             You've read <strong>{booksReadCount}</strong>{" "}
-            {booksReadCount === 1 ? "book" : "books"} 🎉
+            {booksReadCount === 1 ? "book" : "books"} ✅
           </p>
         </figcaption>
       </figure>
