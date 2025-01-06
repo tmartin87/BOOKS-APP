@@ -29,8 +29,7 @@ function HomePage() {
 
   function calculatePagesRead(readingData, readData) {
     let pagesReadSum = sumPages(0, readingData, "current_page");
-    //TODO editar función get_books_read(user_id bigint) en supabase para que devuelva páginas también
-    //pagesReadSum = sumPages(pagesReadSum, readData, "pages");
+    pagesReadSum = sumPages(pagesReadSum, readData, "pages");
     setPagesRead(pagesReadSum);
   }
 
