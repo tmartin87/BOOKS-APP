@@ -13,10 +13,13 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
 
   function sumPages(sum, books, attribute){
-    books.forEach((book) => {
-      sum += book[attribute];
-    });
-    return sum;
+    const newSum = books.reduce((acc, book) => {
+      if (attribute == "current_page"){
+        return acc + book[attribute] - 1;
+      }
+      return acc + book[attribute];
+    }, sum);
+    return newSum;
   }
 
   function calculatePagesToRead(toReadData, readingData) {
