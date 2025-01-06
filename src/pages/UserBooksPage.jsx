@@ -1,5 +1,5 @@
 import "./UserBooksPage.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   getBooksToReadDetails,
   getBooksReadingDetails,
@@ -14,10 +14,18 @@ function UserBooksPage() {
   const [BooksReadingDetails, setBooksReadingDetails] = useState([]);
   const [BooksReadDetails, setBooksReadDetails] = useState([]);
 
+  const abortControllerArray = useRef([]);
+
   useEffect(() => {
     getBooksToReadDetails(1, setBooksToReadDetails);
-    getBooksReadingDetails(1, setBooksReadingDetails);
+    getBooksReadingDetails(1, setBooksReadingDetails, abortControllerArray);
     getBooksReadDetails(1, setBooksReadDetails);
+    return () => {
+      abortControllerArray.current.forEach((abortController) => {
+        abortController.abort();
+      });
+      abortControllerArray.current = [];
+    };
   }, []);
   return (
     <div className="UserBooksPage-container">

@@ -1,0 +1,26 @@
+.ReadingListRow {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.ReadingListRow-Details {
+  flex-basis: 10rem;
+}
+
+.ReadingListRow-cover,
+.ReadingListRow-no-cover{
+  height: 7rem;
+  width: 5rem;
+}
+
+.ReadingListRow-no-cover{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: slategray;
+    color: black;
+    font-size: 0.8rem;
+  }
