@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./ProgressBar.css";
 
 function ProgressBar({ pagesRead, totalPages, onPagesReadChange }) {
