@@ -22,6 +22,8 @@ function ProgressBar({ pagesRead, totalPages, onPagesReadChange }) {
         <div
           className="ProgressBar-filled"
           style={{ width: `${progress}%` }}
+
+          
         ></div>
       </div>
     </div>

@@ -72,6 +72,8 @@ function HomePage() {
           <p>Pages read: {pagesRead}</p>
 
           <PaceCalculator pagesToRead={pagesToRead} />
+          
+          
         </>
       )}
     </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import "./BookDetails.css";
 
@@ -12,30 +12,29 @@ function BookDetails({ book, bookCover }) {
         <img
           className="BookDetails-cover"
           src={bookCover || "default_cover.jpg"}
-          alt={`${book.title} cover`}
+          alt={`${book.title || "book"} cover`}
         />
         <div className="BookDetails-text">
-          <h2>{book.title}</h2>
+          <h2>{book.title || "Unknown Title"}</h2>
           <h3>
-            <strong>Author:</strong> {book.author}
+            <strong>Author:</strong> {book.author || "Unknown Author"}
           </h3>
           <p>
-            <strong>Genres:</strong> {book.genres}
+            <strong>Genres:</strong> {Array.isArray(book.genres) ? book.genres.join(", ") : book.genres || "N/A"}
           </p>
           <p>
-            <strong>Year:</strong> {book.year}
+            <strong>Year:</strong> {book.year || "Unknown Year"}
           </p>
           <p>
-            <strong>Pages:</strong> {book.pages}
+            <strong>Pages:</strong> {book.pages || "N/A"}
           </p>
           <p>
-            <strong>Rating:</strong> {book.rating}
+            <strong>Rating:</strong> {book.rating || "No Rating"}
           </p>
 
-          {/* Incluir ProgressBar */}
           <ProgressBar
             pagesRead={pagesRead}
-            totalPages={book.pages}
+            totalPages={book.pages || 1} // Fallback to 1 to avoid division by zero
             onPagesReadChange={setPagesRead}
           />
         </div>
