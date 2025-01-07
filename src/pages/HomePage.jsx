@@ -13,10 +13,13 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
 
   function sumPages(sum, books, attribute){
-    books.forEach((book) => {
-      sum += book[attribute];
-    });
-    return sum;
+    const newSum = books.reduce((acc, book) => {
+      if (attribute == "current_page"){
+        return acc + book[attribute] - 1;
+      }
+      return acc + book[attribute];
+    }, sum);
+    return newSum;
   }
 
   function calculatePagesToRead(toReadData, readingData) {
@@ -29,8 +32,7 @@ function HomePage() {
 
   function calculatePagesRead(readingData, readData) {
     let pagesReadSum = sumPages(0, readingData, "current_page");
-    //TODO editar función get_books_read(user_id bigint) en supabase para que devuelva páginas también
-    //pagesReadSum = sumPages(pagesReadSum, readData, "pages");
+    pagesReadSum = sumPages(pagesReadSum, readData, "pages");
     setPagesRead(pagesReadSum);
   }
 
