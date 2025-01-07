@@ -34,7 +34,7 @@ function BookDetails({ book, bookCover }) {
 
           <ProgressBar
             pagesRead={pagesRead}
-            totalPages={book.pages || 1} // Fallback to 1 to avoid division by zero
+            totalPages={book.pages || 1} 
             onPagesReadChange={setPagesRead}
           />
         </div>
