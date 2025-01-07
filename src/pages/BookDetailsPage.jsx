@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BookDetails from "../components/BookDetails";
 import { createApiURL, getCoverURL } from "../helperFunctions/getImagesFromAPI.js";
+
 import { getOneBook } from "../helperFunctions/getDataFromDB.js";
+
 import "./BookDetailsPage.css";
 
 function BookDetailsPage() {

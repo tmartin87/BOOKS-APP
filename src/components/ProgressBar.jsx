@@ -1,33 +1,36 @@
 
-import "./ProgressBar.css";
+
+
+
+import './ProgressBar.css'; 
 
 function ProgressBar({ pagesRead, totalPages, onPagesReadChange }) {
-  const progress = (pagesRead / totalPages) * 100;
+
+  const handleProgressChange = (e) => {
+    const value = e.target.value;
+    if (value >= 0 && value <= totalPages) {
+      onPagesReadChange(Number(value)); 
+    }
+  };
 
   return (
-    <div className="ProgressBar-container">
-      <label>
-        Pages Read: {pagesRead} / {totalPages}
-      </label>
-      <input
-      className="ProgressBar-slider"
-        type="text"
-        min="0"
-        max={totalPages}
-        value={pagesRead}
-        onChange={(e) => onPagesReadChange(Number(e.target.value))}
-        
-      />
-      <div className="ProgressBar">
-        <div
-          className="ProgressBar-filled"
-          style={{ width: `${progress}%` }}
-
-          
-        ></div>
+    <div className="progress-bar-container">
+      <div className="ProgressBar-filled">
+        <input
+          type="number"
+          min="0"
+          max={totalPages}
+          value={pagesRead}
+          onChange={handleProgressChange}
+          className="ProgressBar-bar"
+        />
+        <div className="progress-info">
+          <span>{pagesRead} / {totalPages} pages read</span>
+        </div>
       </div>
     </div>
   );
 }
+
 
 export default ProgressBar;

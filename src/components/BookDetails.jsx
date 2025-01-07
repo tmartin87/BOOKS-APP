@@ -1,9 +1,17 @@
-import { useState } from "react";
-import ProgressBar from "./ProgressBar";
-import "./BookDetails.css";
+import { useState, useEffect } from "react";
+import { updatePagesRead } from "../helperFunctions/getDataFromDB.js"
+import ProgressBar from "./ProgressBar.jsx"; 
+import "./bookDetails.css";
 
-function BookDetails({ book, bookCover }) {
+function BookDetails({ book, bookCover, userId }) {
   const [pagesRead, setPagesRead] = useState(0);
+
+
+  useEffect(() => {
+    if (userId && book.id) {
+      updatePagesRead(userId, book.id, pagesRead);  
+    }
+  }, [pagesRead, userId, book.id]);  
 
   return (
     <div className="BookDetails-container">
@@ -31,11 +39,10 @@ function BookDetails({ book, bookCover }) {
           <p>
             <strong>Rating:</strong> {book.rating || "No Rating"}
           </p>
-
           <ProgressBar
             pagesRead={pagesRead}
             totalPages={book.pages || 1} 
-            onPagesReadChange={setPagesRead}
+            onPagesReadChange={setPagesRead}  
           />
         </div>
       </div>

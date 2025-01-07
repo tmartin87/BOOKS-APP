@@ -36,7 +36,7 @@ import {
 } from "../helperFunctions/updateUserLists.js";
 
 function AllBooksList() {
-  const booksPerPage = 10; //also defined in getDataFrom DB
+ /*  const booksPerPage = 10; //also defined in getDataFrom DB */
   const [currPage, setCurrPage] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState();
   const [books, setBooks] = useState([]);
