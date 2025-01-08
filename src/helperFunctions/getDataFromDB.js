@@ -205,13 +205,13 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
   }
 }
 
-export async function updatePagesRead(userId, bookId, pagesRead) {
+export async function updatePagesRead(userId, bookId, current_page) {
   try {
     const { data, error } = await supabase
       .from('booksReading')
       .upsert([
-        { user_id: userId, book_id: bookId, pages_read: pagesRead }
-      ], { onConflict: ['user_id', 'book_id'] }); // This ensures the record is updated if it already exists
+        { user_id: userId, book_id: bookId, current_page: current_page }
+      ], { onConflict: ['user_id', 'book_id'] });
 
     if (error) {
       console.error('Error updating pages read:', error);
@@ -222,6 +222,7 @@ export async function updatePagesRead(userId, bookId, pagesRead) {
     console.error('Error updating pages read:', err);
   }
 }
+
 export {
   /* getAllBooks, */
   getNumberOfPages,
