@@ -2,6 +2,7 @@ import supabase from "../supabase/config.js";
 import { getBookCovers } from "./getImagesFromAPI.js";
 const booksPerPage = 10; //also defined in AllBooksList
 
+
 /* async function getAllBooks(setBooks) {
   try {
     const { data } = await supabase
@@ -205,24 +206,17 @@ async function getBooksReadDetails(userId, setBooksReadDetails) {
   }
 }
 
-export async function updatePagesRead(userId, bookId, current_page) {
-  try {
-    const { data, error } = await supabase
-      .from('booksReading')
-      .upsert([
-        { user_id: userId, book_id: bookId, current_page: current_page }
-      ], { onConflict: ['user_id', 'book_id'] });
+async function updatePagesRead(userId, bookId, current_page) {
+ /*  const { data, error } = await supabase.rpc('update_pages_read', { 
+    user_id: userId, book_id: bookId, current_page }); */
+    const { data, error } = await supabase.from("booksReading").update({ current_page: current_page}).match({ user_id: userId, book_id: bookId });
 
-    if (error) {
-      console.error('Error updating pages read:', error);
-    } else {
-      console.log('Pages read updated successfully:', data);
-    }
-  } catch (err) {
-    console.error('Error updating pages read:', err);
+  if (error) {
+    console.error('Error updating pages read:', error);
+    return { success: false, error };
   }
+  return { success: true, data };
 }
-
 export {
   /* getAllBooks, */
   getNumberOfPages,
@@ -235,6 +229,7 @@ export {
   getBooksReadingDetails,
   getBooksReadDetails,
   getAllGenres,
+  updatePagesRead,
   
   
 };

@@ -71,8 +71,8 @@ function PaceCalculator({ pagesToRead }) {
           className="PaceCalculator-control-plus"
           onClick={increasePagesPerDay}
         />{" "}
-        pages per day, you will be done in{" "}
-        <strong>{calculateTime(pagesPerDay, pagesToRead)}days</strong>.
+        <span>pages per day, you will be done in{" "}
+        <strong> {calculateTime(pagesPerDay, pagesToRead)} days</strong></span>.
       </p>
       {warning && <p className="PaceCalculator-warning">{warning}</p>}
     </section>

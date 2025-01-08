@@ -1,23 +1,41 @@
 import { useState } from "react";
 import "./ProgressBar.css";
+import { updatePagesRead } from "../helperFunctions/getDataFromDB";
 
-function ProgressBar({ pagesRead, totalPages, onPagesReadChange, onSave }) {
+function ProgressBar({
+  userId,
+  bookId,
+  currentPage,
+  totalPages,
+  setCurrentPage,
+}) {
   const [isSaving, setIsSaving] = useState(false);
+
+  
 
   const handleProgressChange = (e) => {
     const value = e.target.value;
     if (value >= 0 && value <= totalPages) {
-      onPagesReadChange(Number(value));
+      setCurrentPage(Number(value));
     }
   };
 
   const handleSave = async () => {
     setIsSaving(true);
-    await onSave(); // Assuming onSave is a prop passed to handle saving to Supabase
+    console.log(userId);
+    console.log(bookId);
+    console.log(currentPage);
+    
+    const result = await updatePagesRead(userId, bookId, currentPage);
     setIsSaving(false);
+
+    if (!result.success) {
+      console.error("Error al guardar las páginas");
+    }
   };
 
-  const progressPercentage = (pagesRead / totalPages) * 100;
+  const progressPercentage = (currentPage / totalPages) * 100;
+console.log(currentPage);
 
   return (
     <div className="progress-bar-container">
@@ -31,19 +49,20 @@ function ProgressBar({ pagesRead, totalPages, onPagesReadChange, onSave }) {
         type="number"
         min="0"
         max={totalPages}
-        value={pagesRead}
+        value={currentPage}
         onChange={handleProgressChange}
         className="ProgressBar-input"
       />
       <div className="progress-info">
-        <span>{pagesRead} / {totalPages} pages read</span>
+        <span>
+          {currentPage} / {totalPages} pages read
+        </span>
       </div>
-      <button onClick={handleSave} disabled={isSaving} className="ProgressBar-save-button">
-        {isSaving ? "Saving..." : "Save Progress"}
+      <button onClick={handleSave} className="ProgressBar-save-button">
+        {isSaving ? "Saving..." : "Save"}
       </button>
     </div>
   );
 }
 
 export default ProgressBar;
-

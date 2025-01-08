@@ -1,7 +1,7 @@
 .progress-bar-container {
   margin-top: 20px;
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .ProgressBar {
@@ -33,6 +33,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 70px;
 }
 
 .ProgressBar-save-button:disabled {
