@@ -31,11 +31,11 @@ function ToReadListRow({
     <li className="ToReadListRow" key={book.id}>
       <div className="ToReadListRow-book-info">
         <p>
-          <strong>{book.title}</strong>
+          <strong className="textSmall">{book.title}</strong>
         </p>
         <p>{book.author}</p>
       </div>
-      <div className="ToReadListRow-icon-buttons">
+      <div className="UserBooks-icon-buttons">
         {/*TODO Add IconButton to move to Reading*/}
         <IconButton
           buttonImg={arrowRight}

@@ -10,11 +10,17 @@ import {
 
 function ReadListRow({ book, setBooksReadDetails }) {
   return (
-    <li key={book.id}>
+    
+    <li className="readListRow-Container" key={book.id}>
+    
+    <div className="readListRow-details">
       <p>
-        <strong>{book.title}</strong>
+        <strong className="textSmall">{book.title}</strong>
       </p>
       <p>{book.author}</p>
+      </div>
+      
+      <div className="readListRow-button">
       <IconButton
         buttonImg={x}
         label="Remove"
@@ -26,7 +32,10 @@ function ReadListRow({ book, setBooksReadDetails }) {
         getUpdatedOldList={getBooksReadDetails}
         updateOldListComponent={setBooksReadDetails}
       />
+      </div>
+      
     </li>
+    
   );
 }
 
