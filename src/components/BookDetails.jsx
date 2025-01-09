@@ -9,17 +9,19 @@ function BookDetails({ book, bookCover }) {
 
   async function getCurrentPage() {
     const booksReadingDetails = await getBooksReadingDetails(1);
-    console.log(booksReadingDetails);
+   
    
     const booksReading = booksReadingDetails.filter((currentBook) => {
      return book.id === currentBook.id;
     });
-    console.log(booksReading.length );
+   
     
-    if (booksReading.length > 1) {
+    if (booksReading.length >= 1) {
       setCurrentPage(booksReading[0].current_page)
+      
+      
     }
-    console.log("!", booksReading[0].current_page);
+    
     
   }
  

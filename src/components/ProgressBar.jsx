@@ -35,7 +35,7 @@ function ProgressBar({
   };
 
   const progressPercentage = (currentPage / totalPages) * 100;
-console.log(currentPage);
+
 
   return (
     <div className="progress-bar-container">
@@ -50,7 +50,7 @@ console.log(currentPage);
         min="0"
         max={totalPages}
         value={currentPage}
-        onChange={handleProgressChange}
+        onChange={(e)=>handleProgressChange(e)}
         className="ProgressBar-input"
       />
       <div className="progress-info">
