@@ -51,7 +51,7 @@ async function markAsRead(bookId, userId, getBooksRead_, setBooksRead_) {
 }
 
 //##
-//Remove from to one of 3 lists
+//Remove from one of 3 lists
 //##
 
 async function removeFromToRead(
