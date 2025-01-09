@@ -15,44 +15,58 @@ import {
 
 function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
   return (
-    <li key={book.id}>
+    <li className="ReadingListRow" key={book.id}>
+      {book.image ? (
+        <img
+          className="ReadingListRow-cover"
+          src={book.image}
+          alt={`${book.title} cover`}
+        />
+      ) : (
+        <div className="ReadingListRow-no-cover">Cover not available</div>
+      )}
+      <div className="ReadingListRow-Details">
       <p>
-        <strong>{book.title}</strong>
+        <strong className="textSmall">{book.title}</strong>
       </p>
       <p>{book.author}</p>
-      <p>{book.current_page}/{book.pages}pages</p>
-      <IconButton
-        buttonImg={check}
-        label="Mark as read"
-        bookId={book.id}
-        addToList={markAsRead}
-        getUpdatedNewList={getBooksReadDetails}
-        updateNewListComponent={setBooksReadDetails}
-        removeFromList={removeFromReading}
-        getUpdatedOldList={getBooksReadingDetails}
-        updateOldListComponent={setBooksReadingDetails}
-      />
-      <div className="AllBooksListRow-options">
-        <div className="AllBooksListRow-icon-wrapper">
-          <Link to={`/book/${book.id}`}>
-            <img src={pencil} />
-          </Link>
-        </div>
-        <div>
+      <p>
+        {book.current_page}/{book.pages}pages
+      </p>
+      </div>
+      <div className="UserBooks-icon-buttons">
+        <IconButton
+          buttonImg={check}
+          label="Mark as read"
+          bookId={book.id}
+          addToList={markAsRead}
+          getUpdatedNewList={getBooksReadDetails}
+          updateNewListComponent={setBooksReadDetails}
+          removeFromList={removeFromReading}
+          getUpdatedOldList={getBooksReadingDetails}
+          updateOldListComponent={setBooksReadingDetails}
+        />
+        <div className="IconButton">
+          <div className="AllBooksListRow-icon-wrapper">
+            <Link to={`/book/${book.id}`}>
+              <img src={pencil} />
+            </Link>
+          </div>
+
           <p className="AllBooksListRow-label">Update page</p>
         </div>
+        <IconButton
+          buttonImg={listWithCross}
+          label="Remove"
+          bookId={book.id}
+          addToList={null}
+          getUpdatedNewList={null}
+          updateNewListComponent={null}
+          removeFromList={removeFromReading}
+          getUpdatedOldList={getBooksReadingDetails}
+          updateOldListComponent={setBooksReadingDetails}
+        />
       </div>
-      <IconButton
-        buttonImg={listWithCross}
-        label="Remove"
-        bookId={book.id}
-        addToList={null}
-        getUpdatedNewList={null}
-        updateNewListComponent={null}
-        removeFromList={removeFromReading}
-        getUpdatedOldList={getBooksReadingDetails}
-        updateOldListComponent={setBooksReadingDetails}
-      />
     </li>
   );
 }

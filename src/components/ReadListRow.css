@@ -1,0 +1,8 @@
+.readListRow-Container {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.readListRow-details {
+    flex-basis: 10rem;
+}

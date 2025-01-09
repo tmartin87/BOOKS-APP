@@ -1,5 +1,5 @@
 import "./UserBooksPage.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   getBooksToReadDetails,
   getBooksReadingDetails,
@@ -14,17 +14,28 @@ function UserBooksPage() {
   const [BooksReadingDetails, setBooksReadingDetails] = useState([]);
   const [BooksReadDetails, setBooksReadDetails] = useState([]);
 
+  const abortControllerArray = useRef([]);
+
   useEffect(() => {
     getBooksToReadDetails(1, setBooksToReadDetails);
-    getBooksReadingDetails(1, setBooksReadingDetails);
+    getBooksReadingDetails(1, setBooksReadingDetails, abortControllerArray);
     getBooksReadDetails(1, setBooksReadDetails);
+    return () => {
+      abortControllerArray.current.forEach((abortController) => {
+        abortController.abort();
+      });
+      abortControllerArray.current = [];
+    };
   }, []);
   return (
+    <>
+    <h1 className="textLarge">Your Books</h1>
     <div className="UserBooksPage-container">
+      
       {
         <div className="books-to-read">
-          <h2>📚 To read</h2>
-          <ul>
+          <h2 className="textMedium">📚 To read</h2>
+          <ul className="books-to-read-details">
             {BooksToReadDetails.map((book) => (
               <ToReadListRow
                 key={book.id}
@@ -39,8 +50,8 @@ function UserBooksPage() {
       }
       {
         <div className="books-reading">
-          <h2>📖 Reading</h2>
-          <ul>
+          <h2 className="textMedium">📖 Reading</h2>
+          <ul className="books-reading-details">
             {BooksReadingDetails.map((book) => (
               <ReadingListRow
                 key={book.id}
@@ -54,8 +65,8 @@ function UserBooksPage() {
       }
       {
         <div className="books-read">
-          <h2>✅ Read</h2>
-          <ul>
+          <h2 className="textMedium">✅ Read</h2>
+          <ul className="books-read-details">
             {BooksReadDetails.map((book) => (
               <ReadListRow
                 key={book.id}
@@ -67,6 +78,7 @@ function UserBooksPage() {
         </div>
       }
     </div>
+    </>
   );
 }
 

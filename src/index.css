@@ -42,3 +42,15 @@ a {
   text-decoration: none;
   color: black
 }
+
+.textSmall {
+  font-size: 15px;
+}
+
+.textMedium {
+  font-size: 20px;
+}
+
+.textLarge {
+  font-size: 30px;
+}

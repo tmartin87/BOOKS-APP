@@ -1,0 +1,13 @@
+.ToReadListRow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ToReadListRow-book-info{
+    width: 12rem;
+    margin-bottom: 0.8rem;
+}
+
+.UserBooks-icon-buttons{
+    display: flex;
+}
