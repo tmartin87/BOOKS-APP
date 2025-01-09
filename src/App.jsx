@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/all-books" element={<AllBooksPage />} />
-            <Route path="/book/:bookId" element={<BookDetailsPage />} />
+            <Route path="/book/:bookId/:bookStatus" element={<BookDetailsPage />} />
             <Route path="/my-books" element={<UserBooksPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>

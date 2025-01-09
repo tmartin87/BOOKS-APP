@@ -2,33 +2,28 @@ import { useEffect, useState } from "react";
 import ProgressBar from "./ProgressBar.jsx";
 import "./bookDetails.css";
 import { getBooksReadingDetails } from "../helperFunctions/getDataFromDB.js";
+import { useParams } from "react-router-dom";
 
 function BookDetails({ book, bookCover }) {
   const [currentPage, setCurrentPage] = useState(0);
-
-
+  const bookStatus = useParams().bookStatus
+  console.log(bookStatus);
+  
   async function getCurrentPage() {
     const booksReadingDetails = await getBooksReadingDetails(1);
-   
-   
+
     const booksReading = booksReadingDetails.filter((currentBook) => {
-     return book.id === currentBook.id;
+      return book.id === currentBook.id;
     });
-   
-    
+
     if (booksReading.length >= 1) {
-      setCurrentPage(booksReading[0].current_page)
-      
-      
+      setCurrentPage(booksReading[0].current_page);
     }
-    
-    
   }
- 
+
   useEffect(() => {
-  getCurrentPage()
-  },[])
-  
+    getCurrentPage();
+  }, []);
 
   if (!book) {
     return <p>Loading book details...</p>;
@@ -63,13 +58,14 @@ function BookDetails({ book, bookCover }) {
           <p>
             <strong>Rating:</strong> {book.rating || "No Rating"}
           </p>
-          <ProgressBar
+          {bookStatus==="isReading" && <ProgressBar
             currentPage={currentPage}
             totalPages={book.pages || 1}
             setCurrentPage={setCurrentPage}
             userId={1}
             bookId={book.id}
-          />
+          />}
+         
         </div>
       </div>
     </div>
