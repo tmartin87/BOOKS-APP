@@ -6,7 +6,7 @@ function ErrorMessage({error}){
     let reloadCount = useRef(initialReloadCount);
     
     useEffect(()=>{
-        window.localStorage.setItem('reloadCount', reloadCount.current)
+        window.localStorage.setItem('reloadCount', reloadCount.current); //CHECK
         return () => window.localStorage.removeItem('reloadCount');
     },[])
 
