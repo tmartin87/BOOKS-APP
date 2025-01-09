@@ -185,10 +185,9 @@ async function getBooksReadingDetails(userId, setBooksReadingDetails, abortContr
 
   if (error) {
     console.log(error);
-  } else if (setBooksReadingDetails) {
-    setBooksReadingDetails(data);
   } else {
-    return data;
+   const booksWithImages = await getBookCovers(data, abortControllerArray);
+    setBooksReadingDetails(booksWithImages);
   }
 }
 
