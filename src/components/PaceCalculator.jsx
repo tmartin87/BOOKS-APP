@@ -46,7 +46,7 @@ function PaceCalculator({ pagesToRead }) {
   }
 
   useEffect(()=>{
-    window.localStorage.setItem('pagesPerDay', pagesPerDay)
+    window.localStorage.setItem('pagesPerDay', pagesPerDay) //CHECK
   },[pagesPerDay])
 
   return (
