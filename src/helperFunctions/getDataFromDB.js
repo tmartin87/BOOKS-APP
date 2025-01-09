@@ -178,7 +178,11 @@ async function getBooksToReadDetails(userId, setBooksToReadDetails) {
   }
 }
 
-async function getBooksReadingDetails(userId, setBooksReadingDetails) {
+async function getBooksReadingDetails(
+  userId,
+  setBooksReadingDetails,
+  abortControllerArray
+) {
   const { data, error } = await supabase.rpc("get_books_reading", {
     user__id: userId,
   });
@@ -186,7 +190,8 @@ async function getBooksReadingDetails(userId, setBooksReadingDetails) {
   if (error) {
     console.log(error);
   } else if (setBooksReadingDetails) {
-    setBooksReadingDetails(data);
+    const booksWithImages = await getBookCovers(data, abortControllerArray);
+    setBooksReadingDetails(booksWithImages);
   } else {
     return data;
   }
