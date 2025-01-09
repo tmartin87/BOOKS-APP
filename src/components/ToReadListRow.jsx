@@ -31,7 +31,7 @@ function ToReadListRow({
     <li className="ToReadListRow" key={book.id}>
       <div className="ToReadListRow-book-info">
         <p>
-          <strong>{book.title}</strong>
+          <strong className="textSmall">{book.title}</strong>
         </p>
         <p>{book.author}</p>
       </div>

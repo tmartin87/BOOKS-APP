@@ -28,10 +28,13 @@ function UserBooksPage() {
     };
   }, []);
   return (
+    <>
+    <h1 className="textLarge">Your Books</h1>
     <div className="UserBooksPage-container">
+      
       {
         <div className="books-to-read">
-          <h2>📚 To read</h2>
+          <h2 className="textMedium">📚 To read</h2>
           <ul className="books-to-read-details">
             {BooksToReadDetails.map((book) => (
               <ToReadListRow
@@ -47,7 +50,7 @@ function UserBooksPage() {
       }
       {
         <div className="books-reading">
-          <h2>📖 Reading</h2>
+          <h2 className="textMedium">📖 Reading</h2>
           <ul className="books-reading-details">
             {BooksReadingDetails.map((book) => (
               <ReadingListRow
@@ -62,7 +65,7 @@ function UserBooksPage() {
       }
       {
         <div className="books-read">
-          <h2>✅ Read</h2>
+          <h2 className="textMedium">✅ Read</h2>
           <ul className="books-read-details">
             {BooksReadDetails.map((book) => (
               <ReadListRow
@@ -75,6 +78,7 @@ function UserBooksPage() {
         </div>
       }
     </div>
+    </>
   );
 }
 

@@ -27,7 +27,7 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
       )}
       <div className="ReadingListRow-Details">
       <p>
-        <strong>{book.title}</strong>
+        <strong className="textSmall">{book.title}</strong>
       </p>
       <p>{book.author}</p>
       <p>
