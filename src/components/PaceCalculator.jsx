@@ -22,7 +22,6 @@ function PaceCalculator({ pagesToRead }) {
 
   function updatePagesPerDayField(e) {
     setPagesPerDay(Number(e.target.value));
-    console.log(e.target.value);
     checkRange(Number(e.target.value));
   }
 
@@ -31,13 +30,11 @@ function PaceCalculator({ pagesToRead }) {
       setPagesPerDay((curr) => curr - 1);
     }
     checkRange(pagesPerDay - 1);
-    console.log(pagesPerDay - 1);
   }
 
   function increasePagesPerDay() {
     setPagesPerDay((curr) => curr + 1);
     checkRange(pagesPerDay + 1);
-    console.log(pagesPerDay + 1);
   }
 
   function calculateTime(pagesPerDay, pagesToRead) {

@@ -19,10 +19,6 @@ function DonutChart({ booksToReadCount, booksReadingCount, booksReadCount }) {
     const sliceToRead = `grey 0deg, grey ${sliceToReadEnd}deg`;
     const sliceReading = `purple ${sliceToReadEnd}deg, purple ${sliceReadingEnd}deg`;
     const sliceRead = `green ${sliceReadingEnd}deg`;
-    console.log(
-      "function ",
-      `conic-gradient(${sliceToRead}, ${sliceReading}, ${sliceRead})`
-    );
     return `conic-gradient(${sliceToRead}, ${sliceReading}, ${sliceRead})`;
   }
 

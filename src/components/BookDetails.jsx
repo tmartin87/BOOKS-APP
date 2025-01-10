@@ -7,11 +7,9 @@ import { useParams } from "react-router-dom";
 function BookDetails({ book, bookCover }) {
   const [currentPage, setCurrentPage] = useState(0);
   const bookStatus = useParams().bookStatus
-  console.log(bookStatus);
   
   async function getCurrentPage() {
     const booksReadingDetails = await getBooksReadingDetails(1);
-
     const booksReading = booksReadingDetails.filter((currentBook) => {
       return book.id === currentBook.id;
     });

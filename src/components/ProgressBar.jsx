@@ -22,9 +22,6 @@ function ProgressBar({
 
   const handleSave = async () => {
     setIsSaving(true);
-    console.log(userId);
-    console.log(bookId);
-    console.log(currentPage);
     
     const result = await updatePagesRead(userId, bookId, currentPage);
     setIsSaving(false);

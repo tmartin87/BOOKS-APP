@@ -40,9 +40,7 @@ function HomePage() {
     const toReadData = await getBooksToReadDetails(1); //TODO replace with useContext?
     const readingData = await getBooksReadingDetails(1); //TODO replace with useContext?
     const readData = await getBooksReadDetails(1); //TODO replace with useContext?
-    console.log("toReadData ", toReadData);
-    console.log("readingData ", readingData);
-    console.log("readData ", readData);
+
     calculatePagesToRead(toReadData, readingData);
     calculatePagesRead(readingData, readData);
     setbooksToReadCount(toReadData.length);

@@ -16,17 +16,7 @@ function AllBooksListRow({
     bookStatus = "isReading"
   }else if (bookIsRead){
     bookStatus = "isRead"
-  }else {bookStatus = "0"}
-  console.log(book.title);
-  
-  console.log(bookIsToRead);
-  console.log(bookIsRead);
-  console.log(bookIsReading);
-  
-  
-  
-  console.log(bookStatus);
-  
+  }else {bookStatus = "0"}  
   
   return (
     <li className="AllBooksListRow">
