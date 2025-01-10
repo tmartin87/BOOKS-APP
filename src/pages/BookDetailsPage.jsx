@@ -28,7 +28,7 @@ function BookDetailsPage() {
 
   useEffect(() => {
     getBookDataAndCover();
-  }, [bookId]);
+  }, []);
 
   if (error) return <p>{error}</p>;
 
