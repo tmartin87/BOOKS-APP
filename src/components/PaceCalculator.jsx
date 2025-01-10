@@ -7,7 +7,7 @@ function PaceCalculator({ pagesToRead }) {
   const [pagesPerDay, setPagesPerDay] = useState(Number(window.localStorage.getItem("pagesPerDay")) || 5);
   const [warning, setWarning] = useState();
   const sillyMessageBelowZero = `You can't read less than 0 pages per day 😬`;
-  const sillyMessageAbovePagesToRead = `A+ for attitude, but you al your unread books sum just ${pagesToRead} pages! 🧐`;
+  const sillyMessageAbovePagesToRead = `A+ for attitude, but all of your unread books sum just ${pagesToRead} pages! 🧐`;
 
 
   function checkRange(futureNumber) {
@@ -22,7 +22,6 @@ function PaceCalculator({ pagesToRead }) {
 
   function updatePagesPerDayField(e) {
     setPagesPerDay(Number(e.target.value));
-    console.log(e.target.value);
     checkRange(Number(e.target.value));
   }
 
@@ -31,13 +30,11 @@ function PaceCalculator({ pagesToRead }) {
       setPagesPerDay((curr) => curr - 1);
     }
     checkRange(pagesPerDay - 1);
-    console.log(pagesPerDay - 1);
   }
 
   function increasePagesPerDay() {
     setPagesPerDay((curr) => curr + 1);
     checkRange(pagesPerDay + 1);
-    console.log(pagesPerDay + 1);
   }
 
   function calculateTime(pagesPerDay, pagesToRead) {
@@ -45,9 +42,11 @@ function PaceCalculator({ pagesToRead }) {
     return Number(time.toFixed(2));
   }
 
-  useEffect(()=>{
-    window.localStorage.setItem('pagesPerDay', pagesPerDay) //CHECK
-  },[pagesPerDay])
+  useEffect(() => {
+    if (pagesPerDay >= 0 && pagesPerDay <= pagesToRead) {
+      window.localStorage.setItem("pagesPerDay", pagesPerDay); //Mejorar para que no guarde valores intermedios en caso de numeros de páginas fuera de rango
+    }
+  }, [pagesPerDay]);
 
   return (
     <section className="PaceCalculator">
@@ -71,8 +70,8 @@ function PaceCalculator({ pagesToRead }) {
           className="PaceCalculator-control-plus"
           onClick={increasePagesPerDay}
         />{" "}
-        pages per day, you will be done in{" "}
-        <strong>{calculateTime(pagesPerDay, pagesToRead)}days</strong>.
+        <span>pages per day, you will be done in{" "}
+        <strong> {calculateTime(pagesPerDay, pagesToRead)} days</strong></span>.
       </p>
       {warning && <p className="PaceCalculator-warning">{warning}</p>}
     </section>

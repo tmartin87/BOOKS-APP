@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getBooksReadingDetails, getBooksToReadDetails, getBooksReadDetails } from "../helperFunctions/getDataFromDB";
+import {
+  getBooksReadingDetails,
+  getBooksToReadDetails,
+  getBooksReadDetails,
+} from "../helperFunctions/getDataFromDB";
 import "./HomePage.css";
 import BookCountStats from "../components/BookCountStats";
 import PaceCalculator from "../components/PaceCalculator";
@@ -7,14 +11,15 @@ import PaceCalculator from "../components/PaceCalculator";
 function HomePage() {
   const [pagesToRead, setPagesToRead] = useState();
   const [pagesRead, setPagesRead] = useState();
+  const progressPercentage = (pagesRead / (pagesToRead + pagesRead)) * 100;
   const [booksToReadCount, setbooksToReadCount] = useState();
   const [booksReadingCount, setbooksReadingCount] = useState();
   const [booksReadCount, setbooksReadCount] = useState();
   const [loading, setLoading] = useState(true);
 
-  function sumPages(sum, books, attribute){
+  function sumPages(sum, books, attribute) {
     const newSum = books.reduce((acc, book) => {
-      if (attribute == "current_page"){
+      if (attribute == "current_page") {
         return acc + book[attribute] - 1;
       }
       return acc + book[attribute];
@@ -40,9 +45,7 @@ function HomePage() {
     const toReadData = await getBooksToReadDetails(1); //TODO replace with useContext?
     const readingData = await getBooksReadingDetails(1); //TODO replace with useContext?
     const readData = await getBooksReadDetails(1); //TODO replace with useContext?
-    console.log("toReadData ", toReadData);
-    console.log("readingData ", readingData);
-    console.log("readData ", readData);
+
     calculatePagesToRead(toReadData, readingData);
     calculatePagesRead(readingData, readData);
     setbooksToReadCount(toReadData.length);
@@ -65,11 +68,27 @@ function HomePage() {
             booksReadingCount={booksReadingCount}
             booksReadCount={booksReadCount}
           />
-          <br></br>
-          <br></br>
-          <h2>Your progress in terms of pages</h2>
-          <p>Pages to read: {pagesToRead}</p>
-          <p>Pages read: {pagesRead}</p>
+          <section className="PaceCalculator">
+            <h2>Your progress in terms of pages</h2>
+            {pagesToRead === 0 && (
+              <p>You have no books to read at the moment.</p>
+            )}
+            {pagesToRead > 0 && (
+              <>
+                <div className="ProgressBar ProgressBar-static">
+                  <div
+                    className="ProgressBar-filled"
+                    style={{ width: `${progressPercentage}%` }}
+                  >
+                  </div>
+                </div>
+                <p>
+                  You have read {pagesRead} out of {pagesToRead + pagesRead}{" "}
+                  pages.
+                </p>
+              </>
+            )}
+          </section>
 
           <PaceCalculator pagesToRead={pagesToRead} />
         </>

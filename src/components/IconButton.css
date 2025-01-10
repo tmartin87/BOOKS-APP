@@ -8,30 +8,29 @@
   .AllBooksListRow-options:hover {
     cursor: pointer;
   } */
-  
-  .AllBooksListRow-icon-wrapper {
-   display: flex;
-   justify-content: center;
-   width: 24px;
-   height: 24px;
-   all: unset;
-  }
-  
-  
-  
-  .AllBooksListRow-label {
-    font-size: 8px; 
-    color: #555; 
-    opacity: 0;
-    transition: opacity 0.3s ease; 
-  }
 
-  .IconButton:hover {
-    cursor: pointer;
-  }
-  
-   .IconButton:hover .AllBooksListRow-label {
-    opacity: 1; 
-    font-size: 8px;
-    
-  } 
+.AllBooksListRow-icon-wrapper {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.AllBooksListRow-label {
+  font-size: 8px;
+  color: #555;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.IconButton:hover {
+  cursor: pointer;
+}
+
+.IconButton:hover .AllBooksListRow-label {
+  opacity: 1;
+  font-size: 8px;
+
+}

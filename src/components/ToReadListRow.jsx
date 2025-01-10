@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 //Styles and components
 import "./ToReadListRow.css";
 import IconButton from "./IconButton";
@@ -30,9 +32,9 @@ function ToReadListRow({
   return (
     <li className="ToReadListRow" key={book.id}>
       <div className="ToReadListRow-book-info">
-        <p>
+        <Link to={`/book/${book.id}/isToRead`}>
           <strong className="textSmall">{book.title}</strong>
-        </p>
+        </Link>
         <p>{book.author}</p>
       </div>
       <div className="UserBooks-icon-buttons">

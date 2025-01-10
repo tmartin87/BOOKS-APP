@@ -1,3 +1,7 @@
 h1.HomePage{
     margin-block: 3rem;
 }
+
+.ProgressBar-static{
+    margin-top: 1.5rem;
+}

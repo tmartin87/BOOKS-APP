@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 //Styles and components
 import "./AllBooksList.css";
-import AllBooksListHeader from "./AllbooksListHeader.jsx"
+import AllBooksListHeader from "./AllbooksListHeader.jsx";
 import AllBooksListFilter from "./AllBooksListFilter.jsx";
 import AllBooksListRow from "./AllBooksListRow.jsx";
 import IconButton from "./IconButton.jsx";
@@ -36,7 +36,7 @@ import {
 } from "../helperFunctions/updateUserLists.js";
 
 function AllBooksList() {
-  const booksPerPage = 10; //also defined in getDataFrom DB
+  /*  const booksPerPage = 10; //also defined in getDataFrom DB */
   const [currPage, setCurrPage] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState();
   const [books, setBooks] = useState([]);
@@ -68,7 +68,7 @@ function AllBooksList() {
       selectedGenre,
       setBooks,
       setError,
-      abortControllerArray,
+      abortControllerArray
     );
 
     getNumberOfPages(setNumberOfPages, selectedGenre);
@@ -100,12 +100,20 @@ function AllBooksList() {
             {books.map((book) => {
               const bookIsRead =
                 booksReadList && booksReadList.includes(book.id);
-              const bookIsInList =
-                (booksToReadList && booksToReadList.includes(book.id)) ||
-                (booksReadingList && booksReadingList.includes(book.id));
+              const bookIsToRead =
+                booksToReadList && booksToReadList.includes(book.id);
+              const bookIsReading =
+                booksReadingList && booksReadingList.includes(book.id);
+              const bookIsInList = bookIsToRead || bookIsReading;
 
               return (
-                <AllBooksListRow key={book.id} book={book}>
+                <AllBooksListRow
+                  key={book.id}
+                  book={book}
+                  bookIsToRead={bookIsToRead}
+                  bookIsReading={bookIsReading}
+                  bookIsRead={bookIsRead}
+                >
                   {/*Icons as children*/}
                   {/*First icon*/}
                   {bookIsRead ? (
@@ -157,7 +165,13 @@ function AllBooksList() {
             })}
             <BackToTop />
           </ul>
-          {<Pagination currPage={currPage} setCurrPage={setCurrPage} numberOfPages={numberOfPages} />}
+          {
+            <Pagination
+              currPage={currPage}
+              setCurrPage={setCurrPage}
+              numberOfPages={numberOfPages}
+            />
+          }
         </>
       )}
     </div>
