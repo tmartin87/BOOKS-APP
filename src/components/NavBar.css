@@ -22,9 +22,9 @@
   }
   
   .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var( --color-primary)
+    height: 3rem;
+    width: 5rem;
+    align-content: center;
   }
   
   .menu {

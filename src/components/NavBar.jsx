@@ -1,5 +1,6 @@
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/LOGO_BOOKIFY.svg"
 //TODO que en NavBar se marque la página actual
 
 function NavBar() {
@@ -7,7 +8,9 @@ function NavBar() {
     <nav className="navbar">
       <ul className="navbar-container">
         <li className="logo">
-          <NavLink to="/">Logo</NavLink>
+          <NavLink to="/">
+            <img src={logo} alt="dashboard" />
+          </NavLink>
         </li>
         <div className="menu">
           <li className="button">
