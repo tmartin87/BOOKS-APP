@@ -26,13 +26,13 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
         <div className="ReadingListRow-no-cover">Cover not available</div>
       )}
       <div className="ReadingListRow-Details">
-      <p>
-        <strong className="textSmall">{book.title}</strong>
-      </p>
-      <p>{book.author}</p>
-      <p>
-        {book.current_page}/{book.pages}pages
-      </p>
+        <p>
+          <strong className="textSmall">{book.title}</strong>
+        </p>
+        <p>{book.author}</p>
+        <p>
+          {book.current_page}/{book.pages}pages
+        </p>
       </div>
       <div className="UserBooks-icon-buttons">
         <IconButton
@@ -48,7 +48,7 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
         />
         <div className="IconButton">
           <div className="AllBooksListRow-icon-wrapper">
-            <Link to={`/book/${book.id}`}>
+            <Link to={`/book/${book.id}/isReading`}>
               <img src={pencil} />
             </Link>
           </div>
