@@ -10,4 +10,5 @@
 
 .UserBooks-icon-buttons{
     display: flex;
+    align-items: center;
 }
