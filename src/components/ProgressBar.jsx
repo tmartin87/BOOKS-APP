@@ -50,11 +50,7 @@ function ProgressBar({
         onChange={(e)=>handleProgressChange(e)}
         className="ProgressBar-input"
       />
-      <div className="progress-info">
-        <span>
-          {currentPage} / {totalPages} pages read
-        </span>
-      </div>
+      <p className="progressBar-totalPages">/ {totalPages} pages read</p>
       <button onClick={handleSave} className="ProgressBar-save-button">
         {isSaving ? "Saving..." : "Save"}
       </button>
