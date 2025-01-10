@@ -70,16 +70,26 @@ function HomePage() {
           />
           <section className="PaceCalculator">
             <h2>Your progress in terms of pages</h2>
-            <div className="ProgressBar ProgressBar-static">
-              <div
-                className="ProgressBar-filled"
-                style={{ width: `${progressPercentage}%` }}
-              />
-            </div>
+            {pagesToRead === 0 && (
+              <p>You have no books to read at the moment.</p>
+            )}
+            {pagesToRead > 0 && (
+              <>
+                <div className="ProgressBar ProgressBar-static">
+                  <div
+                    className="ProgressBar-filled"
+                    style={{ width: `${progressPercentage}%` }}
+                  >
+                    >
+                  </div>
+                </div>
+                <p>
+                  You've read {pagesRead} out of {pagesToRead + pagesRead}{" "}
+                  pages.
+                </p>
+              </>
+            )}
           </section>
-          <p>
-            You've read {pagesRead} out of {pagesToRead + pagesRead}
-          </p>
 
           <PaceCalculator pagesToRead={pagesToRead} />
         </>
