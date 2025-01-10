@@ -71,7 +71,7 @@ function HomePage() {
           <section className="PaceCalculator">
             <h2>Your progress in terms of pages</h2>
             {pagesToRead === 0 && (
-              <p>You have no books to read at the moment.</p>
+              <p>You have no books to read at the moment. Time to look for a new book!</p>
             )}
             {pagesToRead > 0 && (
               <>
