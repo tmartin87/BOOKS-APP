@@ -80,11 +80,10 @@ function HomePage() {
                     className="ProgressBar-filled"
                     style={{ width: `${progressPercentage}%` }}
                   >
-                    >
                   </div>
                 </div>
                 <p>
-                  You've read {pagesRead} out of {pagesToRead + pagesRead}{" "}
+                  You have read {pagesRead} out of {pagesToRead + pagesRead}{" "}
                   pages.
                 </p>
               </>
