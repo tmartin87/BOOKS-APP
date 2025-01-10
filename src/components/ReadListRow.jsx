@@ -15,7 +15,7 @@ function ReadListRow({ book, setBooksReadDetails }) {
     <li className="readListRow-Container" key={book.id}>
     
     <div className="readListRow-details">
-      <Link to={`/book/${book.id}/isToRead`}>
+      <Link to={`/book/${book.id}/isRead`}>
         <strong className="textSmall">{book.title}</strong>
       </Link>
       <p>{book.author}</p>
