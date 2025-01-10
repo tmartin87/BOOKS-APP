@@ -11,8 +11,6 @@ function ProgressBar({
 }) {
   const [isSaving, setIsSaving] = useState(false);
 
-  
-
   const handleProgressChange = (e) => {
     const value = e.target.value;
     if (value >= 0 && value <= totalPages) {
@@ -47,7 +45,7 @@ function ProgressBar({
         min="0"
         max={totalPages}
         value={currentPage}
-        onChange={(e)=>handleProgressChange(e)}
+        onChange={(e) => handleProgressChange(e)}
         className="ProgressBar-input"
       />
       <p className="progressBar-totalPages">/ {totalPages} pages read</p>

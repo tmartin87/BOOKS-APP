@@ -36,26 +36,28 @@ function BookDetails({ book, bookCover }) {
           src={bookCover || "default_cover.jpg"}
           alt={`${book.title || "book"} cover`}
         />
-        <div className="BookDetails-text">
-          <h2>{book.title || "Unknown Title"}</h2>
-          <h3>
-            <strong>Author:</strong> {book.author || "Unknown Author"}
-          </h3>
-          <p>
-            <strong>Genres:</strong>{" "}
-            {Array.isArray(book.genres)
-              ? book.genres.join(", ")
-              : book.genres || "N/A"}
-          </p>
-          <p>
-            <strong>Year:</strong> {book.year || "Unknown Year"}
-          </p>
-          <p>
-            <strong>Pages:</strong> {book.pages || "N/A"}
-          </p>
-          <p>
-            <strong>Rating:</strong> {book.rating || "No Rating"}
-          </p>
+        <div className="BookDetails-info">
+          <div className="BookDetails-text">
+            <h2>{book.title || "Unknown Title"}</h2>
+            <h3 className="BookDetails-author">
+              <strong>Author:</strong> {book.author || "Unknown Author"}
+            </h3>
+            <p>
+              <strong>Genres:</strong>{" "}
+              {Array.isArray(book.genres)
+                ? book.genres.join(", ")
+                : book.genres || "N/A"}
+            </p>
+            <p>
+              <strong>Year:</strong> {book.year || "Unknown Year"}
+            </p>
+            <p>
+              <strong>Pages:</strong> {book.pages || "N/A"}
+            </p>
+            <p>
+              <strong>Rating:</strong> {book.rating || "No Rating"}
+            </p>
+          </div>
           {bookStatus==="isReading" && <ProgressBar
             currentPage={currentPage}
             totalPages={book.pages || 1}
@@ -63,7 +65,6 @@ function BookDetails({ book, bookCover }) {
             userId={1}
             bookId={book.id}
           />}
-         
         </div>
       </div>
     </div>

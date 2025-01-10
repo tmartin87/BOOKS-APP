@@ -32,7 +32,7 @@ p.progressBar-totalPages{
 
 .ProgressBar-save-button {
   display: block;
-  margin-block: 0.8rem;
+  margin-top: 0.8rem;
   background-color: var(--color-primary);
   color: white;
   padding: 8px 16px;
