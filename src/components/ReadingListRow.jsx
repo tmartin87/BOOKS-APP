@@ -26,9 +26,9 @@ function ReadingListRow({ book, setBooksReadingDetails, setBooksReadDetails }) {
         <div className="ReadingListRow-no-cover">Cover not available</div>
       )}
       <div className="ReadingListRow-Details">
-        <p>
+        <Link to={`/book/${book.id}/isReading`}>
           <strong className="textSmall">{book.title}</strong>
-        </p>
+        </Link>
         <p>{book.author}</p>
         <p>
           {book.current_page}/{book.pages}pages

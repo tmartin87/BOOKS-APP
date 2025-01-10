@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./ReadListRow.css";
 import IconButton from "./IconButton";
 import x from "../assets/x.svg"
@@ -14,9 +15,9 @@ function ReadListRow({ book, setBooksReadDetails }) {
     <li className="readListRow-Container" key={book.id}>
     
     <div className="readListRow-details">
-      <p>
+      <Link to={`/book/${book.id}/isToRead`}>
         <strong className="textSmall">{book.title}</strong>
-      </p>
+      </Link>
       <p>{book.author}</p>
       </div>
       
