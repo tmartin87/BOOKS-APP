@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProgressBar from "./ProgressBar.jsx";
-import "./bookDetails.css";
+import "./BookDetails.css";
 import { getBooksReadingDetails } from "../helperFunctions/getDataFromDB.js";
 import { useParams } from "react-router-dom";
 
