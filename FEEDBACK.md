@@ -4,6 +4,10 @@
 
 - Vuestro proyecto no tiene un README.md. Es importante que lo incluyáis para que los usuarios puedan entender rápidamente cómo funciona vuestro proyecto y cómo pueden usarlo. Cualquier proyecto que se publique en GitHub debería tener un README.md.
 
+## About Us
+
+- No hay una página de About Us. Es importante que los usuarios puedan saber quiénes sois y cómo contactar con vosotras.
+
 ## App.jsx
 
 - El archivo principal tiene una estructura impecable. Está muy bien organizado y es fácil de leer. ¡Buen trabajo!
