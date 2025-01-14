@@ -8,6 +8,7 @@ function ErrorMessage({error}){
     useEffect(()=>{
         window.localStorage.setItem('reloadCount', reloadCount.current); //CHECK
         return () => window.localStorage.removeItem('reloadCount');
+        // Interesante forma de gestionar la impaciencia del usuario 😅
     },[])
 
     return (
